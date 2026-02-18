@@ -1,24 +1,24 @@
 # Documentación
 
 ## semana 0
-[AI_WORKFLOW.md](documentación/AI_WORKFLOW.md)
+- [AI_WORKFLOW.md](documentación/AI_WORKFLOW.md)
 
 ## semana 1
-[AUDITORIA.md](documentación/AUDITORIA.md)
-[CALIDAD.md](documentación/CALIDAD.md)
-[DEUDA_TECNICA.md](documentación/DEUDA_TECNICA.md)
+- [AUDITORIA.md](documentación/AUDITORIA.md) 
+- [CALIDAD.md](documentación/CALIDAD.md)
+- [DEUDA_TECNICA.md](documentación/DEUDA_TECNICA.md)
 
 
 ## semana 2
-[explain-project.md](documentación/explain-project.md)
-[ANALISIS_COMPLEJIDAD_DOCUMENTACION.md](documentación/ANALISIS_COMPLEJIDAD_DOCUMENTACION.md)
-[HANDOVER_REPORT.md](documentación/HANDOVER_REPORT.md)
-[REQUERIMIENTOS_COMPLETOS.md](documentación/REQUERIMIENTOS_COMPLETOS.md)
-[FASE_2_ANALISIS_SISTEMAS_CONTEXTO.md](documentación/FASE_2_ANALISIS_SISTEMAS_CONTEXTO.md)
-[justificación-microservicios.md](documentación/justificación-microservicios.md)
-[FASE_3_HISTORIAS_RIESGOS.md](documentación/FASE_3_HISTORIAS_RIESGOS.md)
-[FASE_4_AMBIGUEDADES_VALIDACION.md](documentación/FASE_4_AMBIGUEDADES_VALIDACION.md)
-[DOCUMENTO_FINAL_ANALISIS_REQUERIMIENTOS.md](documentación/DOCUMENTO_FINAL_ANALISIS_REQUERIMIENTOS.md)
+- [explain-project.md](documentación/explain-project.md)
+- [ANALISIS_COMPLEJIDAD_DOCUMENTACION.md](documentación/ANALISIS_COMPLEJIDAD_DOCUMENTACION.md)
+- [HANDOVER_REPORT.md](documentación/HANDOVER_REPORT.md)
+- [REQUERIMIENTOS_COMPLETOS.md](documentación/REQUERIMIENTOS_COMPLETOS.md)
+- [FASE_2_ANALISIS_SISTEMAS_CONTEXTO.md](documentación/FASE_2_ANALISIS_SISTEMAS_CONTEXTO.md)
+- [justificación-microservicios.md](documentación/justificación-microservicios.md)
+- [FASE_3_HISTORIAS_RIESGOS.md](documentación/FASE_3_HISTORIAS_RIESGOS.md)
+- [FASE_4_AMBIGUEDADES_VALIDACION.md](documentación/FASE_4_AMBIGUEDADES_VALIDACION.md)
+- [DOCUMENTO_FINAL_ANALISIS_REQUERIMIENTOS.md](documentación/DOCUMENTO_FINAL_ANALISIS_REQUERIMIENTOS.md)
 
 
 
