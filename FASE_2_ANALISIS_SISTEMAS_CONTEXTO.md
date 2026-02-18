@@ -21,8 +21,7 @@ Proveer visibilidad operativa del sistema de gestión de quejas mediante una int
 Implementar un módulo de visualización y consulta de tickets que permita:
 1. **Consultar** tickets procesados con filtros avanzados
 2. **Visualizar** métricas clave del sistema (volumen, prioridades, estados)
-3. **Exportar** datos para análisis externo
-4. **Monitorear** en tiempo real el estado del sistema
+3. **Monitorear** en tiempo real el estado del sistema
 
 ---
 
@@ -37,6 +36,7 @@ Implementar un módulo de visualización y consulta de tickets que permita:
 - Paginación y ordenamiento
 - Exportación básica (CSV/JSON)
 - Integración con arquitectura existente
+- Persistencia en base de datos real (reemplazo del in-memory)
 
 ### Fuera del alcance:
 - Modificación o eliminación de tickets desde dashboard
@@ -127,20 +127,20 @@ Implementar un módulo de visualización y consulta de tickets que permita:
 ## 🧩 Listado de Módulos
 
 ### **Backend - Producer (API)**
-1. **Query Controller** (`tickets.controller.ts`)
-   - GET /tickets
-   - GET /tickets/:id
-   - GET /tickets/metrics
-
-2. **Query Service** (`tickets.query.service.ts`)
+1. **Query Service** (`tickets.query.service.ts`)
    - Lógica de filtrado y agregación
    - Transformación de datos para respuesta
 
-3. **Validation Middleware** (`validateTicketQuery.ts`)
+2. **Validation Middleware** (`validateTicketQuery.ts`)
    - Validación de query params
    - Sanitización de inputs
 
 ### **Backend - Consumer (Worker)**
+3. **Query Controller** (`tickets.controller.ts`)
+   - GET /tickets
+   - GET /tickets/:id
+   - GET /tickets/metrics
+
 4. **Persistencia en BD**
    - Repositorio con acceso a base de datos (reemplazo del in-memory)
    - Operaciones de lectura y escritura (CRUD parcial)
