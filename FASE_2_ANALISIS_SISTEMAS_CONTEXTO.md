@@ -36,6 +36,7 @@ Implementar un módulo de visualización y consulta de tickets que permita:
 - Paginación y ordenamiento
 - Exportación básica (CSV/JSON)
 - Integración con arquitectura existente
+- Persistencia en base de datos real (reemplazo del in-memory)
 
 ### Fuera del alcance:
 - Modificación o eliminación de tickets desde dashboard
@@ -126,7 +127,6 @@ Implementar un módulo de visualización y consulta de tickets que permita:
 ## 🧩 Listado de Módulos
 
 ### **Backend - Producer (API)**
-
 1. **Query Service** (`tickets.query.service.ts`)
    - Lógica de filtrado y agregación
    - Transformación de datos para respuesta
@@ -136,16 +136,17 @@ Implementar un módulo de visualización y consulta de tickets que permita:
    - Sanitización de inputs
 
 ### **Backend - Consumer (Worker)**
-4. **Persistencia en BD**
+3. **Persistencia en BD**
    - Repositorio con acceso a base de datos (reemplazo del in-memory)
    - Operaciones de lectura y escritura (CRUD parcial)
 
 ### **Backend - Microservicio de Consultas (nuevo)**
-5. **Query Controller** (`tickets.controller.ts`)
+4. **Query Controller** (`tickets.controller.ts`)
    - GET /tickets
    - GET /tickets/:id
    - GET /tickets/metrics
-6. **API de consultas para dashboard**
+
+5. **API de consultas para dashboard**
    - Se conecta a la misma base de datos
    - Expone endpoints de lectura, filtros y metricas
 

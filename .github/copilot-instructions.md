@@ -1,90 +1,96 @@
-# Copilot Instructions — ISP Complaint Management System
+# Instrucciones de Copilot - Taller Sistema Distribuido (Gestión de Quejas ISP)
 
-## Architecture Overview
+Eres un desarrollador experto en IA que asiste en el desarrollo de un sistema de gestión de quejas distribuido para un ISP. Sigue estas guías estrictamente para asegurar la consistencia con la arquitectura y los estándares de calidad del proyecto.
 
-Event-driven distributed system: **React Frontend → Producer API (Express) → RabbitMQ → Consumer Worker**. All services are TypeScript. Docker Compose orchestrates everything (`docker-compose up -d --build`).
+## 1. Objetivo del Proyecto
+Construir y mantener un sistema distribuido para gestión de quejas de ISP con arquitectura orientada a eventos:
+- Frontend captura incidentes del usuario.
+- Producer valida y publica en RabbitMQ.
+- Consumer consume, prioriza y procesa los tickets.
 
-| Service | Port | Runtime | Module system |
-|---------|------|---------|---------------|
-| Frontend | 80 | Vite + React 19 + Tailwind 4 | ESM (`"type": "module"`) |
-| Producer | 3000 | Express + Node 20 | ESM (`.js` extensions in imports) |
-| Consumer | 3001 (health) | Plain Node worker | CJS |
-| RabbitMQ | 5672 / 15672 | rabbitmq:3-management-alpine | — |
+## 2. Estructura del Monorepo
+- **`/frontend`**: React + Vite + TypeScript. UI de captura de incidentes y pruebas de estrés.
+- **`/backend/producer`**: API Express + TypeScript. Valida requests, serializa y publica mensajes a RabbitMQ.
+- **`/backend/consumer`**: Worker Node.js + TypeScript. Consume mensajes, resuelve prioridad y persiste.
+- **`/backend/e2e`**: Pruebas end-to-end del flujo distribuido completo.
+- **`docker-compose.yml`**: Orquestación de todos los servicios (frontend, producer, consumer, RabbitMQ).
 
-**Data flow:** Frontend POSTs to `/complaints` → Producer validates, builds a `Ticket` (UUID, status `RECEIVED`, priority `PENDING`), publishes to `complaints.exchange` (topic) with routing key `complaint.received` → Consumer reads from `complaints.queue`, applies Strategy Pattern to resolve priority (`HIGH`/`MEDIUM`/`LOW`), sets status `IN_PROGRESS`, persists in-memory.
+## 3. Flujo End-to-End (Fuente de Verdad)
+1. **Frontend** envía queja HTTP al Producer (`/api/complaints`).
+2. **Producer** valida el request (middleware `validateComplaintRequest`).
+3. **Producer** serializa y publica mensaje a RabbitMQ (vía `MessagingFacade`).
+4. **Consumer** recibe mensaje del broker (`MessageHandler`).
+5. **Consumer** resuelve prioridad (`PriorityResolver` + estrategias Strategy).
+6. **Consumer** actualiza estado del ciclo de vida y persiste en repositorio.
 
-## Key Design Patterns
+## 4. Reglas de Negocio Obligatorias
 
-### Strategy Pattern — Consumer priority resolution
-Each `IPriorityStrategy` declares `supportedTypes` and a `calculate()` method. `PriorityResolver` maps `IncidentType → strategy` at construction. Add new priorities by creating a strategy class in `backend/consumer/src/strategies/` and registering it in the `PriorityResolver` constructor.
+### Ciclo de Vida de la Queja
+Recibida → Validada → Encolada → Priorizada → En Progreso.
 
-```
-CriticalServiceStrategy  → NO_SERVICE           → HIGH
-DegradedServiceStrategy  → INTERMITTENT_SERVICE, SLOW_CONNECTION → MEDIUM
-MinorIssuesStrategy      → ROUTER_ISSUE, BILLING_QUESTION       → LOW
-DefaultPriorityStrategy  → fallback (OTHER, unknown)             → PENDING
-```
+### Prioridad por Tipo de Incidente
+| Tipo de Incidente        | Prioridad |
+|--------------------------|-----------|
+| `NO_SERVICE`             | **ALTA**  |
+| `INTERMITTENT_SERVICE`   | **MEDIA** |
+| `SLOW_CONNECTION`        | **MEDIA** |
+| `ROUTER_ISSUE`           | **MEDIA** |
+| `BILLING_QUESTION`       | **BAJA**  |
+| `OTHER`                  | **BAJA**  |
 
-### Facade Pattern — Producer messaging
-`MessagingFacade` wraps `IConnectionManager` + `IMessageSerializer` to publish tickets. Dependencies are injected via constructor for testability.
+### Validación de Campos
+- **Obligatorios**: `lineNumber`, `email`, `incidentType`.
+- `description` es **REQUERIDO SOLO** si `incidentType === "OTHER"`.
+- `description: null` debe procesarse normalmente si el tipo NO es `OTHER`.
 
-### Chain of Responsibility — Producer error handling
-Error middleware pipeline in `backend/producer/src/middlewares/errorHandler.ts`: `validationErrorHandler → jsonSyntaxErrorHandler → messagingErrorHandler → httpErrorHandler → defaultErrorHandler`. All domain errors extend `HttpError` (OCP). Add new error types by extending `HttpError` and adding a handler to the chain.
+## 5. Stack Tecnológico, Principios y Patrones
+- **Lenguaje**: TypeScript (modo estricto).
+- **Pruebas**: Vitest (unitarias, integración, E2E).
+- **Principios Core**: SOLID, Clean Code.
+- **Patrones de Diseño obligatorios**:
+  - **Strategy**: Resolución de prioridades y determinación de estados.
+  - **Chain of Responsibility**: Manejo centralizado de errores (`middlewares/errorHandlers/*`).
+  - **Facade**: Interacciones con el broker de mensajería (`MessagingFacade`).
+  - **Singleton**: Gestores de conexión (ej. `RabbitMQConnectionManager`).
+  - **Adapter**: Abstracciones de infraestructura.
 
-### Singleton — RabbitMQ connections
-Both Producer and Consumer use `RabbitMQConnectionManager.getInstance()`. Consumer includes `resetInstance()` for test isolation.
+## 6. Reglas de Implementación
+- Controladores **delgados**: sin lógica de negocio; delegar a servicios.
+- **No** usar `try-catch` en controladores; delegar a servicios o middleware centralizado.
+- Priorizar **interfaces sobre implementaciones** (DIP).
+- Nombres explícitos y semánticos (ej. `PriorityResolverStrategy`, no `PrioRes`).
+- Programación funcional donde sea posible; clases para Servicios/Repositorios cuando DIP lo requiera.
+- Mantener compatibilidad de tipos compartidos entre frontend y backend.
+- **No introducir campos nuevos** en payloads sin actualizar tipos, validaciones y pruebas en toda la cadena.
 
-## Testing
+## 7. Reglas de Pruebas y Calidad
+- **Cobertura objetivo**: 100% en servicios del backend (Producer y Consumer).
+- Toda lógica nueva **debe incluir** pruebas Vitest.
+- **Impacto de cambios de contrato** — al modificar validaciones o payloads, actualizar:
+  - Tests de middleware/controller/service en Producer.
+  - Tests de processor/handler/strategies en Consumer.
+  - E2E si cambia el contrato de mensajería.
+- Si hay duda de contrato, **validar con pruebas existentes** antes de refactorizar.
+- Manejo de errores con `errorHandler` centralizado (Chain of Responsibility).
 
-All three packages use **Vitest** with `globals: true`. Run tests from each package directory:
+## 8. Flujo de Trabajo AI-First para Copilot
+Antes de proponer cualquier cambio:
+1. **Auditar SOLID**: Revisar que el cambio no viole principios.
+2. **Revisar contratos y tipos**: Verificar impacto en payloads, interfaces y validaciones.
+3. **Proponer tests** en paralelo o antes del cambio.
+4. **Implementar** el cambio mínimo necesario.
+5. **Validar**: Asegurar que compila y pasa tests.
 
-```bash
-cd backend/producer && npm test       # unit + integration (supertest)
-cd backend/consumer && npm test       # unit tests
-cd frontend && npm test               # jsdom + @testing-library/react
-```
+### Protocolo de Auditoría Pre-Commit
+- Verificar SOLID y patrones.
+- Ejecutar pruebas del paquete afectado.
+- Confirmar que la cobertura se mantiene o mejora.
 
-- **Producer tests** mock the `IMessagingFacade` via `createComplaintsService(mockMessaging)` factory.
-- **Consumer tests** inject mock `Channel`, `IIncidentRepository`, and silent `ILogger` into `MessageHandler`.
-- **Frontend tests** use `@testing-library/react` with `jsdom`; setup in `frontend/src/test/setup.ts`.
-- **E2E** (`backend/e2e/complaint-flow.e2e.test.ts`): requires Docker Compose running; polls Consumer `/health` metrics to verify async processing. Run via `cd backend/producer && npm run test:e2e`.
-- Coverage: `npm run test:coverage` in any package (v8 provider).
+## 9. Definition of Done (por cada cambio)
+- [ ] Compila en TypeScript estricto sin errores.
+- [ ] Pasa lint y tests del paquete afectado.
+- [ ] Mantiene o mejora cobertura de pruebas.
+- [ ] Respeta reglas de negocio y patrones definidos.
+- [ ] No rompe el flujo distribuido Producer → RabbitMQ → Consumer.
+- [ ] Cambios de contrato reflejados en tipos, validaciones y tests de toda la cadena.
 
-## Validation
-
-- **Producer middleware** (`validateComplaintRequest.ts`): validates `lineNumber`, `email` (regex), `incidentType` (enum guard via `isIncidentType()`), and requires `description` when type is `OTHER`. Throws `ValidationError` (400).
-- **Frontend** uses **Zod v4** schema (`frontend/src/utils/validation.ts`) with `superRefine` for conditional `OTHER` description requirement.
-- **Consumer** validates message structure via `isIncidentType()` type guard; invalid messages are nacked to DLQ.
-
-## Incident Types (shared domain constant)
-
-`NO_SERVICE | INTERMITTENT_SERVICE | SLOW_CONNECTION | ROUTER_ISSUE | BILLING_QUESTION | OTHER`
-
-Defined as `enum` in backend (`backend/*/src/types/`) and as `const object + type` in frontend (`frontend/src/types/incident.ts`). Keep all three in sync when adding types.
-
-## Project Conventions
-
-- **Producer imports** use explicit `.js` extensions (ESM): `import { foo } from './bar.js'`.
-- **Consumer imports** use extensionless paths (CJS): `import { foo } from './bar'`.
-- **Frontend** uses `VITE_API_URL` env var (defaults to `http://localhost:3000`).
-- Structured logging via custom `logger` util in each service (implements `ILogger` interface).
-- Metrics tracked via `metrics.ts` in Producer and Consumer (`incrementPublished`, `incrementProcessed`, etc.), exposed on `/health` endpoints.
-- Graceful shutdown registered in `lifecycle/gracefulShutdown.ts` (both backend services).
-- RabbitMQ topology: main exchange `complaints.exchange` (topic) + DLX `complaints.dlx` (fanout) → `complaints.dlq`. Messages that exceed retry or fail validation go to DLQ.
-
-## Quick Commands
-
-```bash
-# Full system
-docker-compose up -d --build
-
-# Individual dev servers (need local RabbitMQ or Docker rabbitmq running)
-cd backend/producer && npm run dev    # tsx watch
-cd backend/consumer && npm run dev    # ts-node
-cd frontend && npm run dev            # vite
-
-# Build
-cd backend/producer && npm run build  # tsc → dist/
-cd backend/consumer && npm run build  # tsc → dist/
-cd frontend && npm run build          # tsc + vite build
-```
