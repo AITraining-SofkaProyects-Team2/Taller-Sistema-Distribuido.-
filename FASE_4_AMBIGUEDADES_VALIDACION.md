@@ -113,12 +113,16 @@ Resolver ambiguedades para definir el alcance tecnico y funcional antes de avanz
 ---
 
 ## 9) Preguntas pendientes de definicion
-21. Paginacion: confirmas usar `page + pageSize` o `limit + offset`?
-22. Orden por defecto: confirmas `createdAt desc` o prefieres `createdAt asc` o `prioridad`?
-23. Filtro de fecha: aplica sobre `createdAt`, `processedAt` o ambos?
-24. Zona horaria para filtros de fecha: UTC o hora local?
-25. Esquema minimo de BD: confirmas una sola tabla `tickets` con indices por `status`, `priority`, `type`, `createdAt`, `lineNumber`?
-26. Herramienta de migraciones: prefieres `prisma`, `typeorm`, `knex` o migracion manual?
+21. Paginacion: confirmas usar `page + pageSize`
+
+22. Orden por defecto: confirmas `createdAt asc`
+
+23. Filtro de fecha: aplica sobre `createdAt`
+
+24. Zona horaria para filtros de fecha: hora local
+25. Esquema minimo de BD: confirmas una sola tabla `tickets` con indices por `status`, `priority`, `type`, `createdAt`, `lineNumber` (si, confirmo)
+
+26. Herramienta de migraciones: migracion manual
 
 ---
 
