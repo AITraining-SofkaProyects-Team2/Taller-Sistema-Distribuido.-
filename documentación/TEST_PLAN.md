@@ -7,61 +7,88 @@
 
 ## 📋 Índice de Tests
 
-| Completado | ID Test | Historia | Descripción |
-|:----------:|---------|----------|-------------|
-| [ ] | TC-001 | HU-01 | Listado paginado con tamaño por defecto |
-| [ ] | TC-002 | HU-01 | Listado paginado con tamaño configurable |
-| [ ] | TC-003 | HU-01 | Indicación de total de resultados y página actual |
-| [ ] | TC-004 | HU-01 | Ordenamiento consistente entre páginas |
-| [ ] | TC-005 | HU-01 | Lista vacía cuando no hay tickets |
-| [ ] | TC-006 | HU-01 | Solicitar página fuera de rango |
-| [ ] | TC-007 | HU-01 | Tamaño de página con valores inválidos |
-| [ ] | TC-008 | HU-02 | Filtrar por un solo estado válido |
-| [ ] | TC-009 | HU-02 | Filtrar por múltiples estados simultáneamente |
-| [ ] | TC-010 | HU-02 | Combinar filtro de estado con otros filtros |
-| [ ] | TC-011 | HU-02 | Filtrar con estado inválido |
-| [ ] | TC-012 | HU-02 | Filtrar por estado sin resultados coincidentes |
-| [ ] | TC-013 | HU-03 | Filtrar por prioridad válida |
-| [ ] | TC-014 | HU-03 | Visualizar prioridades disponibles |
-| [ ] | TC-015 | HU-03 | Combinar filtro de prioridad con otros filtros |
-| [ ] | TC-016 | HU-03 | Filtrar con prioridad inválida |
-| [ ] | TC-017 | HU-03 | Filtrar por prioridad sin resultados coincidentes |
-| [ ] | TC-018 | HU-04 | Filtrar por tipo de incidente válido |
-| [ ] | TC-019 | HU-04 | Listar todos los tipos de incidente disponibles |
-| [ ] | TC-020 | HU-04 | Combinar filtro de tipo con estado y prioridad |
-| [ ] | TC-021 | HU-04 | Filtrar con tipo de incidente inválido |
-| [ ] | TC-022 | HU-05 | Filtrar por rango de fechas válido |
-| [ ] | TC-023 | HU-05 | Validar que fecha fin sea mayor o igual a fecha inicio |
-| [ ] | TC-024 | HU-05 | Rango de fechas sin resultados coincidentes |
-| [ ] | TC-025 | HU-05 | Filtrar con solo fecha inicio (sin fecha fin) |
-| [ ] | TC-026 | HU-05 | Filtrar con solo fecha fin (sin fecha inicio) |
-| [ ] | TC-027 | HU-05 | Fechas con formato inválido |
-| [ ] | TC-028 | HU-06 | Buscar por ID de ticket existente |
-| [ ] | TC-029 | HU-06 | Buscar por ID de ticket inexistente |
-| [ ] | TC-030 | HU-06 | Buscar con ID en formato inválido |
-| [ ] | TC-031 | HU-06 | Buscar con ID vacío |
-| [ ] | TC-032 | HU-07 | Buscar por número de línea válido con resultados |
-| [ ] | TC-033 | HU-07 | Buscar por número de línea válido sin resultados |
-| [ ] | TC-034 | HU-07 | Buscar con número de línea inválido |
-| [ ] | TC-035 | HU-08 | Ordenar por fecha ascendente |
-| [ ] | TC-036 | HU-08 | Ordenar por fecha descendente |
-| [ ] | TC-037 | HU-08 | Ordenar por prioridad |
-| [ ] | TC-038 | HU-08 | Ordenar por estado |
-| [ ] | TC-039 | HU-08 | Campo de ordenamiento inválido |
-| [ ] | TC-040 | HU-09 | Visualizar total de tickets |
-| [ ] | TC-041 | HU-09 | Distribución por estado |
-| [ ] | TC-042 | HU-09 | Distribución por prioridad |
-| [ ] | TC-043 | HU-09 | Distribución por tipo de incidente |
-| [ ] | TC-044 | HU-09 | Consistencia de métricas con el repositorio |
-| [ ] | TC-045 | HU-10 | Gráfica de distribución por prioridad |
-| [ ] | TC-046 | HU-10 | Gráfica de distribución por estado |
-| [ ] | TC-047 | HU-10 | Actualización de gráficas con filtros activos |
-| [ ] | TC-048 | HU-11 | Exportar CSV con columnas básicas |
-| [ ] | TC-049 | HU-11 | Exportar respetando filtros activos |
-| [ ] | TC-050 | HU-11 | Exportar cuando no hay resultados |
-| [ ] | TC-051 | HU-12 | Refresco manual de datos |
-| [ ] | TC-052 | HU-12 | Auto-refresh configurable |
-| [ ] | TC-053 | HU-12 | Desactivar auto-refresh |
+| Completado | ID Test | Historia | Servicios afectados | Descripción |
+|:----------:|---------|-|---------|-------------|
+| [ ] | TC-001 | HU-01 | Query Service + Frontend | Listado paginado con tamaño por defecto |
+| [ ] | TC-002 | HU-01 | Query Service + Frontend | Listado paginado con tamaño configurable |
+| [ ] | TC-003 | HU-01 | Query Service + Frontend | Indicación de total de resultados y página actual |
+| [ ] | TC-004 | HU-01 | Query Service + Frontend | Ordenamiento consistente entre páginas |
+| [ ] | TC-005 | HU-01 | Query Service + Frontend | Lista vacía cuando no hay tickets |
+| [ ] | TC-006 | HU-01 | Query Service + Frontend | Solicitar página fuera de rango |
+| [ ] | TC-007 | HU-01 | Query Service + Frontend | Tamaño de página con valores inválidos |
+| [ ] | TC-008 | HU-02 | Query Service + Frontend | Filtrar por un solo estado válido |
+| [ ] | TC-009 | HU-02 | Query Service + Frontend | Filtrar por múltiples estados simultáneamente |
+| [ ] | TC-010 | HU-02 | Query Service + Frontend | Combinar filtro de estado con otros filtros |
+| [ ] | TC-011 | HU-02 | Query Service + Frontend | Filtrar con estado inválido |
+| [ ] | TC-012 | HU-02 | Query Service + Frontend | Filtrar por estado sin resultados coincidentes |
+| [ ] | TC-013 | HU-03 | Query Service + Frontend | Filtrar por prioridad válida |
+| [ ] | TC-014 | HU-03 | Query Service + Frontend | Visualizar prioridades disponibles |
+| [ ] | TC-015 | HU-03 | Query Service + Frontend | Combinar filtro de prioridad con otros filtros |
+| [ ] | TC-016 | HU-03 | Query Service + Frontend | Filtrar con prioridad inválida |
+| [ ] | TC-017 | HU-03 | Query Service + Frontend | Filtrar por prioridad sin resultados coincidentes |
+| [ ] | TC-018 | HU-04 | Query Service + Frontend | Filtrar por tipo de incidente válido |
+| [ ] | TC-019 | HU-04 | Query Service + Frontend | Listar todos los tipos de incidente disponibles |
+| [ ] | TC-020 | HU-04 | Query Service + Frontend | Combinar filtro de tipo con estado y prioridad |
+| [ ] | TC-021 | HU-04 | Query Service + Frontend | Filtrar con tipo de incidente inválido |
+| [ ] | TC-022 | HU-05 | Query Service + Frontend 	| Filtrar por rango de fechas válido |
+| [ ] | TC-023 | HU-05 | Query Service + Frontend 	| Validar que fecha fin sea mayor o igual a fecha inicio |
+| [ ] | TC-024 | HU-05 | Query Service + Frontend | Rango de fechas sin resultados coincidentes |
+| [ ] | TC-025 | HU-05 | Query Service + Frontend | Filtrar con solo fecha inicio (sin fecha fin) |
+| [ ] | TC-026 | HU-05 | Query Service + Frontend | Filtrar con solo fecha fin (sin fecha inicio) |
+| [ ] | TC-027 | HU-05 | Query Service + Frontend | Fechas con formato inválido |
+| [ ] | TC-028 | HU-06 | Query Service + Frontend | Buscar por ID de ticket existente |
+| [ ] | TC-029 | HU-06 | Query Service + Frontend | Buscar por ID de ticket inexistente |
+| [ ] | TC-030 | HU-06 | Query Service + Frontend | Buscar con ID en formato inválido |
+| [ ] | TC-031 | HU-06 | Query Service + Frontend | Buscar con ID vacío |
+| [ ] | TC-032 | HU-07 | Query Service + Frontend | Buscar por número de línea válido con resultados |
+| [ ] | TC-033 | HU-07 | Query Service + Frontend | Buscar por número de línea válido sin resultados |
+| [ ] | TC-034 | HU-07 | Query Service + Frontend | Buscar con número de línea inválido |
+| [ ] | TC-035 | HU-08 | Query Service + Frontend | Ordenar por fecha ascendente |
+| [ ] | TC-036 | HU-08 | Query Service + Frontend | Ordenar por fecha descendente |
+| [ ] | TC-037 | HU-08 | Query Service + Frontend | Ordenar por prioridad |
+| [ ] | TC-038 | HU-08 | Query Service + Frontend | Ordenar por estado |
+| [ ] | TC-039 | HU-08 | Query Service + Frontend | Campo de ordenamiento inválido |
+| [ ] | TC-040 | HU-09 | Query Service + Frontend | Visualizar total de tickets |
+| [ ] | TC-041 | HU-09 | Query Service + Frontend | Distribución por estado |
+| [ ] | TC-042 | HU-09 | Query Service + Frontend | Distribución por prioridad |
+| [ ] | TC-043 | HU-09 | Query Service + Frontend | Distribución por tipo de incidente |
+| [ ] | TC-044 | HU-09 | Query Service + Frontend | Consistencia de métricas con el repositorio |
+| [ ] | TC-045 | HU-10 | Query Service + Frontend | Gráfica de distribución por prioridad |
+| [ ] | TC-046 | HU-10 | Query Service + Frontend | Gráfica de distribución por estado |
+| [ ] | TC-047 | HU-10 | Query Service + Frontend | Actualización de gráficas con filtros activos |
+| [ ] | TC-048 | HU-11 | Frontend | Exportar CSV con columnas básicas |
+| [ ] | TC-049 | HU-11 | Frontend | Exportar respetando filtros activos |
+| [ ] | TC-050 | HU-11 | Frontend | Exportar cuando no hay resultados |
+| [ ] | TC-051 | HU-12 | Query Service + Frontend | Refresco manual de datos |
+| [ ] | TC-052 | HU-12 | Query Service + Frontend | Auto-refresh configurable |
+| [ ] | TC-053 | HU-12 | Query Service + Frontend | Desactivar auto-refresh |
+
+
+
+---
+
+## 🏗️ Arquitectura del Sistema
+
+### Servicios Involucrados
+
+El sistema distribuido de gestión de quejas ISP consta de los siguientes servicios:
+
+| Servicio | Descripción | Puerto | Responsabilidad en Tests |
+|----------|-------------|:------:|------------------------|
+| **Frontend** | Aplicación React + Vite | 80 | Tests de UI, interacción de usuario, visualización de datos, exportación CSV, gráficas |
+| **Producer** | API Express de ingreso de quejas | 3000 | Validación de requests, publicación a RabbitMQ (no involucrado en dashboard) |
+| **Consumer** | Worker de procesamiento de mensajes | 3001 (health) | Priorización de tickets, persistencia inicial (no involucrado directamente en dashboard) |
+| **Query Service** | Microservicio de consultas (nuevo) | 3002 | API REST de consultas (`GET /api/tickets`), filtros, paginación, búsquedas, métricas agregadas |
+
+### Mapeo de Historias de Usuario a Servicios
+
+| Historia | Descripción | Servicios Involucrados |
+|----------|-------------|------------------------|
+| **HU-01 a HU-08** | Listado, filtros, búsquedas, ordenamiento | **Query Service** (backend) + **Frontend** (visualización) |
+| **HU-09** | Métricas agregadas | **Query Service** (endpoint `/api/tickets/metrics`) + **Frontend** (visualización) |
+| **HU-10** | Visualización gráfica | **Frontend** (renderizado) + **Query Service** (datos) |
+| **HU-11** | Exportación CSV | **Frontend** (generación de archivo) |
+| **HU-12** | Actualización de datos | **Frontend** (refresh manual/auto) + **Query Service** (datos actualizados) |
 
 ---
 
@@ -89,6 +116,7 @@
 - **ID de la Historia de Usuario**: HU-01
 - **Descripción**: Verificar que el sistema retorna una lista paginada de tickets con el tamaño de página por defecto (20) cuando no se especifica el parámetro `limit`.
 - **Precondiciones**: Existen al menos 25 tickets procesados en el repositorio del query-service.
+- **Servicio(s)**: **Query Service** (validación de params, lógica de paginación, respuesta JSON) + **Frontend** (renderizado de tabla y controles)
 
 **Pasos (Gherkin)**:
 ```gherkin
@@ -137,6 +165,7 @@ Then el código de respuesta es 200
 - **ID de la Historia de Usuario**: HU-01
 - **Descripción**: Verificar que el operador puede configurar la cantidad de tickets por página mediante el parámetro `limit`.
 - **Precondiciones**: Existen 50 tickets procesados en el repositorio.
+- **Servicio(s)**: **Query Service** (validación de `limit`, aplicación de paginación) + **Frontend** (control de tamaño de página)
 
 **Pasos (Gherkin)**:
 ```gherkin
@@ -172,6 +201,7 @@ Then el código de respuesta es 200
 - **ID de la Historia de Usuario**: HU-01
 - **Descripción**: Verificar que la respuesta incluye correctamente el total de resultados y la página actual en la metadata de paginación.
 - **Precondiciones**: Existen 55 tickets procesados en el repositorio.
+- **Servicio(s)**: **Query Service** (cálculo de totalItems, totalPages, metadata) + **Frontend** (visualización de metadata)
 
 **Pasos (Gherkin)**:
 ```gherkin
@@ -211,8 +241,9 @@ Then el código de respuesta es 200
 - **ID de la Historia de Usuario**: HU-01
 - **Descripción**: Verificar que el ordenamiento se mantiene consistente al navegar entre diferentes páginas.
 - **Precondiciones**: Existen 30 tickets con diferentes fechas de creación en el repositorio.
+- **Servicio(s)**: **Query Service** (aplicación de sortBy/sortOrder consistente) + **Frontend** (navegación entre páginas)
 
-**Pasos (Gherkin)**:
+**Pasos (Gherkin**:
 ```gherkin
 Given existen 30 tickets procesados con fechas de creación distintas
 When el operador solicita GET /api/tickets?page=1&limit=10&sortBy=createdAt&sortOrder=desc
@@ -256,6 +287,7 @@ Then el código de respuesta es 200 en ambas solicitudes
 - **ID de la Historia de Usuario**: HU-01
 - **Descripción**: Verificar que el sistema retorna una respuesta válida con lista vacía cuando no existen tickets.
 - **Precondiciones**: El repositorio del query-service está vacío (0 tickets).
+- **Servicio(s)**: **Query Service** (manejo de repositorio vacío) + **Frontend** (renderizado de estado vacío)
 
 **Pasos (Gherkin)**:
 ```gherkin
@@ -289,6 +321,7 @@ Then el código de respuesta es 200
 - **ID de la Historia de Usuario**: HU-01
 - **Descripción**: Verificar el comportamiento cuando se solicita una página que excede el total de páginas disponibles.
 - **Precondiciones**: Existen 10 tickets procesados (1 página con limit=20).
+- **Servicio(s)**: **Query Service** (manejo de páginas fuera de rango) + **Frontend** (visualización de resultados vacíos)
 
 **Pasos (Gherkin)**:
 ```gherkin
@@ -321,6 +354,7 @@ Then el código de respuesta es 200
 - **ID de la Historia de Usuario**: HU-01
 - **Descripción**: Verificar que el sistema rechaza valores inválidos para los parámetros de paginación con HTTP 400.
 - **Precondiciones**: Existen tickets en el repositorio.
+- **Servicio(s)**: **Query Service** (validación de query params, manejo de errores)
 
 **Pasos (Gherkin)**:
 ```gherkin
@@ -387,6 +421,7 @@ Then el código de respuesta es 400
 - **ID de la Historia de Usuario**: HU-02
 - **Descripción**: Verificar que al filtrar por un estado válido, solo se retornan tickets con ese estado.
 - **Precondiciones**: Existen tickets con estado `RECEIVED` y tickets con estado `IN_PROGRESS` en el repositorio.
+- **Servicio(s)**: **Query Service** (filtrado por `status` en query) + **Frontend** (selector de estado, renderizado de resultados)
 
 **Pasos (Gherkin)**:
 ```gherkin
@@ -420,6 +455,7 @@ Then el código de respuesta es 200
 - **ID de la Historia de Usuario**: HU-02
 - **Descripción**: Verificar que el sistema permite seleccionar múltiples estados y retorna tickets que coincidan con cualquiera de ellos.
 - **Precondiciones**: Existen tickets con ambos estados en el repositorio.
+- **Servicio(s)**: **Query Service** (filtrado con múltiples valores de `status`) + **Frontend** (selector múltiple de estados)
 
 **Pasos (Gherkin)**:
 ```gherkin
@@ -451,6 +487,7 @@ Then el código de respuesta es 200
 - **ID de la Historia de Usuario**: HU-02
 - **Descripción**: Verificar que el filtro de estado se combina correctamente con otros filtros (prioridad, tipo de incidente) usando lógica AND.
 - **Precondiciones**: Existen tickets variados con diferentes estados, prioridades y tipos en el repositorio.
+- **Servicio(s)**: **Query Service** (combinación de múltiples filtros con AND) + **Frontend** (múltiples selectores activos)
 
 **Pasos (Gherkin)**:
 ```gherkin
@@ -485,6 +522,7 @@ Then el código de respuesta es 200
 - **ID de la Historia de Usuario**: HU-02
 - **Descripción**: Verificar que el sistema rechaza un valor de estado que no existe en el dominio.
 - **Precondiciones**: Existen tickets en el repositorio.
+- **Servicio(s)**: **Query Service** (validación de valores de `status`, manejo de errores HTTP 400)
 
 **Pasos (Gherkin)**:
 ```gherkin
@@ -511,6 +549,7 @@ Then el código de respuesta es 400
 - **ID de la Historia de Usuario**: HU-02
 - **Descripción**: Verificar que el sistema retorna una lista vacía cuando el estado filtrado no tiene tickets asociados.
 - **Precondiciones**: Existen solo tickets con estado `IN_PROGRESS` en el repositorio.
+- **Servicio(s)**: **Query Service** (filtrado sin resultados) + **Frontend** (renderizado de lista vacía)
 
 **Pasos (Gherkin)**:
 ```gherkin
@@ -534,6 +573,7 @@ Then el código de respuesta es 200
 - **ID de la Historia de Usuario**: HU-03
 - **Descripción**: Verificar que al filtrar por una prioridad válida, solo se retornan tickets con esa prioridad.
 - **Precondiciones**: Existen tickets con prioridades HIGH, MEDIUM, LOW y PENDING en el repositorio.
+- **Servicio(s)**: **Query Service** (filtrado por `priority` en query) + **Frontend** (selector de prioridad, renderizado)
 
 **Pasos (Gherkin)**:
 ```gherkin
@@ -573,6 +613,7 @@ Then el código de respuesta es 200
 - **ID de la Historia de Usuario**: HU-03
 - **Descripción**: Verificar que el sistema expone o permite conocer las prioridades disponibles para filtrar.
 - **Precondiciones**: El sistema está operativo.
+- **Servicio(s)**: **Frontend** (renderizado de selector/dropdown con todas las prioridades del dominio)
 
 **Pasos (Gherkin)**:
 ```gherkin
@@ -596,6 +637,7 @@ Then se muestran las siguientes opciones disponibles: "HIGH", "MEDIUM", "LOW", "
 - **ID de la Historia de Usuario**: HU-03
 - **Descripción**: Verificar que el filtro de prioridad se combina correctamente con otros filtros activos.
 - **Precondiciones**: Existen tickets variados en el repositorio.
+- **Servicio(s)**: **Query Service** (combinación de filtros múltiples) + **Frontend** (múltiples selectores)
 
 **Pasos (Gherkin)**:
 ```gherkin
@@ -627,6 +669,7 @@ Then el código de respuesta es 200
 - **ID de la Historia de Usuario**: HU-03
 - **Descripción**: Verificar que el sistema rechaza valores de prioridad no pertenecientes al dominio.
 - **Precondiciones**: Existen tickets en el repositorio.
+- **Servicio(s)**: **Query Service** (validación de valores de `priority`, HTTP 400)
 
 **Pasos (Gherkin)**:
 ```gherkin
@@ -653,6 +696,7 @@ Then el código de respuesta es 400
 - **ID de la Historia de Usuario**: HU-03
 - **Descripción**: Verificar que el sistema retorna una lista vacía cuando no hay tickets con la prioridad filtrada.
 - **Precondiciones**: Existen solo tickets con prioridad HIGH y MEDIUM.
+- **Servicio(s)**: **Query Service** (filtrado sin resultados) + **Frontend** (renderizado de lista vacía)
 
 **Pasos (Gherkin)**:
 ```gherkin
@@ -676,6 +720,7 @@ Then el código de respuesta es 200
 - **ID de la Historia de Usuario**: HU-04
 - **Descripción**: Verificar que al filtrar por tipo de incidente válido, solo se retornan tickets de ese tipo.
 - **Precondiciones**: Existen tickets de diferentes tipos de incidente en el repositorio.
+- **Servicio(s)**: **Query Service** (filtrado por `incidentType` en query) + **Frontend** (selector de tipo, renderizado)
 
 **Pasos (Gherkin)**:
 ```gherkin
@@ -719,6 +764,7 @@ Then el código de respuesta es 200
 - **ID de la Historia de Usuario**: HU-04
 - **Descripción**: Verificar que la interfaz presenta todos los tipos de incidente disponibles para filtrar.
 - **Precondiciones**: El sistema está operativo con la interfaz de filtros cargada.
+- **Servicio(s)**: **Frontend** (renderizado de selector/dropdown con los 6 tipos de incidente)
 
 **Pasos (Gherkin)**:
 ```gherkin
@@ -743,6 +789,7 @@ Then se listan las siguientes opciones:
 - **ID de la Historia de Usuario**: HU-04
 - **Descripción**: Verificar que el filtro de tipo de incidente es combinable con estado y prioridad usando lógica AND.
 - **Precondiciones**: Existen tickets variados en el repositorio.
+- **Servicio(s)**: **Query Service** (combinación triple de filtros con AND) + **Frontend** (múltiples selectores)
 
 **Pasos (Gherkin)**:
 ```gherkin
@@ -775,6 +822,7 @@ Then el código de respuesta es 200
 - **ID de la Historia de Usuario**: HU-04
 - **Descripción**: Verificar que el sistema rechaza un tipo de incidente no perteneciente al dominio.
 - **Precondiciones**: Existen tickets en el repositorio.
+- **Servicio(s)**: **Query Service** (validación de valores de `incidentType`, HTTP 400)
 
 **Pasos (Gherkin)**:
 ```gherkin
@@ -804,6 +852,7 @@ Then el código de respuesta es 400
 - **ID de la Historia de Usuario**: HU-05
 - **Descripción**: Verificar que al especificar un rango de fechas válido (dateFrom ≤ dateTo), solo se retornan tickets cuya fecha de creación esté dentro del rango.
 - **Precondiciones**: Existen tickets con fechas de creación repartidas en varios meses.
+- **Servicio(s)**: **Query Service** (filtrado por rango de fechas en `createdAt`) + **Frontend** (date pickers, validación)
 
 **Pasos (Gherkin)**:
 ```gherkin
@@ -846,6 +895,7 @@ Then el código de respuesta es 200
 - **ID de la Historia de Usuario**: HU-05
 - **Descripción**: Verificar que el sistema rechaza un rango donde la fecha de fin es anterior a la fecha de inicio.
 - **Precondiciones**: Existen tickets en el repositorio.
+- **Servicio(s)**: **Query Service** (validación de rango de fechas, HTTP 400) + **Frontend** (validación client-side)
 
 **Pasos (Gherkin)**:
 ```gherkin
@@ -876,6 +926,7 @@ Then el código de respuesta es 400
 - **ID de la Historia de Usuario**: HU-05
 - **Descripción**: Verificar que el sistema retorna lista vacía cuando no existen tickets en el rango de fechas especificado.
 - **Precondiciones**: Existen tickets con fechas fuera del rango consultado.
+- **Servicio(s)**: **Query Service** (filtrado por fechas sin resultados) + **Frontend** (renderizado de lista vacía)
 
 **Pasos (Gherkin)**:
 ```gherkin
@@ -895,6 +946,7 @@ Then el código de respuesta es 200
 - **ID de la Historia de Usuario**: HU-05
 - **Descripción**: Verificar que al especificar solo `dateFrom`, se retornan todos los tickets desde esa fecha en adelante.
 - **Precondiciones**: Existen tickets con fechas distribuidas.
+- **Servicio(s)**: **Query Service** (filtrado con solo fecha inicial) + **Frontend** (permitir dateFrom sin dateTo)
 
 **Pasos (Gherkin)**:
 ```gherkin
@@ -917,6 +969,7 @@ Then el código de respuesta es 200
 - **ID de la Historia de Usuario**: HU-05
 - **Descripción**: Verificar que al especificar solo `dateTo`, se retornan todos los tickets hasta esa fecha.
 - **Precondiciones**: Existen tickets con fechas distribuidas.
+- **Servicio(s)**: **Query Service** (filtrado con solo fecha final) + **Frontend** (permitir dateTo sin dateFrom)
 
 **Pasos (Gherkin)**:
 ```gherkin
@@ -939,6 +992,7 @@ Then el código de respuesta es 200
 - **ID de la Historia de Usuario**: HU-05
 - **Descripción**: Verificar que el sistema rechaza fechas con formato no ISO-8601 con HTTP 400.
 - **Precondiciones**: Existen tickets en el repositorio.
+- **Servicio(s)**: **Query Service** (validación de formato de fecha, HTTP 400)
 
 **Pasos (Gherkin)**:
 ```gherkin
@@ -986,6 +1040,7 @@ Then el código de respuesta es 400
 - **ID de la Historia de Usuario**: HU-06
 - **Descripción**: Verificar que al buscar por un ID de ticket existente (UUIDv4), el sistema retorna exactamente ese ticket.
 - **Precondiciones**: Existe un ticket con ID conocido en el repositorio.
+- **Servicio(s)**: **Query Service** (endpoint `GET /api/tickets/:id`, búsqueda por ID) + **Frontend** (campo de búsqueda, renderizado de detalle)
 
 **Pasos (Gherkin)**:
 ```gherkin
@@ -1012,6 +1067,7 @@ Then el código de respuesta es 200
 - **ID de la Historia de Usuario**: HU-06
 - **Descripción**: Verificar que al buscar un ID inexistente, el sistema muestra un mensaje claro indicando que el ticket no fue encontrado.
 - **Precondiciones**: El ID buscado no existe en el repositorio.
+- **Servicio(s)**: **Query Service** (manejo de HTTP 404) + **Frontend** (visualización de mensaje de error)
 
 **Pasos (Gherkin)**:
 ```gherkin
@@ -1029,6 +1085,7 @@ Then el código de respuesta es 404
 - **ID de la Historia de Usuario**: HU-06
 - **Descripción**: Verificar que el sistema rechaza búsquedas con IDs que no tienen formato UUIDv4.
 - **Precondiciones**: El sistema está operativo.
+- **Servicio(s)**: **Query Service** (validación de formato UUID, HTTP 400)
 
 **Pasos (Gherkin)**:
 ```gherkin
@@ -1062,6 +1119,7 @@ Then el código de respuesta es 400
 - **ID de la Historia de Usuario**: HU-06
 - **Descripción**: Verificar el comportamiento cuando se intenta buscar con un ID vacío.
 - **Precondiciones**: El sistema está operativo.
+- **Servicio(s)**: **Query Service** (endpoint raíz `/api/tickets` retorna listado) + **Frontend** (comportamiento al enviar búsqueda vacía)
 
 **Pasos (Gherkin)**:
 ```gherkin
@@ -1083,6 +1141,7 @@ Then el código de respuesta es 200
 - **ID de la Historia de Usuario**: HU-07
 - **Descripción**: Verificar que al buscar por un número de línea válido, se retornan todos los tickets asociados a ese número.
 - **Precondiciones**: Existen múltiples tickets asociados al mismo número de línea.
+- **Servicio(s)**: **Query Service** (filtrado por `lineNumber` en query) + **Frontend** (campo de búsqueda, renderizado de lista)
 
 **Pasos (Gherkin)**:
 ```gherkin
@@ -1122,6 +1181,7 @@ Then el código de respuesta es 200
 - **ID de la Historia de Usuario**: HU-07
 - **Descripción**: Verificar que al buscar por un número de línea sin tickets asociados, se retorna lista vacía.
 - **Precondiciones**: No existen tickets para el número de línea consultado.
+- **Servicio(s)**: **Query Service** (búsqueda sin resultados) + **Frontend** (renderizado de lista vacía)
 
 **Pasos (Gherkin)**:
 ```gherkin
@@ -1140,6 +1200,7 @@ Then el código de respuesta es 200
 - **ID de la Historia de Usuario**: HU-07
 - **Descripción**: Verificar que el sistema rechaza búsquedas con números de línea que contienen caracteres no válidos.
 - **Precondiciones**: El sistema está operativo.
+- **Servicio(s)**: **Query Service** (validación de formato de lineNumber, HTTP 400)
 
 **Pasos (Gherkin)**:
 ```gherkin
@@ -1169,6 +1230,7 @@ Then el código de respuesta es 400
 - **ID de la Historia de Usuario**: HU-08
 - **Descripción**: Verificar que los tickets se ordenan por fecha de creación en orden ascendente (más antiguo primero).
 - **Precondiciones**: Existen tickets con diferentes fechas de creación.
+- **Servicio(s)**: **Query Service** (aplicación de `sortBy=createdAt&sortOrder=asc`) + **Frontend** (control de ordenamiento)
 
 **Pasos (Gherkin)**:
 ```gherkin
@@ -1199,6 +1261,7 @@ Then el código de respuesta es 200
 - **ID de la Historia de Usuario**: HU-08
 - **Descripción**: Verificar que los tickets se ordenan por fecha de creación en orden descendente (más reciente primero).
 - **Precondiciones**: Existen tickets con diferentes fechas de creación.
+- **Servicio(s)**: **Query Service** (aplicación de `sortBy=createdAt&sortOrder=desc`) + **Frontend** (control de ordenamiento)
 
 **Pasos (Gherkin)**:
 ```gherkin
@@ -1221,6 +1284,7 @@ Then el código de respuesta es 200
 - **ID de la Historia de Usuario**: HU-08
 - **Descripción**: Verificar que los tickets se pueden ordenar por prioridad (HIGH > MEDIUM > LOW > PENDING).
 - **Precondiciones**: Existen tickets con diferentes prioridades.
+- **Servicio(s)**: **Query Service** (aplicación de `sortBy=priority`) + **Frontend** (control de ordenamiento por prioridad)
 
 **Pasos (Gherkin)**:
 ```gherkin
@@ -1253,6 +1317,7 @@ Then el código de respuesta es 200
 - **ID de la Historia de Usuario**: HU-08
 - **Descripción**: Verificar que los tickets se pueden ordenar por estado.
 - **Precondiciones**: Existen tickets con diferentes estados.
+- **Servicio(s)**: **Query Service** (aplicación de `sortBy=status`) + **Frontend** (control de ordenamiento por estado)
 
 **Pasos (Gherkin)**:
 ```gherkin
@@ -1277,6 +1342,7 @@ Then el código de respuesta es 200
 - **ID de la Historia de Usuario**: HU-08
 - **Descripción**: Verificar que el sistema rechaza campos de ordenamiento no válidos.
 - **Precondiciones**: Existen tickets en el repositorio.
+- **Servicio(s)**: **Query Service** (validación de valores de `sortBy`, HTTP 400)
 
 **Pasos (Gherkin)**:
 ```gherkin
@@ -1316,6 +1382,7 @@ Then el código de respuesta es 400
 - **ID de la Historia de Usuario**: HU-09
 - **Descripción**: Verificar que el sistema muestra el total de tickets procesados.
 - **Precondiciones**: Existen tickets en el repositorio.
+- **Servicio(s)**: **Query Service** (endpoint `GET /api/tickets/metrics`, cálculo de totalTickets) + **Frontend** (card/tarjeta de métrica)
 
 **Pasos (Gherkin)**:
 ```gherkin
@@ -1346,6 +1413,7 @@ Then el código de respuesta es 200
 - **ID de la Historia de Usuario**: HU-09
 - **Descripción**: Verificar que las métricas incluyen la distribución de tickets por estado.
 - **Precondiciones**: Existen tickets con diferentes estados.
+- **Servicio(s)**: **Query Service** (cálculo de `byStatus` en `/api/tickets/metrics`) + **Frontend** (visualización de distribución)
 
 **Pasos (Gherkin)**:
 ```gherkin
@@ -1375,6 +1443,7 @@ Then el código de respuesta es 200
 - **ID de la Historia de Usuario**: HU-09
 - **Descripción**: Verificar que las métricas incluyen la distribución de tickets por prioridad.
 - **Precondiciones**: Existen tickets con diferentes prioridades.
+- **Servicio(s)**:** **Query Service** (cálculo de `byPriority` en `/api/tickets/metrics`) + **Frontend** (visualización)
 
 **Pasos (Gherkin)**:
 ```gherkin
@@ -1401,6 +1470,7 @@ Then el código de respuesta es 200
 - **ID de la Historia de Usuario**: HU-09
 - **Descripción**: Verificar que las métricas incluyen la distribución de tickets por tipo de incidente.
 - **Precondiciones**: Existen tickets de diferentes tipos.
+- **Servicio(s)**: **Query Service** (cálculo de `byType` en `/api/tickets/metrics`) + **Frontend** (visualización)
 
 **Pasos (Gherkin)**:
 ```gherkin
@@ -1431,6 +1501,7 @@ Then el código de respuesta es 200
 - **ID de la Historia de Usuario**: HU-09
 - **Descripción**: Verificar que las métricas agregadas son consistentes con los datos reales del repositorio y el listado paginado.
 - **Precondiciones**: Existen tickets en el repositorio.
+- **Servicio(s)**: **Query Service** (validación de consistencia entre endpoints `/api/tickets/metrics` y `/api/tickets`) + **Frontend** (validación de totales)
 
 **Pasos (Gherkin)**:
 ```gherkin
@@ -1455,6 +1526,7 @@ Then el campo "totalTickets" de las métricas es igual al campo "pagination.tota
 - **ID de la Historia de Usuario**: HU-10
 - **Descripción**: Verificar que se muestra una gráfica (barras o pastel) con la distribución de tickets por prioridad.
 - **Precondiciones**: Existen tickets con diferentes prioridades. La página de administrador está cargada.
+- **Servicio(s)**: **Frontend** (renderizado de gráfica, librería de charts) + **Query Service** (fuente de datos desde `/api/tickets/metrics`)
 
 **Pasos (Gherkin)**:
 ```gherkin
@@ -1482,6 +1554,7 @@ Then se muestra una gráfica de distribución por prioridad
 - **ID de la Historia de Usuario**: HU-10
 - **Descripción**: Verificar que se muestra una gráfica con la distribución de tickets por estado.
 - **Precondiciones**: Existen tickets con diferentes estados. La página de administrador está cargada.
+- **Servicio(s)**: **Frontend** (renderizado de gráfica por estado) + **Query Service** (fuente de datos desde `/api/tickets/metrics`)
 
 **Pasos (Gherkin)**:
 ```gherkin
@@ -1501,6 +1574,7 @@ Then se muestra una gráfica de distribución por estado
 - **ID de la Historia de Usuario**: HU-10
 - **Descripción**: Verificar que las gráficas se actualizan al aplicar filtros, reflejando solo los datos del subconjunto filtrado.
 - **Precondiciones**: La página de administrador está cargada con datos y gráficas visibles.
+- **Servicio(s)**: **Frontend** (actualización de gráficas con datos filtrados) + **Query Service** (datos filtrados desde `/api/tickets`)
 
 **Pasos (Gherkin)**:
 ```gherkin
@@ -1538,6 +1612,7 @@ Then las gráficas se actualizan
 - **ID de la Historia de Usuario**: HU-11
 - **Descripción**: Verificar que se puede exportar la lista de tickets en formato CSV con las columnas básicas del modelo.
 - **Precondiciones**: Existen tickets en el repositorio. La página de administrador está cargada.
+- **Servicio(s)**: **Frontend** (generación de CSV cliente, descarga de archivo)
 
 **Pasos (Gherkin)**:
 ```gherkin
@@ -1573,6 +1648,7 @@ Then se descarga un archivo con extensión ".csv"
 - **ID de la Historia de Usuario**: HU-11
 - **Descripción**: Verificar que el CSV exportado solo contiene los tickets que coinciden con los filtros activos al momento de la exportación.
 - **Precondiciones**: Existen tickets variados. Se han aplicado filtros en la UI.
+- **Servicio(s)**: **Frontend** (exportación respetando filtros activos)
 
 **Pasos (Gherkin)**:
 ```gherkin
@@ -1593,6 +1669,7 @@ Then se descarga un archivo CSV
 - **ID de la Historia de Usuario**: HU-11
 - **Descripción**: Verificar el comportamiento de la exportación cuando no hay resultados (por filtros o repositorio vacío).
 - **Precondiciones**: No hay tickets que coincidan con los filtros activos.
+- **Servicio(s)**: **Frontend** (manejo de exportación vacía)
 
 **Pasos (Gherkin)**:
 ```gherkin
@@ -1615,6 +1692,7 @@ Then se descarga un archivo CSV que contiene solo la fila de encabezados
 - **ID de la Historia de Usuario**: HU-12
 - **Descripción**: Verificar que el operador puede actualizar manualmente los datos de la tabla para ver cambios recientes.
 - **Precondiciones**: La página de administrador está cargada con datos.
+- **Servicio(s)**: **Frontend** (botón de refresh, recarga de datos) + **Query Service** (datos actualizados desde `/api/tickets`)
 
 **Pasos (Gherkin)**:
 ```gherkin
@@ -1642,6 +1720,7 @@ Then la tabla se recarga con los datos más recientes
 - **ID de la Historia de Usuario**: HU-12
 - **Descripción**: Verificar que el auto-refresh es configurable en intervalo y puede activarse/desactivarse.
 - **Precondiciones**: La página de administrador está cargada.
+- **Servicio(s)**: **Frontend** (lógica de auto-refresh, timer, indicador visual) + **Query Service** (fuente de datos actualizada)
 
 **Pasos (Gherkin)**:
 ```gherkin
@@ -1683,6 +1762,7 @@ Then los datos de la tabla se recargan automáticamente cada 30 segundos
 - **ID de la Historia de Usuario**: HU-12
 - **Descripción**: Verificar que el operador puede desactivar el auto-refresh cuando está activo.
 - **Precondiciones**: El auto-refresh está activo.
+- **Servicio(s)**: **Frontend** (desactivación de auto-refresh, stop de timer)
 
 **Pasos (Gherkin)**:
 ```gherkin
