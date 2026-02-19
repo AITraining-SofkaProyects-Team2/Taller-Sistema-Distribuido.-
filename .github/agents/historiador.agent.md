@@ -8,7 +8,7 @@ tools: [read, edit, search, todo] # specify the tools this agent can use. If not
 
 # === Agregar ===
 # que el agente agregue el servicio en el que debería implementarse el test
-#
+# que no se les diseñen casos de prueba a las historias de usuario y funcionalidades que estén marcadas como opcionales
 #
 #
 ---

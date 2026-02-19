@@ -1,0 +1,152 @@
+name: Crear Issues por Historia de Usuario
+
+on:
+  workflow_dispatch:
+
+permissions:
+  issues: write
+  contents: read
+
+jobs:
+  create_issues:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Crear Issues por HU desde FASE_3 y TEST_PLAN
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const fs = require('fs');
+            const path = require('path');
+            const { owner, repo } = context.repo;
+            const workspace = process.env.GITHUB_WORKSPACE;
+
+            // ── Rutas de los archivos fuente ────────────────────────────────────
+            const fasePath  = path.join(workspace, 'documentación', 'FASE_3_HISTORIAS_RIESGOS.md');
+            const testsPaths = [
+              path.join(workspace, 'documentación', 'TEST_PLAN.md'),
+              path.join(workspace, 'TEST_PLAN.md'),
+            ];
+
+            if (!fs.existsSync(fasePath)) {
+              core.setFailed(`Archivo no encontrado: ${fasePath}`);
+              return;
+            }
+
+            const fase = fs.readFileSync(fasePath, 'utf8');
+
+            let testsDoc = '';
+            for (const p of testsPaths) {
+              if (fs.existsSync(p)) {
+                testsDoc = fs.readFileSync(p, 'utf8');
+                core.info(`TEST_PLAN leído desde: ${p}`);
+                break;
+              }
+            }
+            if (!testsDoc) {
+              core.warning('TEST_PLAN.md no encontrado. Los Issues se crearán sin tests asociados.');
+            }
+
+            // ── 1. Parsear HUs desde FASE_3 ─────────────────────────────────────
+            // Captura: título de HU  +  todo el bloque hasta el siguiente ### HU-, --- o ## 
+            const huRegex = /^###\s+(HU-\d+\s*-\s*[^\n\r]+)\s*[\r\n]+([\s\S]*?)(?=^###\s+HU-|\n---|\n##\s|$)/gmi;
+            const hus = [];
+            let m;
+            while ((m = huRegex.exec(fase)) !== null) {
+              const title = m[1].trim();                     // "HU-02 - Filtro por estado"
+              const body  = m[2].trim()                      // cuerpo completo de la HU
+                .replace(/^---\s*$/gm, '')                   // eliminar separadores
+                .trim();
+              hus.push({ title, body });
+            }
+
+            if (!hus.length) {
+              core.setFailed('No se encontraron HUs en FASE_3_HISTORIAS_RIESGOS.md');
+              return;
+            }
+            core.info(`HUs encontradas: ${hus.length}`);
+
+            // ── 2. Parsear tabla de tests desde TEST_PLAN ───────────────────────
+            // Formato de cada fila:
+            // | [ ] | TC-008 | HU-02 | Query Service + Frontend | Filtrar por un solo estado válido |
+            const testsByHu = {};
+
+            if (testsDoc) {
+              for (const line of testsDoc.split(/\r?\n/)) {
+                // Ignorar cabeceras y separadores de tabla
+                if (!/\|\s*TC-\d+/i.test(line)) continue;
+
+                const cells = line.split('|').map(c => c.trim()).filter(c => c.length > 0);
+                // cells[0]=completado  cells[1]=TC-ID  cells[2]=HU-ID  cells[3]=Servicios  cells[4]=Descripción
+                if (cells.length < 5) continue;
+
+                const tcId    = (cells[1].match(/TC-\d+/i) || [''])[0].toUpperCase();
+                const huRef   = (cells[2].match(/HU-\d+/i) || [''])[0].toUpperCase();
+                const service = cells[3];
+                const desc    = cells[4];
+
+                if (!tcId || !huRef) continue;
+
+                if (!testsByHu[huRef]) testsByHu[huRef] = [];
+                testsByHu[huRef].push(`- [ ] | ${tcId} - ${service} - ${desc}`);
+              }
+            }
+
+            // ── 3. Obtener issues existentes (open + closed) ────────────────────
+            const existing = await github.paginate(github.rest.issues.listForRepo, {
+              owner,
+              repo,
+              state: 'all',
+              per_page: 100,
+            });
+            const existingTitles = new Set(existing.map(i => i.title));
+
+            // ── 4. Crear un Issue por cada HU ────────────────────────────────────
+            let created = 0;
+            let skipped = 0;
+
+            for (const hu of hus) {
+              const { title, body } = hu;
+
+              // Verificar duplicado por título exacto (independiente de estado)
+              if (existingTitles.has(title)) {
+                core.info(`DUPLICADO (omitido): ${title}`);
+                skipped++;
+                continue;
+              }
+
+              // Extraer "HU-XX" del título para buscar tests
+              const huKey = (title.match(/HU-\d+/i) || [''])[0].toUpperCase();
+              const tests = testsByHu[huKey] || [];
+
+              const testsSection = tests.length
+                ? tests.join('\n')
+                : '_No se encontraron tests asociados a esta HU en TEST_PLAN._';
+
+              const issueBody = [
+                body,
+                '',
+                '---',
+                '',
+                '## ✅ Tests asociados',
+                '',
+                testsSection,
+              ].join('\n');
+
+              await github.rest.issues.create({
+                owner,
+                repo,
+                title,
+                body: issueBody,
+                labels: ['hu'],
+              });
+
+              core.info(`Issue creado: ${title} (${tests.length} tests)`);
+              created++;
+            }
+
+            core.info(`\n── Resumen ──`);
+            core.info(`Issues creados : ${created}`);
+            core.info(`Duplicados omitidos: ${skipped}`);
