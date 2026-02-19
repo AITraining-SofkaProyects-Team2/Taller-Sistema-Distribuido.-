@@ -23,7 +23,7 @@ jobs:
             const { owner, repo } = context.repo;
             const workspace = process.env.GITHUB_WORKSPACE;
 
-            // ── Rutas de los archivos fuente ────────────────────────────────────
+            // --- Rutas de los archivos fuente ---
             const fasePath  = path.join(workspace, 'documentación', 'FASE_3_HISTORIAS_RIESGOS.md');
             const testsPaths = [
               path.join(workspace, 'documentación', 'TEST_PLAN.md'),
@@ -49,7 +49,7 @@ jobs:
               core.warning('TEST_PLAN.md no encontrado. Los Issues se crearán sin tests asociados.');
             }
 
-            // ── 1. Parsear HUs desde FASE_3 (línea a línea) ─────────────────────
+            // --- 1. Parsear HUs desde FASE_3 (linea a linea) ---
             const hus = [];
             const lines = fase.split(/\r?\n/);
             let currentTitle = null;
@@ -89,9 +89,9 @@ jobs:
             }
             core.info(`HUs encontradas: ${hus.length}`);
 
-            // ── 2. Parsear tabla de tests desde TEST_PLAN ───────────────────────
+            // --- 2. Parsear tabla de tests desde TEST_PLAN ---
             // Formato de cada fila:
-            // | [ ] | TC-008 | HU-02 | Query Service + Frontend | Filtrar por un solo estado válido |
+            // | [ ] | TC-008 | HU-02 | Query Service + Frontend | Filtrar por un solo estado valido |
             const testsByHu = {};
 
             if (testsDoc) {
@@ -100,7 +100,7 @@ jobs:
                 if (!/\|\s*TC-\d+/i.test(line)) continue;
 
                 const cells = line.split('|').map(c => c.trim()).filter(c => c.length > 0);
-                // cells[0]=completado  cells[1]=TC-ID  cells[2]=HU-ID  cells[3]=Servicios  cells[4]=Descripción
+                // cells[0]=completado  cells[1]=TC-ID  cells[2]=HU-ID  cells[3]=Servicios  cells[4]=Descripcion
                 if (cells.length < 5) continue;
 
                 const tcId    = (cells[1].match(/TC-\d+/i) || [''])[0].toUpperCase();
@@ -115,7 +115,7 @@ jobs:
               }
             }
 
-            // ── 3. Obtener issues existentes (open + closed) ────────────────────
+            // --- 3. Obtener issues existentes (open + closed) ---
             const existing = await github.paginate(github.rest.issues.listForRepo, {
               owner,
               repo,
@@ -124,7 +124,7 @@ jobs:
             });
             const existingTitles = new Set(existing.map(i => i.title));
 
-            // ── 4. Crear un Issue por cada HU ────────────────────────────────────
+            // --- 4. Crear un Issue por cada HU ---
             let created = 0;
             let skipped = 0;
 
@@ -152,7 +152,7 @@ jobs:
                 '---',
                 '',
                 '## Test driving',
-                '| | ID Test | Servicios afectados | Descripción |'
+                '| | ID Test | Servicios afectados | Descripción |',
                 '|---|---|---|---|',
                 testsSection,
               ].join('\n');
@@ -169,6 +169,4 @@ jobs:
               created++;
             }
 
-            core.info(`\n── Resumen ──`);
-            core.info(`Issues creados : ${created}`);
-            core.info(`Duplicados omitidos: ${skipped}`);
+            core.info(`Resumen: ${created} issues creados, ${skipped} duplicados omitidos`);
