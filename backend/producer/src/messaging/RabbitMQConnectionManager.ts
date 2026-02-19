@@ -3,7 +3,15 @@ import { rabbitmqConfig } from '../config/index.js';
 import { logger } from '../utils/logger.js';
 import type { IConnectionManager } from './IConnectionManager.js';
 
+/**
+ * Clase Singleton que gestiona la conexión y el canal para RabbitMQ.
+ * Implementa IConnectionManager para proporcionar una interfaz consistente para las operaciones del broker de mensajería.
+ * 
+ * @class RabbitMQConnectionManager
+ * @implements {IConnectionManager}
+ */
 class RabbitMQConnectionManager implements IConnectionManager {
+
     private static instance: RabbitMQConnectionManager | null = null;
     private connection: ChannelModel | null = null;
     private channel: Channel | null = null;
@@ -11,7 +19,14 @@ class RabbitMQConnectionManager implements IConnectionManager {
     // Private constructor prevents external instantiation
     private constructor() { }
 
+    /**
+     * Retorna la instancia única (singleton) de RabbitMQConnectionManager.
+     * 
+     * @static
+     * @returns {RabbitMQConnectionManager} La instancia activa del gestor de conexiones.
+     */
     public static getInstance(): RabbitMQConnectionManager {
+
         if (!RabbitMQConnectionManager.instance) {
             RabbitMQConnectionManager.instance = new RabbitMQConnectionManager();
         }
@@ -23,7 +38,16 @@ class RabbitMQConnectionManager implements IConnectionManager {
         RabbitMQConnectionManager.instance = null;
     }
 
+    /**
+     * Establece una conexión con el broker de RabbitMQ y crea un canal.
+     * También declara el exchange definido en la configuración.
+     * 
+     * @async
+     * @returns {Promise<void>} Se resuelve cuando la conexión se establece con éxito.
+     * @throws {Error} Si la conexión falla.
+     */
     async connect(): Promise<void> {
+
         if (this.connection) {
             return; // Already connected
         }
@@ -50,7 +74,14 @@ class RabbitMQConnectionManager implements IConnectionManager {
         }
     }
 
+    /**
+     * Cierra el canal y la conexión activa de RabbitMQ de forma segura.
+     * 
+     * @async
+     * @returns {Promise<void>} Se resuelve cuando la conexión se cierra.
+     */
     async close(): Promise<void> {
+
         try {
             if (this.channel) {
                 await this.channel.close();
@@ -77,7 +108,13 @@ class RabbitMQConnectionManager implements IConnectionManager {
         return this.connection !== null && this.channel !== null;
     }
 
+    /**
+     * Configura los manejadores de eventos para la conexión amqp para gestionar errores y cierres.
+     * 
+     * @private
+     */
     private setupEventHandlers(): void {
+
         this.connection?.on('close', () => {
             logger.warn('RabbitMQ connection closed');
             this.connection = null;
