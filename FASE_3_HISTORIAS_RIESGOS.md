@@ -7,8 +7,8 @@
 ## 📘 Historias de Usuario (HU)
 
 ### HU-01 - Listado de tickets con paginacion
-**Como** operador
-**Quiero** ver una lista paginada de tickets
+**Como** operador \
+**Quiero** ver una lista paginada de tickets \
 **Para** navegar grandes volumenes sin perder rendimiento
 
 **Criterios de aceptacion**
@@ -19,8 +19,8 @@
 ---
 
 ### HU-02 - Filtro por estado
-**Como** operador
-**Quiero** filtrar tickets por estado
+**Como** operador \
+**Quiero** filtrar tickets por estado \
 **Para** priorizar el seguimiento operativo
 
 **Criterios de aceptacion**
@@ -31,8 +31,8 @@
 ---
 
 ### HU-03 - Filtro por prioridad
-**Como** operador
-**Quiero** filtrar tickets por prioridad
+**Como** operador \
+**Quiero** filtrar tickets por prioridad \
 **Para** identificar incidentes criticos
 
 **Criterios de aceptacion**
@@ -43,8 +43,8 @@
 ---
 
 ### HU-04 - Filtro por tipo de incidente
-**Como** operador
-**Quiero** filtrar por tipo de incidente
+**Como** operador \
+**Quiero** filtrar por tipo de incidente \
 **Para** agrupar casos similares
 
 **Criterios de aceptacion**
@@ -54,8 +54,8 @@
 ---
 
 ### HU-05 - Filtro por rango de fechas
-**Como** operador
-**Quiero** filtrar tickets por rango de fechas
+**Como** operador \
+**Quiero** filtrar tickets por rango de fechas \
 **Para** analizar periodos especificos
 
 **Criterios de aceptacion**
@@ -66,8 +66,8 @@
 ---
 
 ### HU-06 - Busqueda por ID de ticket
-**Como** operador
-**Quiero** buscar un ticket por ID
+**Como** operador \
+**Quiero** buscar un ticket por ID \
 **Para** acceder rapidamente a un caso
 
 **Criterios de aceptacion**
@@ -77,8 +77,8 @@
 ---
 
 ### HU-07 - Busqueda por numero de linea
-**Como** operador
-**Quiero** buscar tickets por numero de linea
+**Como** operador \
+**Quiero** buscar tickets por numero de linea \
 **Para** revisar quejas de un cliente
 
 **Criterios de aceptacion**
@@ -88,8 +88,8 @@
 ---
 
 ### HU-08 - Ordenamiento de resultados
-**Como** operador
-**Quiero** ordenar resultados
+**Como** operador \
+**Quiero** ordenar resultados \
 **Para** revisar prioridades o fechas de forma eficiente
 
 **Criterios de aceptacion**
@@ -99,8 +99,8 @@
 ---
 
 ### HU-09 - Metricas agregadas
-**Como** supervisor
-**Quiero** ver metricas agregadas
+**Como** supervisor \
+**Quiero** ver metricas agregadas \
 **Para** obtener una vision global del sistema
 
 **Criterios de aceptacion**
@@ -111,8 +111,8 @@
 ---
 
 ### HU-10 - Visualizacion grafica
-**Como** supervisor
-**Quiero** ver graficas de distribucion
+**Como** supervisor \
+**Quiero** ver graficas de distribucion \
 **Para** interpretar tendencias rapidamente
 
 **Criterios de aceptacion**
@@ -122,8 +122,8 @@
 ---
 
 ### HU-11 - Exportacion de resultados (opcional)
-**Como** analista
-**Quiero** exportar resultados filtrados
+**Como** analista \
+**Quiero** exportar resultados filtrados \
 **Para** analizarlos fuera del sistema
 
 **Criterios de aceptacion**
@@ -133,8 +133,8 @@
 ---
 
 ### HU-12 - Actualizacion manual o en tiempo real (opcional)
-**Como** operador
-**Quiero** actualizar los datos manualmente o en tiempo real
+**Como** operador \
+**Quiero** actualizar los datos manualmente o en tiempo real \
 **Para** ver cambios recientes
 
 **Criterios de aceptacion**
