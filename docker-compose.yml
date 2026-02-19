@@ -63,6 +63,17 @@ services:
     restart: unless-stopped
 
   # ============================================
+  # REPORTS QUERY SERVICE (EMPTY)
+  # ============================================
+  reports-query:
+    build:
+      context: ./backend/reports-query
+      dockerfile: Dockerfile
+    image: reports-query-service
+    container_name: reports-query-service
+    restart: unless-stopped
+
+  # ============================================
   # FRONTEND
   # ============================================
   frontend:
