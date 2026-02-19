@@ -9,19 +9,37 @@ export interface MetricsSnapshot {
   uptime: number;
 }
 
+/**
+ * Tracks operational counters for the Producer process.
+ *
+ * Counters:
+ * - `messagesPublished` — Messages successfully published to RabbitMQ.
+ * - `publishErrors` — Publish attempts that failed (channel down, broker rejection).
+ * - `uptime` — Seconds since the Producer process started.
+ *
+ * Exposed via the `/health` endpoint as a {@link MetricsSnapshot}.
+ *
+ * @class Metrics
+ */
 class Metrics {
   private messagesPublished = 0;
   private publishErrors = 0;
   private readonly startTime = Date.now();
 
+  /** Increments the successfully-published counter. */
   incrementPublished(): void {
     this.messagesPublished++;
   }
 
+  /** Increments the publish-error counter. */
   incrementPublishErrors(): void {
     this.publishErrors++;
   }
 
+  /**
+   * Returns a snapshot of all current counters plus uptime in seconds.
+   * @returns {MetricsSnapshot} Immutable copy of the current metrics.
+   */
   getSnapshot(): MetricsSnapshot {
     return {
       messagesPublished: this.messagesPublished,
@@ -31,4 +49,8 @@ class Metrics {
   }
 }
 
+/**
+ * Module-level singleton metrics instance.
+ * Shared across all Producer components.
+ */
 export const metrics = new Metrics();
