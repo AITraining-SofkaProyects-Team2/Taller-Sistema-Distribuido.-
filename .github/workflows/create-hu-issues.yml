@@ -49,18 +49,39 @@ jobs:
               core.warning('TEST_PLAN.md no encontrado. Los Issues se crearán sin tests asociados.');
             }
 
-            // ── 1. Parsear HUs desde FASE_3 ─────────────────────────────────────
-            // Captura: título de HU  +  todo el bloque hasta el siguiente ### HU-, --- o ## 
-            const huRegex = /^###\s+(HU-\d+\s*-\s*[^\n\r]+)\s*[\r\n]+([\s\S]*?)(?=^###\s+HU-|\n---|\n##\s|$)/gmi;
+            // ── 1. Parsear HUs desde FASE_3 (línea a línea) ─────────────────────
             const hus = [];
-            let m;
-            while ((m = huRegex.exec(fase)) !== null) {
-              const title = m[1].trim();                     // "HU-02 - Filtro por estado"
-              const body  = m[2].trim()                      // cuerpo completo de la HU
-                .replace(/^---\s*$/gm, '')                   // eliminar separadores
+            const lines = fase.split(/\r?\n/);
+            let currentTitle = null;
+            let currentLines = [];
+
+            const flushHU = () => {
+              if (!currentTitle) return;
+              // Eliminar separadores horizontales (---) y trailing blanks
+              const body = currentLines
+                .join('\n')
+                .replace(/^---\s*$/gm, '')
                 .trim();
-              hus.push({ title, body });
+              hus.push({ title: currentTitle, body });
+              currentTitle = null;
+              currentLines = [];
+            };
+
+            for (const line of lines) {
+              const huHeader = line.match(/^###\s+(HU-\d+\s*-\s*.+)$/i);
+              if (huHeader) {
+                flushHU();                          // guardar HU anterior si la había
+                currentTitle = huHeader[1].trim();  // "HU-02 - Filtro por estado"
+              } else if (currentTitle) {
+                // Detener si llegamos a un encabezado de nivel ## o superior
+                if (/^##\s/.test(line)) {
+                  flushHU();
+                } else {
+                  currentLines.push(line);
+                }
+              }
             }
+            flushHU(); // última HU del archivo
 
             if (!hus.length) {
               core.setFailed('No se encontraron HUs en FASE_3_HISTORIAS_RIESGOS.md');
@@ -130,8 +151,9 @@ jobs:
                 '',
                 '---',
                 '',
-                '## ✅ Tests asociados',
-                '',
+                '## Test driving',
+                '| | ID Test | Servicios afectados | Descripción |'
+                '|---|---|---|---|',
                 testsSection,
               ].join('\n');
 
@@ -140,7 +162,7 @@ jobs:
                 repo,
                 title,
                 body: issueBody,
-                labels: ['hu'],
+                labels: ['enhancement'],
               });
 
               core.info(`Issue creado: ${title} (${tests.length} tests)`);
