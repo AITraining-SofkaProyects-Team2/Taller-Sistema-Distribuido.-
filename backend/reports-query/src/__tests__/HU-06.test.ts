@@ -237,3 +237,40 @@ describe('TC-030 — Buscar con ID en formato inválido', () => {
     });
   });
 });
+
+// ───────────────────────────────────────────────────────────────────────────────
+// TC-031 — Buscar con ID vacío
+// Nota: a nivel de servicio, "" tiene longitud 0 ≠ 36, por lo que la validación
+// de formato (implementada en TC-030) ya cubre este caso. Los tests pasan GREEN
+// de inmediato porque la implementación de TC-030 generalizó la guardia.
+// ───────────────────────────────────────────────────────────────────────────────
+describe('TC-031 — Buscar con ID vacío', () => {
+  let mockRepository: ITicketRepository;
+  let service: TicketQueryService;
+
+  beforeEach(() => {
+    mockRepository = {
+      findById: vi.fn(),
+      findAll: vi.fn(),
+      findByLineNumber: vi.fn(),
+      getMetrics: vi.fn(),
+    } as unknown as ITicketRepository;
+
+    service = new TicketQueryService(mockRepository);
+  });
+
+  describe('Given el sistema está operativo y se proporciona un ID vacío', () => {
+    it('When se solicita findById(""), Then lanza InvalidUuidFormatError', async () => {
+      await expect(service.findById('')).rejects.toThrow(InvalidUuidFormatError);
+    });
+
+    it('When se solicita findById(""), Then el mensaje de error indica formato inválido', async () => {
+      await expect(service.findById('')).rejects.toThrow('Formato de ID inválido');
+    });
+
+    it('When se solicita findById(""), Then el repositorio NO es invocado', async () => {
+      await service.findById('').catch(() => {});
+      expect(mockRepository.findById).not.toHaveBeenCalled();
+    });
+  });
+});

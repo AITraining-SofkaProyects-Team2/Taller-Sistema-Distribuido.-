@@ -74,6 +74,7 @@
 - Se permite buscar por ID exacto → `TicketQueryService.findById` retorna el ticket (TC-028 ✅ GREEN)
 - Si no existe, se muestra mensaje claro → `TicketQueryService.findById` lanza `TicketNotFoundError` con mensaje "Ticket no encontrado" (TC-029 ✅ GREEN)
 - Si el ID no tiene formato UUIDv4, se rechaza antes de consultar el repositorio → lanza `InvalidUuidFormatError` con mensaje "Formato de ID inválido" (TC-030 ✅ GREEN)
+- Si el ID está vacío, se rechaza igual que un formato inválido → `findById("")` lanza `InvalidUuidFormatError` (TC-031 🔴 RED)
 
 ---
 
