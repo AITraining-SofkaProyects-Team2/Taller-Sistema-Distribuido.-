@@ -40,9 +40,9 @@
 | RED | TC-029 | HU-06 | Query Service + Frontend | Buscar por ID de ticket inexistente |
 | [ ] | TC-030 | HU-06 | Query Service + Frontend | Buscar con ID en formato inválido |
 | [ ] | TC-031 | HU-06 | Query Service + Frontend | Buscar con ID vacío |
-| [GREEN] | TC-032 | HU-07 | Query Service + Frontend | Buscar por número de línea válido con resultados |
-| [GREEN] | TC-033 | HU-07 | Query Service + Frontend | Buscar por número de línea válido sin resultados |
-| [GREEN] | TC-034 | HU-07 | Query Service + Frontend | Buscar con número de línea inválido |
+| [REFACTOR] | TC-032 | HU-07 | Query Service + Frontend | Buscar por número de línea válido con resultados |
+| [REFACTOR] | TC-033 | HU-07 | Query Service + Frontend | Buscar por número de línea válido sin resultados |
+| [REFACTOR] | TC-034 | HU-07 | Query Service + Frontend | Buscar con número de línea inválido |
 | [ ] | TC-035 | HU-08 | Query Service + Frontend | Ordenar por fecha ascendente |
 | [ ] | TC-036 | HU-08 | Query Service + Frontend | Ordenar por fecha descendente |
 | [ ] | TC-037 | HU-08 | Query Service + Frontend | Ordenar por prioridad |
