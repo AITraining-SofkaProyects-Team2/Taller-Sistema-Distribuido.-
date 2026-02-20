@@ -1,17 +1,18 @@
 import { Request, Response } from 'express';
 import { TicketQueryService } from '../services/TicketQueryService';
-import { TicketStatus, TicketPriority } from '../types';
+import { TicketStatus, TicketPriority, IncidentType } from '../types';
 
 export class TicketsController {
     constructor(private queryService: TicketQueryService) { }
 
     async getTickets(req: Request, res: Response) {
         try {
-            const { status, priority, page, limit } = req.query;
+            const { status, priority, incidentType, page, limit } = req.query;
 
             // Validation
             const validStatuses = Object.values(TicketStatus) as string[];
             const validPriorities = Object.values(TicketPriority) as string[];
+            const validIncidentTypes = Object.values(IncidentType) as string[];
 
             let statusFilter: TicketStatus[] | undefined;
             if (status) {
@@ -38,9 +39,22 @@ export class TicketsController {
                 priorityFilter = priority as TicketPriority;
             }
 
+            let typeFilter: IncidentType | undefined;
+            if (incidentType) {
+                if (typeof incidentType !== 'string' || !validIncidentTypes.includes(incidentType)) {
+                    return res.status(400).json({
+                        error: 'Bad Request',
+                        message: `El tipo de incidente no es válido: ${incidentType}`,
+                        validValues: validIncidentTypes
+                    });
+                }
+                typeFilter = incidentType as IncidentType;
+            }
+
             const result = await this.queryService.getTickets({
                 status: statusFilter,
                 priority: priorityFilter,
+                type: typeFilter,
                 page: page ? parseInt(page as string) : 1,
                 limit: limit ? parseInt(limit as string) : 20
             });

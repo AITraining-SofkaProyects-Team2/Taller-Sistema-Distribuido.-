@@ -1,8 +1,7 @@
 import { describe, it, expect } from 'vitest';
 import { render, screen, within } from '@testing-library/react';
-import React from 'react';
+
 // Importaremos un componente que aún no existe (RED phase)
-// @ts-ignore - El componente no existe aún
 import { IncidentFilters } from '../components/IncidentFilters';
 
 /**
@@ -38,7 +37,7 @@ describe('HU-04 - Filtro por tipo de incidente (Frontend)', () => {
             expect(selector).toBeInTheDocument();
 
             // Abrir el selector si es necesario o verificar opciones si es un <select>
-            const options = within(selector).getAllByRole('option', { suggest: false });
+            within(selector).getAllByRole('option', { suggest: false });
 
             const expectedTypes = [
                 'NO_SERVICE',
