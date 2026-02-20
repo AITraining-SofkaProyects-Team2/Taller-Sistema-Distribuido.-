@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
-import { TicketQueryService } from '../services/TicketQueryService';
-import { TicketStatus, TicketPriority, IncidentType } from '../types';
+import { getPaginatedTickets } from '../services/ticketsService';
+import { ALLOWED_SORT_FIELDS } from '../types/allowedSortFields';
 
 export class TicketsController {
     constructor(private queryService: TicketQueryService) { }
@@ -9,81 +9,51 @@ export class TicketsController {
         try {
             const { status, priority, incidentType, dateFrom, dateTo, page, limit } = req.query;
 
-            // Validation
-            const validStatuses = Object.values(TicketStatus) as string[];
-            const validPriorities = Object.values(TicketPriority) as string[];
-            const validIncidentTypes = Object.values(IncidentType) as string[];
+  if (req.query.limit !== undefined) {
+    limit = Number(req.query.limit);
+    if (isNaN(limit) || !Number.isInteger(limit) || limit <= 0 || limit > MAX_LIMIT) {
+      return res.status(400).json({
+        error: 'El parámetro "limit" debe ser un entero entre 1 y 100.',
+      });
+    }
+  }
 
-            let statusFilter: TicketStatus[] | undefined;
-            if (status) {
-                const statuses = Array.isArray(status) ? status : [status];
-                for (const s of statuses) {
-                    if (typeof s !== 'string' || !validStatuses.includes(s)) {
-                        return res.status(400).json({
-                            message: `"${s}" no es un estado válido`,
-                            validValues: validStatuses
-                        });
-                    }
-                }
-                statusFilter = statuses as TicketStatus[];
-            }
+  // Acepta tanto sortBy/sortOrder (HU-08) como sort/order (HU-01 TC-004)
+  const sort =
+    typeof req.query.sortBy === 'string'
+      ? req.query.sortBy
+      : typeof req.query.sort === 'string'
+      ? req.query.sort
+      : undefined;
 
-            let priorityFilter: TicketPriority | undefined;
-            if (priority) {
-                if (typeof priority !== 'string' || !validPriorities.includes(priority)) {
-                    return res.status(400).json({
-                        message: `"${priority}" no es una prioridad válida`,
-                        validValues: validPriorities
-                    });
-                }
-                priorityFilter = priority as TicketPriority;
-            }
+  const order =
+    typeof req.query.sortOrder === 'string'
+      ? req.query.sortOrder
+      : typeof req.query.order === 'string'
+      ? req.query.order
+      : undefined;
 
-            let typeFilter: IncidentType | undefined;
-            if (incidentType) {
-                if (typeof incidentType !== 'string' || !validIncidentTypes.includes(incidentType)) {
-                    return res.status(400).json({
-                        error: 'Bad Request',
-                        message: `El tipo de incidente no es válido: ${incidentType}`,
-                        validValues: validIncidentTypes
-                    });
-                }
-                typeFilter = incidentType as IncidentType;
-            }
+  // Validación temprana del campo de ordenamiento
+  if (sort !== undefined && !ALLOWED_SORT_FIELDS.includes(sort)) {
+    return res.status(400).json({
+      error: `Campo de ordenamiento inválido: ${sort}`,
+    });
+  }
 
-            // Date validation
-            const isISO = (str: any) => {
-                if (!str || typeof str !== 'string') return false;
-                const d = new Date(str);
-                return !isNaN(d.valueOf()) && (str.includes('T') || /^\d{4}-\d{2}-\d{2}$/.test(str));
-            };
+  const priority =
+    typeof req.query.priority === 'string' ? req.query.priority : undefined;
+  const status =
+    typeof req.query.status === 'string' ? req.query.status : undefined;
+  const type =
+    typeof req.query.type === 'string' ? req.query.type : undefined;
 
-            if (dateFrom && !isISO(dateFrom)) {
-                return res.status(400).json({ error: 'Formato de fecha de inicio inválido' });
-            }
-            if (dateTo && !isISO(dateTo)) {
-                return res.status(400).json({ error: 'Formato de fecha de fin inválido' });
-            }
-
-            if (dateFrom && dateTo) {
-                if (new Date(dateFrom as string) > new Date(dateTo as string)) {
-                    return res.status(400).json({ error: 'dateTo debe ser mayor o igual a dateFrom' });
-                }
-            }
-
-            const result = await this.queryService.getTickets({
-                status: statusFilter,
-                priority: priorityFilter,
-                type: typeFilter,
-                dateFrom: dateFrom as string,
-                dateTo: dateTo as string,
-                page: page ? parseInt(page as string) : 1,
-                limit: limit ? parseInt(limit as string) : 20
-            });
-
-            return res.status(200).json(result);
-        } catch (error) {
-            return res.status(500).json({ message: 'Internal Server Error' });
-        }
+  try {
+    const result = await getPaginatedTickets(
+      page, limit, sort, order, priority, status, type
+    );
+    return res.status(200).json(result);
+  } catch (err: any) {
+    if (err.status === 400) {
+      return res.status(400).json({ error: err.message });
     }
 }
