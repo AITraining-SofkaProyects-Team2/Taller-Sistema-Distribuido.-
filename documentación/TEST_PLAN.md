@@ -49,10 +49,10 @@
 | [ ] | TC-038 | HU-08 | Query Service + Frontend | Ordenar por estado |
 | [ ] | TC-039 | HU-08 | Query Service + Frontend | Campo de ordenamiento inválido |
 | RED | TC-040 | HU-09 | Query Service + Frontend | Visualizar total de tickets |
-| [ ] | TC-041 | HU-09 | Query Service + Frontend | Distribución por estado |
-| [ ] | TC-042 | HU-09 | Query Service + Frontend | Distribución por prioridad |
-| [ ] | TC-043 | HU-09 | Query Service + Frontend | Distribución por tipo de incidente |
-| [ ] | TC-044 | HU-09 | Query Service + Frontend | Consistencia de métricas con el repositorio |
+| RED | TC-041 | HU-09 | Query Service + Frontend | Distribución por estado |
+| RED | TC-042 | HU-09 | Query Service + Frontend | Distribución por prioridad |
+| RED | TC-043 | HU-09 | Query Service + Frontend | Distribución por tipo de incidente |
+| RED | TC-044 | HU-09 | Query Service + Frontend | Consistencia de métricas con el repositorio |
 | [ ] | TC-045 | HU-10 | Query Service + Frontend | Gráfica de distribución por prioridad |
 | [ ] | TC-046 | HU-10 | Query Service + Frontend | Gráfica de distribución por estado |
 | [ ] | TC-047 | HU-10 | Query Service + Frontend | Actualización de gráficas con filtros activos |
