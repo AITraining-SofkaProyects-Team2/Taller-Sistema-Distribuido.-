@@ -21,11 +21,11 @@
 | [ ] | TC-010 | HU-02 | Query Service + Frontend | Combinar filtro de estado con otros filtros |
 | [ ] | TC-011 | HU-02 | Query Service + Frontend | Filtrar con estado inválido |
 | [ ] | TC-012 | HU-02 | Query Service + Frontend | Filtrar por estado sin resultados coincidentes |
-| [RED] | TC-013 | HU-03 | Query Service + Frontend | Filtrar por prioridad válida |
-| [RED] | TC-014 | HU-03 | Query Service + Frontend | Visualizar prioridades disponibles |
-| [RED] | TC-015 | HU-03 | Query Service + Frontend | Combinar filtro de prioridad con otros filtros |
-| [RED] | TC-016 | HU-03 | Query Service + Frontend | Filtrar con prioridad inválida |
-| [RED] | TC-017 | HU-03 | Query Service + Frontend | Filtrar por prioridad sin resultados coincidentes |
+| [GREEN] | TC-013 | HU-03 | Query Service + Frontend | Filtrar por prioridad válida |
+| [GREEN] | TC-014 | HU-03 | Query Service + Frontend | Visualizar prioridades disponibles |
+| [GREEN] | TC-015 | HU-03 | Query Service + Frontend | Combinar filtro de prioridad con otros filtros |
+| [GREEN] | TC-016 | HU-03 | Query Service + Frontend | Filtrar con prioridad inválida |
+| [GREEN] | TC-017 | HU-03 | Query Service + Frontend | Filtrar por prioridad sin resultados coincidentes |
 | [ ] | TC-018 | HU-04 | Query Service + Frontend | Filtrar por tipo de incidente válido |
 | [ ] | TC-019 | HU-04 | Query Service + Frontend | Listar todos los tipos de incidente disponibles |
 | [ ] | TC-020 | HU-04 | Query Service + Frontend | Combinar filtro de tipo con estado y prioridad |
