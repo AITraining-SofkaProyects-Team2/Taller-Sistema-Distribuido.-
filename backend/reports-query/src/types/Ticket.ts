@@ -1,2 +1,11 @@
-// Re-export tipos desde index.ts para mantener compatibilidad
-export type { Ticket, TicketFilters, TicketStatus, TicketPriority, IncidentType } from './index';
+// Re-export canonical types from the single source of truth
+export {
+  Ticket,
+  IncidentType,
+  TicketStatus,
+  TicketPriority,
+  TicketPriority as Priority,
+  PaginatedResponse,
+  PaginationMetadata,
+  TicketFilters,
+} from './index';

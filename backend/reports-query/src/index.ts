@@ -1,6 +1,7 @@
 import express from 'express';
 import { MetricsService, IncidentRepository } from './services/metricsService';
 import ticketRoutes from './routes/tickets.routes';
+import ticketsRouter from './routes/tickets';
 
 /**
  * Crea la aplicación Express con las rutas configuradas
@@ -30,9 +31,28 @@ export function createApp(incidentRepository?: IncidentRepository) {
     };
   }
 
-  // Registrar rutas de tickets
-  app.use('/v1/tickets', ticketRoutes);
-  app.use('/api/tickets', ticketRoutes);
+
+
+
+// Test-only endpoints for seeding/clearing tickets
+if (process.env.NODE_ENV === 'test') {
+  // Dynamic import for compatibility with ts-node/vitest
+  app.post('/__test__/seed', async (req, res) => {
+    const { seedTickets } = await import('./repositories/ticketRepository');
+    const { count } = req.body;
+    seedTickets(count || 0);
+    res.status(204).end();
+  });
+  app.post('/__test__/clear', async (_req, res) => {
+    const { clearTickets } = await import('./repositories/ticketRepository');
+    clearTickets();
+    res.status(204).end();
+  });
+}
+
+app.use('/v1/tickets', ticketRoutes);
+app.use('/api/tickets', ticketRoutes);
+app.use('/api/tickets', ticketsRouter);
 
   // Instanciar servicio de métricas con el repositorio
   const metricsService = new MetricsService(repo);
