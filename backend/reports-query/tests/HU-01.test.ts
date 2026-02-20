@@ -1,7 +1,7 @@
 import { describe, it, expect, beforeAll } from 'vitest';
 import request from 'supertest';
 // Ajusta la importación de la app según la estructura real del Query Service
-import app from '../src/app'; // Suponiendo que el entrypoint es app.ts
+import app from '../src/index'; // Suponiendo que el entrypoint es app.ts
 
 /**
  * TC-001 — Listado paginado con tamaño por defecto
