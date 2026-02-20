@@ -9,7 +9,7 @@
 
 | Completado | ID Test | Historia | Servicios afectados | Descripción |
 |:----------:|---------|-|---------|-------------|
-| [ ] | TC-001 | HU-01 | Query Service + Frontend | Listado paginado con tamaño por defecto |
+| [RED] | TC-001 | HU-01 | Query Service + Frontend | Listado paginado con tamaño por defecto |
 | [ ] | TC-002 | HU-01 | Query Service + Frontend | Listado paginado con tamaño configurable |
 | [ ] | TC-003 | HU-01 | Query Service + Frontend | Indicación de total de resultados y página actual |
 | [ ] | TC-004 | HU-01 | Query Service + Frontend | Ordenamiento consistente entre páginas |
