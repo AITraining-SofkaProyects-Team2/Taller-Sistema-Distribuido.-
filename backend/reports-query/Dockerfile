@@ -8,5 +8,12 @@ RUN npm install
 
 COPY tsconfig.json vitest.config.ts ./
 COPY src ./src
+COPY tests ./tests
 
-CMD ["npm", "run", "test"]
+# Build the application (optional for dev, but good practice)
+RUN npx tsc
+
+EXPOSE 4000
+
+# Start the server
+CMD ["npm", "run", "dev"]

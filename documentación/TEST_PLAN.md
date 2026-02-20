@@ -16,28 +16,48 @@
 | [ ] | TC-005 | HU-01 | Query Service + Frontend | Lista vacía cuando no hay tickets |
 | [ ] | TC-006 | HU-01 | Query Service + Frontend | Solicitar página fuera de rango |
 | [ ] | TC-007 | HU-01 | Query Service + Frontend | Tamaño de página con valores inválidos |
-| [ ] | TC-008 | HU-02 | Query Service + Frontend | Filtrar por un solo estado válido |
-| [ ] | TC-009 | HU-02 | Query Service + Frontend | Filtrar por múltiples estados simultáneamente |
-| [ ] | TC-010 | HU-02 | Query Service + Frontend | Combinar filtro de estado con otros filtros |
-| [ ] | TC-011 | HU-02 | Query Service + Frontend | Filtrar con estado inválido |
-| [ ] | TC-012 | HU-02 | Query Service + Frontend | Filtrar por estado sin resultados coincidentes |
+| [GREEN] | TC-008 | HU-02 | Query Service + Frontend | Filtrar por un solo estado válido |
+| [GREEN] | TC-009 | HU-02 | Query Service + Frontend | Filtrar por múltiples estados simultáneamente |
+| [GREEN] | TC-010 | HU-02 | Query Service + Frontend | Combinar filtro de estado con otros filtros |
+| [GREEN] | TC-011 | HU-02 | Query Service + Frontend | Filtrar con estado inválido |
+| [GREEN] | TC-012 | HU-02 | Query Service + Frontend | Filtrar por estado sin resultados coincidentes |
 | [ ] | TC-013 | HU-03 | Query Service + Frontend | Filtrar por prioridad válida |
 | [ ] | TC-014 | HU-03 | Query Service + Frontend | Visualizar prioridades disponibles |
 | [ ] | TC-015 | HU-03 | Query Service + Frontend | Combinar filtro de prioridad con otros filtros |
 | [ ] | TC-016 | HU-03 | Query Service + Frontend | Filtrar con prioridad inválida |
 | [ ] | TC-017 | HU-03 | Query Service + Frontend | Filtrar por prioridad sin resultados coincidentes |
+<<<<<<< HEAD
 | [ ] | TC-018 | HU-04 | Query Service + Frontend | Filtrar por tipo de incidente válido |
 | [ ] | TC-019 | HU-04 | Query Service + Frontend | Listar todos los tipos de incidente disponibles |
 | [ ] | TC-020 | HU-04 | Query Service + Frontend | Combinar filtro de tipo con estado y prioridad |
 | [ ] | TC-021 | HU-04 | Query Service + Frontend | Filtrar con tipo de incidente inválido |
+<<<<<<< feature/HU05FiltroPorRangoDeFechas
+| [GREEN] | TC-022 | HU-05 | Query Service + Frontend 	| Filtrar por rango de fechas válido |
+| [GREEN] | TC-023 | HU-05 | Query Service + Frontend 	| Validar que fecha fin sea mayor o igual a fecha inicio |
+| [GREEN] | TC-024 | HU-05 | Query Service + Frontend | Rango de fechas sin resultados coincidentes |
+| [GREEN] | TC-025 | HU-05 | Query Service + Frontend | Filtrar con solo fecha inicio (sin fecha fin) |
+| [GREEN] | TC-026 | HU-05 | Query Service + Frontend | Filtrar con solo fecha fin (sin fecha inicio) |
+| [GREEN] | TC-027 | HU-05 | Query Service + Frontend | Fechas con formato inválido |
+| [ ] | TC-028 | HU-06 | Query Service + Frontend | Buscar por ID de ticket existente |
+| [ ] | TC-029 | HU-06 | Query Service + Frontend | Buscar por ID de ticket inexistente |
+=======
+| RED | TC-018 | HU-04 | Query Service + Frontend | Filtrar por tipo de incidente válido |
+| RED | TC-019 | HU-04 | Query Service + Frontend | Listar todos los tipos de incidente disponibles |
+| RED | TC-020 | HU-04 | Query Service + Frontend | Combinar filtro de tipo con estado y prioridad |
+| RED | TC-021 | HU-04 | Query Service + Frontend | Filtrar con tipo de incidente inválido |
 | [ ] | TC-022 | HU-05 | Query Service + Frontend 	| Filtrar por rango de fechas válido |
 | [ ] | TC-023 | HU-05 | Query Service + Frontend 	| Validar que fecha fin sea mayor o igual a fecha inicio |
+=======
+| [ ] | TC-022 | HU-05 | Query Service + Frontend | Filtrar por rango de fechas válido |
+| [ ] | TC-023 | HU-05 | Query Service + Frontend | Validar que fecha fin sea mayor o igual a fecha inicio |
+>>>>>>> main
 | [ ] | TC-024 | HU-05 | Query Service + Frontend | Rango de fechas sin resultados coincidentes |
 | [ ] | TC-025 | HU-05 | Query Service + Frontend | Filtrar con solo fecha inicio (sin fecha fin) |
 | [ ] | TC-026 | HU-05 | Query Service + Frontend | Filtrar con solo fecha fin (sin fecha inicio) |
 | RED | TC-027 | HU-05 | Query Service + Frontend | Fechas con formato inválido |
 | RED | TC-028 | HU-06 | Query Service + Frontend | Buscar por ID de ticket existente |
 | RED | TC-029 | HU-06 | Query Service + Frontend | Buscar por ID de ticket inexistente |
+>>>>>>> feature/HU04FiltroPorTipoDeIncidente
 | [ ] | TC-030 | HU-06 | Query Service + Frontend | Buscar con ID en formato inválido |
 | [ ] | TC-031 | HU-06 | Query Service + Frontend | Buscar con ID vacío |
 | [ ] | TC-032 | HU-07 | Query Service + Frontend | Buscar por número de línea válido con resultados |

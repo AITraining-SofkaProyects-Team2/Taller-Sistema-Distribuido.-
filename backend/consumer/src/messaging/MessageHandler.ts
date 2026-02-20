@@ -117,13 +117,14 @@ export class MessageHandler {
             const status = determineStatus(priority);
 
             const processedIncident: Incident = {
-                ticketId: content.ticketId,
-                lineNumber: content.lineNumber,
+                ticketId: String(content.ticketId),
+                lineNumber: String(content.lineNumber),
+                email: String(content.email || 'N/A'),
                 type: incidentType,
                 description: content.description,
                 priority,
                 status,
-                createdAt: content.createdAt,
+                createdAt: String(content.createdAt),
                 processedAt: new Date(),
             };
 
