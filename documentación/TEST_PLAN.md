@@ -35,9 +35,9 @@
 | [ ] | TC-024 | HU-05 | Query Service + Frontend | Rango de fechas sin resultados coincidentes |
 | [ ] | TC-025 | HU-05 | Query Service + Frontend | Filtrar con solo fecha inicio (sin fecha fin) |
 | [ ] | TC-026 | HU-05 | Query Service + Frontend | Filtrar con solo fecha fin (sin fecha inicio) |
-| [ ] | TC-027 | HU-05 | Query Service + Frontend | Fechas con formato inválido |
-| [ ] | TC-028 | HU-06 | Query Service + Frontend | Buscar por ID de ticket existente |
-| [ ] | TC-029 | HU-06 | Query Service + Frontend | Buscar por ID de ticket inexistente |
+| RED | TC-027 | HU-05 | Query Service + Frontend | Fechas con formato inválido |
+| RED | TC-028 | HU-06 | Query Service + Frontend | Buscar por ID de ticket existente |
+| RED | TC-029 | HU-06 | Query Service + Frontend | Buscar por ID de ticket inexistente |
 | [ ] | TC-030 | HU-06 | Query Service + Frontend | Buscar con ID en formato inválido |
 | [ ] | TC-031 | HU-06 | Query Service + Frontend | Buscar con ID vacío |
 | [ ] | TC-032 | HU-07 | Query Service + Frontend | Buscar por número de línea válido con resultados |
