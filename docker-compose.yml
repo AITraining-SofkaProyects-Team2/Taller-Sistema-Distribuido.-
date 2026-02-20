@@ -71,7 +71,7 @@ services:
       dockerfile: Dockerfile
     image: reports-query-service
     container_name: reports-query-service
-    restart: unless-stopped
+    restart: "no"
 
   # ============================================
   # FRONTEND
