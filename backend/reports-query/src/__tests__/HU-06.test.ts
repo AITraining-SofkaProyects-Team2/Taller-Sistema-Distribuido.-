@@ -44,65 +44,20 @@ describe('TC-028 — Buscar por ID de ticket existente', () => {
 
   describe('Given existe un ticket con ticketId "550e8400-e29b-41d4-a716-446655440000" en el sistema', () => {
     it('When se solicita findById con ese UUID, Then retorna el ticket (no nulo)', async () => {
-      // Given
-      const ticketId = EXISTING_UUID;
-
-      // When
-      const result = await service.findById(ticketId);
-
-      // Then
+      const result = await service.findById(EXISTING_UUID);
       expect(result).not.toBeNull();
     });
 
     it('When se solicita findById con ese UUID, Then el ticketId del resultado coincide exactamente', async () => {
-      // Given
-      const ticketId = EXISTING_UUID;
-
-      // When
-      const result = await service.findById(ticketId);
-
-      // Then
+      const result = await service.findById(EXISTING_UUID);
       expect(result?.ticketId).toBe(EXISTING_UUID);
     });
 
-    it('When se solicita findById, Then la respuesta incluye el campo "ticketId"', async () => {
+    it('When se solicita findById, Then la respuesta incluye todos los campos requeridos', async () => {
       const result = await service.findById(EXISTING_UUID);
-      expect(result).toHaveProperty('ticketId');
-    });
-
-    it('When se solicita findById, Then la respuesta incluye el campo "lineNumber"', async () => {
-      const result = await service.findById(EXISTING_UUID);
-      expect(result).toHaveProperty('lineNumber');
-    });
-
-    it('When se solicita findById, Then la respuesta incluye el campo "type"', async () => {
-      const result = await service.findById(EXISTING_UUID);
-      expect(result).toHaveProperty('type');
-    });
-
-    it('When se solicita findById, Then la respuesta incluye el campo "description"', async () => {
-      const result = await service.findById(EXISTING_UUID);
-      expect(result).toHaveProperty('description');
-    });
-
-    it('When se solicita findById, Then la respuesta incluye el campo "priority"', async () => {
-      const result = await service.findById(EXISTING_UUID);
-      expect(result).toHaveProperty('priority');
-    });
-
-    it('When se solicita findById, Then la respuesta incluye el campo "status"', async () => {
-      const result = await service.findById(EXISTING_UUID);
-      expect(result).toHaveProperty('status');
-    });
-
-    it('When se solicita findById, Then la respuesta incluye el campo "createdAt"', async () => {
-      const result = await service.findById(EXISTING_UUID);
-      expect(result).toHaveProperty('createdAt');
-    });
-
-    it('When se solicita findById, Then la respuesta incluye el campo "processedAt"', async () => {
-      const result = await service.findById(EXISTING_UUID);
-      expect(result).toHaveProperty('processedAt');
+      for (const field of ['ticketId', 'lineNumber', 'type', 'description', 'priority', 'status', 'createdAt', 'processedAt']) {
+        expect(result).toHaveProperty(field);
+      }
     });
 
     it('When se solicita findById, Then el repositorio es invocado exactamente una vez con el ID correcto', async () => {
@@ -218,6 +173,8 @@ describe('TC-030 — Buscar con ID en formato inválido', () => {
     // Valores límite
     { label: 'UUID truncado (35 chars)', id: '550e8400-e29b-41d4-a716-44665544000' },
     { label: 'UUID extendido (37 chars)', id: '550e8400-e29b-41d4-a716-4466554400000' },
+    // TC-031 — cadena vacía (longitud 0, caso límite inferior)
+    { label: 'cadena vacía (TC-031)',      id: ''                                     },
   ];
 
   invalidIds.forEach(({ label, id }) => {
@@ -238,36 +195,4 @@ describe('TC-030 — Buscar con ID en formato inválido', () => {
   });
 });
 
-// ───────────────────────────────────────────────────────────────────────────────
-// TC-031 — Buscar con ID vacío
-// ───────────────────────────────────────────────────────────────────────────────
-describe('TC-031 — Buscar con ID vacío', () => {
-  let mockRepository: ITicketRepository;
-  let service: TicketQueryService;
-
-  beforeEach(() => {
-    mockRepository = {
-      findById: vi.fn(),
-      findAll: vi.fn(),
-      findByLineNumber: vi.fn(),
-      getMetrics: vi.fn(),
-    } as unknown as ITicketRepository;
-
-    service = new TicketQueryService(mockRepository);
-  });
-
-  describe('Given el sistema está operativo y se proporciona un ID vacío', () => {
-    it('When se solicita findById(""), Then lanza InvalidUuidFormatError', async () => {
-      await expect(service.findById('')).rejects.toThrow(InvalidUuidFormatError);
-    });
-
-    it('When se solicita findById(""), Then el mensaje de error indica formato inválido', async () => {
-      await expect(service.findById('')).rejects.toThrow('Formato de ID inválido');
-    });
-
-    it('When se solicita findById(""), Then el repositorio NO es invocado', async () => {
-      await service.findById('').catch(() => {});
-      expect(mockRepository.findById).not.toHaveBeenCalled();
-    });
-  });
-});
+// TC-031 — cubierto por la entrada 'cadena vacía (TC-031)' en el array invalidIds de TC-030
