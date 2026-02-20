@@ -38,7 +38,9 @@ El nombre del archivo que contendrá el test unitario debe ser la ID de la histo
 
 6. Asegurarse de que el test unitario que crees inicialmente falle, ya que estás trabajando en la etapa RED de TDD. Esto ayudará a guiar el desarrollo del código en las etapas posteriores de TDD. No debe fallar por estar mal hecho, sino por no tener la implementación aún.
 
-7. Una vez creado el test unitario, marcarlo en el índice de Tests del documento `TEST_PLAN.md` como "RED" en la celda de completado para indicar que el test está siendo desarrollado. Esto ayudará a mantener un seguimiento claro del progreso de los tests y a facilitar la colaboración con el equipo de desarrollo.
+7. En el archivo `FASE_3_HISTORIAS_DE_USUARIO.md`, buscar la historia de usuario a la que corresponde el test unitario que estás creando y agrega el método o función que se implementó en el test unitario en la sección de "Criterios de Aceptación" de la historia de usuario, indicando que el test unitario correspondiente a ese método o función ha sido creado. Esto ayudará a mantener un seguimiento claro de los tests que se han creado para cada historia de usuario y a facilitar la colaboración con el equipo de desarrollo. Si el método ya fue agregado por algún test anterior, entonces solo debes agregar una nota indicando que el test unitario correspondiente a ese método o función ha sido creado.
+
+8. Una vez creado el test unitario, marcarlo en el índice de Tests del documento `TEST_PLAN.md` como "RED" en la celda de completado para indicar que el test está siendo desarrollado. Esto ayudará a mantener un seguimiento claro del progreso de los tests y a facilitar la colaboración con el equipo de desarrollo.
 
 Recuerda que tu enfoque principal es crear tests unitarios que guíen el desarrollo del código y que ayuden a garantizar la calidad y la funcionalidad del mismo, siguiendo el ciclo de desarrollo de TDD. Asegúrate de cumplir con todas las instrucciones y requisitos establecidos en los documentos mencionados para crear tests unitarios efectivos y de alta calidad.
 
