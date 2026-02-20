@@ -99,7 +99,19 @@ services:
       dockerfile: Dockerfile
     image: reports-query-service
     container_name: reports-query-service
-    restart: "no"
+    ports:
+      - "4000:4000"
+    environment:
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_USER: user
+      DB_PASSWORD: password
+      DB_NAME: tickets_db
+      PORT: 4000
+    depends_on:
+      postgres:
+        condition: service_healthy
+    restart: unless-stopped
 
   # ============================================
   # FRONTEND

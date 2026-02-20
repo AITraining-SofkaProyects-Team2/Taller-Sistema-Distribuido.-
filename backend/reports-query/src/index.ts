@@ -1,5 +1,6 @@
 import express from 'express';
 import { MetricsService, IncidentRepository } from './services/metricsService';
+import ticketRoutes from './routes/tickets.routes';
 
 /**
  * Crea la aplicación Express con las rutas configuradas
@@ -29,6 +30,10 @@ export function createApp(incidentRepository?: IncidentRepository) {
     };
   }
 
+  // Registrar rutas de tickets
+  app.use('/v1/tickets', ticketRoutes);
+  app.use('/api/tickets', ticketRoutes);
+
   // Instanciar servicio de métricas con el repositorio
   const metricsService = new MetricsService(repo);
 
@@ -55,6 +60,7 @@ const app = createApp();
 
 export default app;
 
+
 if (require.main === module) {
   const PORT = process.env.PORT || 4000;
   app.listen(PORT, () => {
@@ -62,4 +68,3 @@ if (require.main === module) {
     console.log(`Reports Query service listening on port ${PORT}`);
   });
 }
-
