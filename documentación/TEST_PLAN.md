@@ -1,4 +1,4 @@
-# 🧪 Plan de Pruebas — Dashboard de Gestión de Reportes (Sistema Distribuido ISP)
+# 🧪 Plan de Pruebas - Dashboard de Gestión de Reportes (Sistema Distribuido ISP)
 
 **Fecha de creación**: 18 de febrero de 2026
 **Basado en**: [FASE_3_HISTORIAS_RIESGOS.md](./FASE_3_HISTORIAS_RIESGOS.md)
@@ -9,6 +9,7 @@
 
 | Completado | ID Test | Historia | Servicios afectados | Descripción |
 |:----------:|---------|-|---------|-------------|
+<<<<<<< HEAD
 | [GREEN] | TC-001 | HU-01 | Query Service + Frontend | Listado paginado con tamaño por defecto |
 | [GREEN] | TC-002 | HU-01 | Query Service + Frontend | Listado paginado con tamaño configurable |
 | [GREEN] | TC-003 | HU-01 | Query Service + Frontend | Indicación de total de resultados y página actual |
@@ -63,6 +64,61 @@
 | [ ] | TC-052 | HU-12 | Query Service + Frontend | Auto-refresh configurable |
 | [ ] | TC-053 | HU-12 | Query Service + Frontend | Desactivar auto-refresh |
 
+=======
+| [ ] | [TC-001](#TC-001---Listado-paginado-con-tamaño-por-defecto) | HU-01 | Query Service + Frontend | Listado paginado con tamaño por defecto |
+| [ ] | [TC-002](#TC-002---Listado-paginado-con-tamaño-configurable) | HU-01 | Query Service + Frontend | Listado paginado con tamaño configurable |
+| [ ] | [TC-003](#TC-003---Indicación-de-total-de-resultados-y-página-actual) | HU-01 | Query Service + Frontend | Indicación de total de resultados y página actual |
+| [ ] | [TC-004](#TC-004---Ordenamiento-consistente-entre-páginas) | HU-01 | Query Service + Frontend | Ordenamiento consistente entre páginas |
+| [ ] | [TC-005](#TC-005---Lista-vacía-cuando-no-hay-tickets) | HU-01 | Query Service + Frontend | Lista vacía cuando no hay tickets |
+| [ ] | [TC-006](#TC-006---Solicitar-página-fuera-de-rango) | HU-01 | Query Service + Frontend | Solicitar página fuera de rango |
+| [ ] | [TC-007](#TC-007---Tamaño-de-página-con-valores-inválidos) | HU-01 | Query Service + Frontend | Tamaño de página con valores inválidos |
+| [GREEN] | [TC-008](#TC-008---Filtrar-por-un-solo-estado-válido) | HU-02 | Query Service + Frontend | Filtrar por un solo estado válido |
+| [GREEN] | [TC-009](#TC-009---Filtrar-por-múltiples-estados-simultáneamente) | HU-02 | Query Service + Frontend | Filtrar por múltiples estados simultáneamente |
+| [GREEN] | [TC-010](#TC-010---Combinar-filtro-de-estado-con-otros-filtros) | HU-02 | Query Service + Frontend | Combinar filtro de estado con otros filtros |
+| [GREEN] | [TC-011](#TC-011---Filtrar-con-estado-inválido) | HU-02 | Query Service + Frontend | Filtrar con estado inválido |
+| [GREEN] | [TC-012](#TC-012---Filtrar-por-estado-sin-resultados-coincidentes) | HU-02 | Query Service + Frontend | Filtrar por estado sin resultados coincidentes |
+| [ ] | [TC-013](#TC-013---Filtrar-por-prioridad-válida) | HU-03 | Query Service + Frontend | Filtrar por prioridad válida |
+| [ ] | [TC-014](#TC-014---Visualizar-prioridades-disponibles) | HU-03 | Query Service + Frontend | Visualizar prioridades disponibles |
+| [ ] | [TC-015](#TC-015---Combinar-filtro-de-prioridad-con-otros-filtros) | HU-03 | Query Service + Frontend | Combinar filtro de prioridad con otros filtros |
+| [ ] | [TC-016](#TC-016---Filtrar-con-prioridad-inválida) | HU-03 | Query Service + Frontend | Filtrar con prioridad inválida |
+| [ ] | [TC-017](#TC-017---Filtrar-por-prioridad-sin-resultados-coincidentes) | HU-03 | Query Service + Frontend | Filtrar por prioridad sin resultados coincidentes |
+| [ ] | [TC-018](#TC-018---Filtrar-por-tipo-de-incidencia-válida) | HU-04 | Query Service + Frontend | Filtrar por tipo de incidente válido |
+| [ ] | [TC-019](#TC-019---Listar-todos-los-tipos-de-incidencia-disponibles) | HU-04 | Query Service + Frontend | Listar todos los tipos de incidente disponibles |
+| [ ] | [TC-020](#TC-020---Combinar-filtro-de-tipo-con-estado-y-prioridad) | HU-04 | Query Service + Frontend | Combinar filtro de tipo con estado y prioridad |
+| [ ] | [TC-021](#TC-021---Filtrar-con-tipo-de-incidencia-inválido) | HU-04 | Query Service + Frontend | Filtrar con tipo de incidente inválido |
+| [GREEN] | [TC-022](#TC-022---Filtrar-por-rango-de-fechas-válido) | HU-05 | Query Service + Frontend | Filtrar por rango de fechas válido |
+| [GREEN] | [TC-023](#TC-023---Validar-que-fecha-fin-sea-mayor-o-igual-a-fecha-inicio) | HU-05 | Query Service + Frontend | Validar que fecha fin sea mayor o igual a fecha inicio |
+| [GREEN] | [TC-024](#TC-024---Rango-de-fechas-sin-resultados-coincidentes) | HU-05 | Query Service + Frontend | Rango de fechas sin resultados coincidentes |
+| [GREEN] | [TC-025](#TC-025---Filtrar-con-solo-fecha-inicio-sin-fecha-fin) | HU-05 | Query Service + Frontend | Filtrar con solo fecha inicio (sin fecha fin) |
+| [GREEN] | [TC-026](#TC-026---Filtrar-con-solo-fecha-fin-sin-fecha-inicio) | HU-05 | Query Service + Frontend | Filtrar con solo fecha fin (sin fecha inicio) |
+| [GREEN] | [TC-027](#TC-027---Fechas-con-formato-inválido) | HU-05 | Query Service + Frontend | Fechas con formato inválido |
+| [REFACTOR] | [TC-028](#TC-028---Buscar-por-ID-de-ticket-existente) | HU-06 | Query Service + Frontend | Buscar por ID de ticket existente |
+| [REFACTOR] | [TC-029](#TC-029---Buscar-por-ID-de-ticket-inexistente) | HU-06 | Query Service + Frontend | Buscar por ID de ticket inexistente |
+| [REFACTOR] | [TC-030](#TC-030---Buscar-con-ID-en-formato-inválido) | HU-06 | Query Service + Frontend | Buscar con ID en formato inválido |
+| [REFACTOR] | [TC-031](#TC-031---Buscar-con-ID-vacío) | HU-06 | Query Service + Frontend | Buscar con ID vacío |
+| [REFACTOR] | [TC-032](#TC-032---Buscar-por-número-de-línea-válido-con-resultados) | HU-07 | Query Service + Frontend | Buscar por número de línea válido con resultados |
+| [REFACTOR] | [TC-033](#TC-033---Buscar-por-número-de-línea-válido-sin-resultados) | HU-07 | Query Service + Frontend | Buscar por número de línea válido sin resultados |
+| [REFACTOR] | [TC-034](#TC-034---Buscar-con-número-de-línea-inválido) | HU-07 | Query Service + Frontend | Buscar con número de línea inválido |
+| [ ] | [TC-035](#TC-035---Ordenar-por-fecha-ascendente) | HU-08 | Query Service + Frontend | Ordenar por fecha ascendente |
+| [ ] | [TC-036](#TC-036---Ordenar-por-fecha-descendente) | HU-08 | Query Service + Frontend | Ordenar por fecha descendente |
+| [ ] | [TC-037](#TC-037---Ordenar-por-prioridad) | HU-08 | Query Service + Frontend | Ordenar por prioridad |
+| [ ] | [TC-038](#TC-038---Ordenar-por-estado) | HU-08 | Query Service + Frontend | Ordenar por estado |
+| [ ] | [TC-039](#TC-039---Campo-de-ordenamiento-inválido) | HU-08 | Query Service + Frontend | Campo de ordenamiento inválido |
+| [ ] | [TC-040](#TC-040---Visualizar-total-de-tickets) | HU-09 | Query Service + Frontend | Visualizar total de tickets |
+| [ ] | [TC-041](#TC-041---Distribución-por-estado) | HU-09 | Query Service + Frontend | Distribución por estado |
+| [ ] | [TC-042](#TC-042---Distribución-por-prioridad) | HU-09 | Query Service + Frontend | Distribución por prioridad |
+| [ ] | [TC-043](#TC-043---Distribución-por-tipo-de-incidente) | HU-09 | Query Service + Frontend | Distribución por tipo de incidente |
+| [ ] | [TC-044](#TC-044---Consistencia-de-métricas-con-el-repositorio) | HU-09 | Query Service + Frontend | Consistencia de métricas con el repositorio |
+| [ ] | [TC-045](#TC-045---Gráfica-de-distribución-por-prioridad) | HU-10 | Query Service + Frontend | Gráfica de distribución por prioridad |
+| [ ] | [TC-046](#TC-046---Gráfica-de-distribución-por-estado) | HU-10 | Query Service + Frontend | Gráfica de distribución por estado |
+| [ ] | [TC-047](#TC-047---Actualización-de-gráficas-con-filtros-activos) | HU-10 | Query Service + Frontend | Actualización de gráficas con filtros activos |
+| [ ] | [TC-048](#TC-048---Exportar-CSV-con-columnas-básicas) | HU-11 | Frontend | Exportar CSV con columnas básicas |
+| [ ] | [TC-049](#TC-049---Exportar-respetando-filtros-activos) | HU-11 | Frontend | Exportar respetando filtros activos |
+| [ ] | [TC-050](#TC-050---Exportar-cuando-no-hay-resultados) | HU-11 | Frontend | Exportar cuando no hay resultados |
+| [ ] | [TC-051](#TC-051---Refresco-manual-de-datos) | HU-12 | Query Service + Frontend | Refresco manual de datos |
+| [ ] | [TC-052](#TC-052---Auto-refresh-configurable) | HU-12 | Query Service + Frontend | Auto-refresh configurable |
+| [ ] | [TC-053](#TC-053---Desactivar-auto-refresh) | HU-12 | Query Service + Frontend | Desactivar auto-refresh */
+>>>>>>> origin/develop
 
 
 ---
@@ -111,11 +167,11 @@ El sistema distribuido de gestión de quejas ISP consta de los siguientes servic
 
 ---
 
-## HU-01 — Listado de tickets con paginación
+## HU-01 - Listado de tickets con paginación
 
 ---
 
-### TC-001 — Listado paginado con tamaño por defecto
+### TC-001 - Listado paginado con tamaño por defecto
 
 - **ID del Test**: TC-001
 - **ID de la Historia de Usuario**: HU-01
@@ -164,7 +220,7 @@ Then el código de respuesta es 200
 
 ---
 
-### TC-002 — Listado paginado con tamaño configurable
+### TC-002 - Listado paginado con tamaño configurable
 
 - **ID del Test**: TC-002
 - **ID de la Historia de Usuario**: HU-01
@@ -200,7 +256,7 @@ Then el código de respuesta es 200
 
 ---
 
-### TC-003 — Indicación de total de resultados y página actual
+### TC-003 - Indicación de total de resultados y página actual
 
 - **ID del Test**: TC-003
 - **ID de la Historia de Usuario**: HU-01
@@ -240,7 +296,7 @@ Then el código de respuesta es 200
 
 ---
 
-### TC-004 — Ordenamiento consistente entre páginas
+### TC-004 - Ordenamiento consistente entre páginas
 
 - **ID del Test**: TC-004
 - **ID de la Historia de Usuario**: HU-01
@@ -286,7 +342,7 @@ Then el código de respuesta es 200 en ambas solicitudes
 
 ---
 
-### TC-005 — Lista vacía cuando no hay tickets
+### TC-005 - Lista vacía cuando no hay tickets
 
 - **ID del Test**: TC-005
 - **ID de la Historia de Usuario**: HU-01
@@ -320,7 +376,7 @@ Then el código de respuesta es 200
 
 ---
 
-### TC-006 — Solicitar página fuera de rango
+### TC-006 - Solicitar página fuera de rango
 
 - **ID del Test**: TC-006
 - **ID de la Historia de Usuario**: HU-01
@@ -353,7 +409,7 @@ Then el código de respuesta es 200
 
 ---
 
-### TC-007 — Tamaño de página con valores inválidos
+### TC-007 - Tamaño de página con valores inválidos
 
 - **ID del Test**: TC-007
 - **ID de la Historia de Usuario**: HU-01
@@ -416,11 +472,11 @@ Then el código de respuesta es 400
 
 ---
 
-## HU-02 — Filtro por estado
+## HU-02 - Filtro por estado
 
 ---
 
-### TC-008 — Filtrar por un solo estado válido
+### TC-008 - Filtrar por un solo estado válido
 
 - **ID del Test**: TC-008
 - **ID de la Historia de Usuario**: HU-02
@@ -454,7 +510,7 @@ Then el código de respuesta es 200
 
 ---
 
-### TC-009 — Filtrar por múltiples estados simultáneamente
+### TC-009 - Filtrar por múltiples estados simultáneamente
 
 - **ID del Test**: TC-009
 - **ID de la Historia de Usuario**: HU-02
@@ -486,7 +542,7 @@ Then el código de respuesta es 200
 
 ---
 
-### TC-010 — Combinar filtro de estado con otros filtros
+### TC-010 - Combinar filtro de estado con otros filtros
 
 - **ID del Test**: TC-010
 - **ID de la Historia de Usuario**: HU-02
@@ -521,7 +577,7 @@ Then el código de respuesta es 200
 
 ---
 
-### TC-011 — Filtrar con estado inválido
+### TC-011 - Filtrar con estado inválido
 
 - **ID del Test**: TC-011
 - **ID de la Historia de Usuario**: HU-02
@@ -548,7 +604,7 @@ Then el código de respuesta es 400
 
 ---
 
-### TC-012 — Filtrar por estado sin resultados coincidentes
+### TC-012 - Filtrar por estado sin resultados coincidentes
 
 - **ID del Test**: TC-012
 - **ID de la Historia de Usuario**: HU-02
@@ -568,11 +624,11 @@ Then el código de respuesta es 200
 
 ---
 
-## HU-03 — Filtro por prioridad
+## HU-03 - Filtro por prioridad
 
 ---
 
-### TC-013 — Filtrar por prioridad válida
+### TC-013 - Filtrar por prioridad válida
 
 - **ID del Test**: TC-013
 - **ID de la Historia de Usuario**: HU-03
@@ -612,7 +668,7 @@ Then el código de respuesta es 200
 
 ---
 
-### TC-014 — Visualizar prioridades disponibles
+### TC-014 - Visualizar prioridades disponibles
 
 - **ID del Test**: TC-014
 - **ID de la Historia de Usuario**: HU-03
@@ -636,7 +692,7 @@ Then se muestran las siguientes opciones disponibles: "HIGH", "MEDIUM", "LOW", "
 
 ---
 
-### TC-015 — Combinar filtro de prioridad con otros filtros
+### TC-015 - Combinar filtro de prioridad con otros filtros
 
 - **ID del Test**: TC-015
 - **ID de la Historia de Usuario**: HU-03
@@ -668,7 +724,7 @@ Then el código de respuesta es 200
 
 ---
 
-### TC-016 — Filtrar con prioridad inválida
+### TC-016 - Filtrar con prioridad inválida
 
 - **ID del Test**: TC-016
 - **ID de la Historia de Usuario**: HU-03
@@ -695,7 +751,7 @@ Then el código de respuesta es 400
 
 ---
 
-### TC-017 — Filtrar por prioridad sin resultados coincidentes
+### TC-017 - Filtrar por prioridad sin resultados coincidentes
 
 - **ID del Test**: TC-017
 - **ID de la Historia de Usuario**: HU-03
@@ -715,11 +771,11 @@ Then el código de respuesta es 200
 
 ---
 
-## HU-04 — Filtro por tipo de incidente
+## HU-04 - Filtro por tipo de incidente
 
 ---
 
-### TC-018 — Filtrar por tipo de incidente válido
+### TC-018 - Filtrar por tipo de incidente válido
 
 - **ID del Test**: TC-018
 - **ID de la Historia de Usuario**: HU-04
@@ -763,7 +819,7 @@ Then el código de respuesta es 200
 
 ---
 
-### TC-019 — Listar todos los tipos de incidente disponibles
+### TC-019 - Listar todos los tipos de incidente disponibles
 
 - **ID del Test**: TC-019
 - **ID de la Historia de Usuario**: HU-04
@@ -788,7 +844,7 @@ Then se listan las siguientes opciones:
 
 ---
 
-### TC-020 — Combinar filtro de tipo con estado y prioridad
+### TC-020 - Combinar filtro de tipo con estado y prioridad
 
 - **ID del Test**: TC-020
 - **ID de la Historia de Usuario**: HU-04
@@ -821,7 +877,7 @@ Then el código de respuesta es 200
 
 ---
 
-### TC-021 — Filtrar con tipo de incidente inválido
+### TC-021 - Filtrar con tipo de incidente inválido
 
 - **ID del Test**: TC-021
 - **ID de la Historia de Usuario**: HU-04
@@ -847,11 +903,11 @@ Then el código de respuesta es 400
 
 ---
 
-## HU-05 — Filtro por rango de fechas
+## HU-05 - Filtro por rango de fechas
 
 ---
 
-### TC-022 — Filtrar por rango de fechas válido
+### TC-022 - Filtrar por rango de fechas válido
 
 - **ID del Test**: TC-022
 - **ID de la Historia de Usuario**: HU-05
@@ -894,7 +950,7 @@ Then el código de respuesta es 200
 
 ---
 
-### TC-023 — Validar que fecha fin sea mayor o igual a fecha inicio
+### TC-023 - Validar que fecha fin sea mayor o igual a fecha inicio
 
 - **ID del Test**: TC-023
 - **ID de la Historia de Usuario**: HU-05
@@ -925,7 +981,7 @@ Then el código de respuesta es 400
 
 ---
 
-### TC-024 — Rango de fechas sin resultados coincidentes
+### TC-024 - Rango de fechas sin resultados coincidentes
 
 - **ID del Test**: TC-024
 - **ID de la Historia de Usuario**: HU-05
@@ -945,7 +1001,7 @@ Then el código de respuesta es 200
 
 ---
 
-### TC-025 — Filtrar con solo fecha inicio (sin fecha fin)
+### TC-025 - Filtrar con solo fecha inicio (sin fecha fin)
 
 - **ID del Test**: TC-025
 - **ID de la Historia de Usuario**: HU-05
@@ -968,7 +1024,7 @@ Then el código de respuesta es 200
 
 ---
 
-### TC-026 — Filtrar con solo fecha fin (sin fecha inicio)
+### TC-026 - Filtrar con solo fecha fin (sin fecha inicio)
 
 - **ID del Test**: TC-026
 - **ID de la Historia de Usuario**: HU-05
@@ -991,7 +1047,7 @@ Then el código de respuesta es 200
 
 ---
 
-### TC-027 — Fechas con formato inválido
+### TC-027 - Fechas con formato inválido
 
 - **ID del Test**: TC-027
 - **ID de la Historia de Usuario**: HU-05
@@ -1035,11 +1091,11 @@ Then el código de respuesta es 400
 
 ---
 
-## HU-06 — Búsqueda por ID de ticket
+## HU-06 - Búsqueda por ID de ticket
 
 ---
 
-### TC-028 — Buscar por ID de ticket existente
+### TC-028 - Buscar por ID de ticket existente
 
 - **ID del Test**: TC-028
 - **ID de la Historia de Usuario**: HU-06
@@ -1066,7 +1122,7 @@ Then el código de respuesta es 200
 
 ---
 
-### TC-029 — Buscar por ID de ticket inexistente
+### TC-029 - Buscar por ID de ticket inexistente
 
 - **ID del Test**: TC-029
 - **ID de la Historia de Usuario**: HU-06
@@ -1084,7 +1140,7 @@ Then el código de respuesta es 404
 
 ---
 
-### TC-030 — Buscar con ID en formato inválido
+### TC-030 - Buscar con ID en formato inválido
 
 - **ID del Test**: TC-030
 - **ID de la Historia de Usuario**: HU-06
@@ -1118,7 +1174,7 @@ Then el código de respuesta es 400
 
 ---
 
-### TC-031 — Buscar con ID vacío
+### TC-031 - Buscar con ID vacío
 
 - **ID del Test**: TC-031
 - **ID de la Historia de Usuario**: HU-06
@@ -1136,11 +1192,11 @@ Then el código de respuesta es 200
 
 ---
 
-## HU-07 — Búsqueda por número de línea
+## HU-07 - Búsqueda por número de línea
 
 ---
 
-### TC-032 — Buscar por número de línea válido con resultados
+### TC-032 - Buscar por número de línea válido con resultados
 
 - **ID del Test**: TC-032
 - **ID de la Historia de Usuario**: HU-07
@@ -1180,7 +1236,7 @@ Then el código de respuesta es 200
 
 ---
 
-### TC-033 — Buscar por número de línea válido sin resultados
+### TC-033 - Buscar por número de línea válido sin resultados
 
 - **ID del Test**: TC-033
 - **ID de la Historia de Usuario**: HU-07
@@ -1199,7 +1255,7 @@ Then el código de respuesta es 200
 
 ---
 
-### TC-034 — Buscar con número de línea inválido
+### TC-034 - Buscar con número de línea inválido
 
 - **ID del Test**: TC-034
 - **ID de la Historia de Usuario**: HU-07
@@ -1225,11 +1281,11 @@ Then el código de respuesta es 400
 
 ---
 
-## HU-08 — Ordenamiento de resultados
+## HU-08 - Ordenamiento de resultados
 
 ---
 
-### TC-035 — Ordenar por fecha ascendente
+### TC-035 - Ordenar por fecha ascendente
 
 - **ID del Test**: TC-035
 - **ID de la Historia de Usuario**: HU-08
@@ -1260,7 +1316,7 @@ Then el código de respuesta es 200
 
 ---
 
-### TC-036 — Ordenar por fecha descendente
+### TC-036 - Ordenar por fecha descendente
 
 - **ID del Test**: TC-036
 - **ID de la Historia de Usuario**: HU-08
@@ -1283,7 +1339,7 @@ Then el código de respuesta es 200
 
 ---
 
-### TC-037 — Ordenar por prioridad
+### TC-037 - Ordenar por prioridad
 
 - **ID del Test**: TC-037
 - **ID de la Historia de Usuario**: HU-08
@@ -1316,7 +1372,7 @@ Then el código de respuesta es 200
 
 ---
 
-### TC-038 — Ordenar por estado
+### TC-038 - Ordenar por estado
 
 - **ID del Test**: TC-038
 - **ID de la Historia de Usuario**: HU-08
@@ -1341,7 +1397,7 @@ Then el código de respuesta es 200
 
 ---
 
-### TC-039 — Campo de ordenamiento inválido
+### TC-039 - Campo de ordenamiento inválido
 
 - **ID del Test**: TC-039
 - **ID de la Historia de Usuario**: HU-08
@@ -1377,11 +1433,11 @@ Then el código de respuesta es 400
 
 ---
 
-## HU-09 — Métricas agregadas
+## HU-09 - Métricas agregadas
 
 ---
 
-### TC-040 — Visualizar total de tickets
+### TC-040 - Visualizar total de tickets
 
 - **ID del Test**: TC-040
 - **ID de la Historia de Usuario**: HU-09
@@ -1412,7 +1468,7 @@ Then el código de respuesta es 200
 
 ---
 
-### TC-041 — Distribución por estado
+### TC-041 - Distribución por estado
 
 - **ID del Test**: TC-041
 - **ID de la Historia de Usuario**: HU-09
@@ -1442,7 +1498,7 @@ Then el código de respuesta es 200
 
 ---
 
-### TC-042 — Distribución por prioridad
+### TC-042 - Distribución por prioridad
 
 - **ID del Test**: TC-042
 - **ID de la Historia de Usuario**: HU-09
@@ -1469,7 +1525,7 @@ Then el código de respuesta es 200
 
 ---
 
-### TC-043 — Distribución por tipo de incidente
+### TC-043 - Distribución por tipo de incidente
 
 - **ID del Test**: TC-043
 - **ID de la Historia de Usuario**: HU-09
@@ -1500,7 +1556,7 @@ Then el código de respuesta es 200
 
 ---
 
-### TC-044 — Consistencia de métricas con el repositorio
+### TC-044 - Consistencia de métricas con el repositorio
 
 - **ID del Test**: TC-044
 - **ID de la Historia de Usuario**: HU-09
@@ -1521,11 +1577,11 @@ Then el campo "totalTickets" de las métricas es igual al campo "pagination.tota
 
 ---
 
-## HU-10 — Visualización gráfica
+## HU-10 - Visualización gráfica
 
 ---
 
-### TC-045 — Gráfica de distribución por prioridad
+### TC-045 - Gráfica de distribución por prioridad
 
 - **ID del Test**: TC-045
 - **ID de la Historia de Usuario**: HU-10
@@ -1553,7 +1609,7 @@ Then se muestra una gráfica de distribución por prioridad
 
 ---
 
-### TC-046 — Gráfica de distribución por estado
+### TC-046 - Gráfica de distribución por estado
 
 - **ID del Test**: TC-046
 - **ID de la Historia de Usuario**: HU-10
@@ -1573,7 +1629,7 @@ Then se muestra una gráfica de distribución por estado
 
 ---
 
-### TC-047 — Actualización de gráficas con filtros activos
+### TC-047 - Actualización de gráficas con filtros activos
 
 - **ID del Test**: TC-047
 - **ID de la Historia de Usuario**: HU-10
@@ -1607,11 +1663,11 @@ Then las gráficas se actualizan
 
 ---
 
-## HU-11 — Exportación de resultados (opcional)
+## HU-11 - Exportación de resultados (opcional)
 
 ---
 
-### TC-048 — Exportar CSV con columnas básicas
+### TC-048 - Exportar CSV con columnas básicas
 
 - **ID del Test**: TC-048
 - **ID de la Historia de Usuario**: HU-11
@@ -1647,7 +1703,7 @@ Then se descarga un archivo con extensión ".csv"
 
 ---
 
-### TC-049 — Exportar respetando filtros activos
+### TC-049 - Exportar respetando filtros activos
 
 - **ID del Test**: TC-049
 - **ID de la Historia de Usuario**: HU-11
@@ -1668,7 +1724,7 @@ Then se descarga un archivo CSV
 
 ---
 
-### TC-050 — Exportar cuando no hay resultados
+### TC-050 - Exportar cuando no hay resultados
 
 - **ID del Test**: TC-050
 - **ID de la Historia de Usuario**: HU-11
@@ -1687,11 +1743,11 @@ Then se descarga un archivo CSV que contiene solo la fila de encabezados
 
 ---
 
-## HU-12 — Actualización manual o en tiempo real (opcional)
+## HU-12 - Actualización manual o en tiempo real (opcional)
 
 ---
 
-### TC-051 — Refresco manual de datos
+### TC-051 - Refresco manual de datos
 
 - **ID del Test**: TC-051
 - **ID de la Historia de Usuario**: HU-12
@@ -1719,7 +1775,7 @@ Then la tabla se recarga con los datos más recientes
 
 ---
 
-### TC-052 — Auto-refresh configurable
+### TC-052 - Auto-refresh configurable
 
 - **ID del Test**: TC-052
 - **ID de la Historia de Usuario**: HU-12
@@ -1761,7 +1817,7 @@ Then los datos de la tabla se recargan automáticamente cada 30 segundos
 
 ---
 
-### TC-053 — Desactivar auto-refresh
+### TC-053 - Desactivar auto-refresh
 
 - **ID del Test**: TC-053
 - **ID de la Historia de Usuario**: HU-12
@@ -1786,5 +1842,5 @@ Then los datos dejan de recargarse automáticamente
 18 de febrero de 2026
 
 ## 📎 Referencias
-- [FASE_3_HISTORIAS_RIESGOS.md](./FASE_3_HISTORIAS_RIESGOS.md) — Historias de usuario y matriz de riesgos
+- [FASE_3_HISTORIAS_RIESGOS.md](./FASE_3_HISTORIAS_RIESGOS.md) - Historias de usuario y matriz de riesgos
 - Dominio: Sistema Distribuido de Gestión de Quejas ISP

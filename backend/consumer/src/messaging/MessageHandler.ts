@@ -117,18 +117,19 @@ export class MessageHandler {
             const status = determineStatus(priority);
 
             const processedIncident: Incident = {
-                ticketId: content.ticketId,
-                lineNumber: content.lineNumber,
+                ticketId: String(content.ticketId),
+                lineNumber: String(content.lineNumber),
+                email: String(content.email || 'N/A'),
                 type: incidentType,
                 description: content.description,
                 priority,
                 status,
-                createdAt: content.createdAt,
+                createdAt: String(content.createdAt),
                 processedAt: new Date(),
             };
 
             // Persist in Consumer repository (§2.2 decision)
-            this.repository.save(processedIncident);
+            await this.repository.save(processedIncident);
 
             this.logger.info('Incident processed and persisted', {
                 ticketId: processedIncident.ticketId,
