@@ -84,8 +84,8 @@ export class TicketRepository implements ITicketRepository {
 
             const tickets: Ticket[] = dataResult.rows.map((row: any) => ({
                 ...row,
-                createdAt: row.createdAt.toISOString(),
-                processedAt: row.processedAt ? row.processedAt.toISOString() : null
+                createdAt: typeof row.createdAt === 'string' ? row.createdAt : row.createdAt.toISOString(),
+                processedAt: row.processedAt ? (typeof row.processedAt === 'string' ? row.processedAt : row.processedAt.toISOString()) : null
             }));
 
             return tickets;
@@ -132,3 +132,4 @@ export class TicketRepository implements ITicketRepository {
         return { metrics: result.rows };
     }
 }
+

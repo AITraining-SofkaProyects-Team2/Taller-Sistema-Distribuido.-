@@ -53,9 +53,9 @@
 | [GREEN] | [TC-042](#TC-042---Distribución-por-prioridad) | HU-09 | Query Service + Frontend | Distribución por prioridad |
 | [GREEN] | [TC-043](#TC-043---Distribución-por-tipo-de-incidente) | HU-09 | Query Service + Frontend | Distribución por tipo de incidente |
 | [GREEN] | [TC-044](#TC-044---Consistencia-de-métricas-con-el-repositorio) | HU-09 | Query Service + Frontend | Consistencia de métricas con el repositorio |
-| [ ] | [TC-045](#TC-045---Gráfica-de-distribución-por-prioridad) | HU-10 | Query Service + Frontend | Gráfica de distribución por prioridad |
-| [ ] | [TC-046](#TC-046---Gráfica-de-distribución-por-estado) | HU-10 | Query Service + Frontend | Gráfica de distribución por estado |
-| [ ] | [TC-047](#TC-047---Actualización-de-gráficas-con-filtros-activos) | HU-10 | Query Service + Frontend | Actualización de gráficas con filtros activos |
+| [REFACTOR] | [TC-045](#TC-045---Gráfica-de-distribución-por-prioridad) | HU-10 | Query Service + Frontend | Gráfica de distribución por prioridad |
+| [REFACTOR] | [TC-046](#TC-046---Gráfica-de-distribución-por-estado) | HU-10 | Query Service + Frontend | Gráfica de distribución por estado |
+| [REFACTOR] | [TC-047](#TC-047---Actualización-de-gráficas-con-filtros-activos) | HU-10 | Query Service + Frontend | Actualización de gráficas con filtros activos |
 | [ ] | [TC-048](#TC-048---Exportar-CSV-con-columnas-básicas) | HU-11 | Frontend | Exportar CSV con columnas básicas |
 | [ ] | [TC-049](#TC-049---Exportar-respetando-filtros-activos) | HU-11 | Frontend | Exportar respetando filtros activos |
 | [ ] | [TC-050](#TC-050---Exportar-cuando-no-hay-resultados) | HU-11 | Frontend | Exportar cuando no hay resultados |

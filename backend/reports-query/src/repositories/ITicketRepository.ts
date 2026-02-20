@@ -6,3 +6,4 @@ export interface ITicketRepository {
   findByLineNumber(lineNumber: string): Promise<Ticket[]>;
   getMetrics(): Promise<Record<string, unknown>>;
 }
+
