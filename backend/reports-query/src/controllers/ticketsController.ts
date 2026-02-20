@@ -22,6 +22,16 @@ export async function getTickets(req: Request, res: Response) {
   }
   const sort = typeof req.query.sort === 'string' ? req.query.sort : undefined;
   const order = typeof req.query.order === 'string' ? req.query.order : undefined;
-  const result = await getPaginatedTickets(page, limit, sort, order);
-  res.status(200).json(result);
+  const priority = typeof req.query.priority === 'string' ? req.query.priority : undefined;
+  const status = typeof req.query.status === 'string' ? req.query.status : undefined;
+  const type = typeof req.query.type === 'string' ? req.query.type : undefined;
+  try {
+    const result = await getPaginatedTickets(page, limit, sort, order, priority, status, type);
+    res.status(200).json(result);
+  } catch (err: any) {
+    if (err.status === 400) {
+      return res.status(400).json({ error: err.message });
+    }
+    throw err;
+  }
 }
