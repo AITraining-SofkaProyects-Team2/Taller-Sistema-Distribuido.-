@@ -40,6 +40,7 @@ const buildMessage = (
 const validPayload = {
     ticketId: 'ticket-001',
     lineNumber: '0991234567',
+    email: 'test@example.com',
     type: IncidentType.NO_SERVICE,
     description: 'Sin servicio en la zona',
     createdAt: '2026-02-13T10:00:00Z',
