@@ -53,9 +53,9 @@
 | RED | TC-042 | HU-09 | Query Service + Frontend | Distribución por prioridad |
 | RED | TC-043 | HU-09 | Query Service + Frontend | Distribución por tipo de incidente |
 | RED | TC-044 | HU-09 | Query Service + Frontend | Consistencia de métricas con el repositorio |
-| [ ] | TC-045 | HU-10 | Query Service + Frontend | Gráfica de distribución por prioridad |
-| [ ] | TC-046 | HU-10 | Query Service + Frontend | Gráfica de distribución por estado |
-| [ ] | TC-047 | HU-10 | Query Service + Frontend | Actualización de gráficas con filtros activos |
+| RED | TC-045 | HU-10 | Query Service + Frontend | Gráfica de distribución por prioridad |
+| RED | TC-046 | HU-10 | Query Service + Frontend | Gráfica de distribución por estado |
+| RED | TC-047 | HU-10 | Query Service + Frontend | Actualización de gráficas con filtros activos |
 | [ ] | TC-048 | HU-11 | Frontend | Exportar CSV con columnas básicas |
 | [ ] | TC-049 | HU-11 | Frontend | Exportar respetando filtros activos |
 | [ ] | TC-050 | HU-11 | Frontend | Exportar cuando no hay resultados |
