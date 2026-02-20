@@ -124,3 +124,42 @@ describe('TC-032 — Buscar por número de línea válido con resultados', () =>
     });
   });
 });
+
+// ─────────────────────────────────────────────────────────────────────────────
+// TC-033 — Buscar por número de línea válido sin resultados
+// ─────────────────────────────────────────────────────────────────────────────
+describe('TC-033 — Buscar por número de línea válido sin resultados', () => {
+  let mockRepository: ITicketRepository;
+  let service: TicketQueryService;
+
+  const VALID_LINE_NUMBER_NO_RESULTS = '0880000000';
+
+  beforeEach(() => {
+    mockRepository = {
+      findById: vi.fn(),
+      findAll: vi.fn(),
+      findByLineNumber: vi.fn().mockResolvedValue([]),
+      getMetrics: vi.fn(),
+    } as unknown as ITicketRepository;
+
+    service = new TicketQueryService(mockRepository);
+  });
+
+  describe('Given no existen tickets con el número de línea solicitado', () => {
+    it('When se solicita findByLineNumber con un número válido sin coincidencias, Then retorna un arreglo vacío', async () => {
+      const result = await service.findByLineNumber(VALID_LINE_NUMBER_NO_RESULTS);
+      expect(Array.isArray(result)).toBe(true);
+      expect(result).toHaveLength(0);
+    });
+
+    it('When se solicita findByLineNumber con un número válido sin coincidencias, Then el repositorio es invocado con el argumento correcto', async () => {
+      await service.findByLineNumber(VALID_LINE_NUMBER_NO_RESULTS);
+      expect(mockRepository.findByLineNumber).toHaveBeenCalledOnce();
+      expect(mockRepository.findByLineNumber).toHaveBeenCalledWith(VALID_LINE_NUMBER_NO_RESULTS);
+    });
+
+    it('When se solicita findByLineNumber con un número válido sin coincidencias, Then no lanza excepción', async () => {
+      await expect(service.findByLineNumber(VALID_LINE_NUMBER_NO_RESULTS)).resolves.not.toThrow();
+    });
+  });
+});

@@ -85,6 +85,8 @@
 - Acepta un numero de linea valido
 - Retorna todos los tickets asociados
 - Dado un número de línea con tickets asociados, `TicketQueryService.findByLineNumber` retorna un arreglo con todos los tickets correspondientes (TC-032 ✅ GREEN)
+ - Dado un número de línea con tickets asociados, `TicketQueryService.findByLineNumber` retorna un arreglo con todos los tickets correspondientes (TC-032 ✅ GREEN)
+ - Dado un número de línea válido sin tickets asociados, `TicketQueryService.findByLineNumber` retorna un arreglo vacío — cubierto por la implementación de TC-032 (TC-033 ✅ GREEN)
 
 ---
 
