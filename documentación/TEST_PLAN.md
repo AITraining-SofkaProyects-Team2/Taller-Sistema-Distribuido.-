@@ -56,9 +56,9 @@
 | RED | TC-045 | HU-10 | Query Service + Frontend | Gráfica de distribución por prioridad |
 | RED | TC-046 | HU-10 | Query Service + Frontend | Gráfica de distribución por estado |
 | RED | TC-047 | HU-10 | Query Service + Frontend | Actualización de gráficas con filtros activos |
-| [ ] | TC-048 | HU-11 | Frontend | Exportar CSV con columnas básicas |
-| [ ] | TC-049 | HU-11 | Frontend | Exportar respetando filtros activos |
-| [ ] | TC-050 | HU-11 | Frontend | Exportar cuando no hay resultados |
+| RED | TC-048 | HU-11 | Frontend | Exportar CSV con columnas básicas |
+| RED | TC-049 | HU-11 | Frontend | Exportar respetando filtros activos |
+| RED | TC-050 | HU-11 | Frontend | Exportar cuando no hay resultados |
 | [ ] | TC-051 | HU-12 | Query Service + Frontend | Refresco manual de datos |
 | [ ] | TC-052 | HU-12 | Query Service + Frontend | Auto-refresh configurable |
 | [ ] | TC-053 | HU-12 | Query Service + Frontend | Desactivar auto-refresh |
