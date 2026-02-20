@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import request from 'supertest';
-import app from '../../src/index'; // Ajustar el import según la estructura real del Query Service
+import app from '../src/index' // Ajustar el import según la estructura real del Query Service
 
 /**
  * TC-017 — Filtrar por prioridad sin resultados coincidentes
