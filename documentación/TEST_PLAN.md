@@ -37,7 +37,7 @@
 | [ ] | [TC-026](#TC-026---Filtrar-con-solo-fecha-fin-sin-fecha-inicio) | HU-05 | Query Service + Frontend | Filtrar con solo fecha fin (sin fecha inicio) |
 | [ ] | [TC-027](#TC-027---Fechas-con-formato-inválido) | HU-05 | Query Service + Frontend | Fechas con formato inválido |
 | [GREEN] | [TC-028](#TC-028---Buscar-por-ID-de-ticket-existente) | HU-06 | Query Service + Frontend | Buscar por ID de ticket existente |
-| [RED] | [TC-029](#TC-029---Buscar-por-ID-de-ticket-inexistente) | HU-06 | Query Service + Frontend | Buscar por ID de ticket inexistente |
+| [GREEN] | [TC-029](#TC-029---Buscar-por-ID-de-ticket-inexistente) | HU-06 | Query Service + Frontend | Buscar por ID de ticket inexistente |
 | [ ] | [TC-030](#TC-030---Buscar-con-ID-en-formato-inválido) | HU-06 | Query Service + Frontend | Buscar con ID en formato inválido |
 | [ ] | [TC-031](#TC-031---Buscar-con-ID-vacío) | HU-06 | Query Service + Frontend | Buscar con ID vacío |
 | [ ] | [TC-032](#TC-032---Buscar-por-número-de-línea-válido-con-resultados) | HU-07 | Query Service + Frontend | Buscar por número de línea válido con resultados |
