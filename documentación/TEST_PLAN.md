@@ -56,9 +56,9 @@
 | [ ] | [TC-045](#TC-045---Gráfica-de-distribución-por-prioridad) | HU-10 | Query Service + Frontend | Gráfica de distribución por prioridad |
 | [ ] | [TC-046](#TC-046---Gráfica-de-distribución-por-estado) | HU-10 | Query Service + Frontend | Gráfica de distribución por estado |
 | [ ] | [TC-047](#TC-047---Actualización-de-gráficas-con-filtros-activos) | HU-10 | Query Service + Frontend | Actualización de gráficas con filtros activos |
-| [ ] | [TC-048](#TC-048---Exportar-CSV-con-columnas-básicas) | HU-11 | Frontend | Exportar CSV con columnas básicas |
-| [ ] | [TC-049](#TC-049---Exportar-respetando-filtros-activos) | HU-11 | Frontend | Exportar respetando filtros activos |
-| [ ] | [TC-050](#TC-050---Exportar-cuando-no-hay-resultados) | HU-11 | Frontend | Exportar cuando no hay resultados |
+| [GREEN] | [TC-048](#TC-048---Exportar-CSV-con-columnas-básicas) | HU-11 | Frontend | Exportar CSV con columnas básicas |
+| [GREEN] | [TC-049](#TC-049---Exportar-respetando-filtros-activos) | HU-11 | Frontend | Exportar respetando filtros activos |
+| [GREEN] | [TC-050](#TC-050---Exportar-cuando-no-hay-resultados) | HU-11 | Frontend | Exportar cuando no hay resultados |
 | [ ] | [TC-051](#TC-051---Refresco-manual-de-datos) | HU-12 | Query Service + Frontend | Refresco manual de datos |
 | [ ] | [TC-052](#TC-052---Auto-refresh-configurable) | HU-12 | Query Service + Frontend | Auto-refresh configurable |
 | [ ] | [TC-053](#TC-053---Desactivar-auto-refresh) | HU-12 | Query Service + Frontend | Desactivar auto-refresh */
