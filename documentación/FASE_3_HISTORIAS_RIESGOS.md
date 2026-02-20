@@ -71,8 +71,10 @@
 **Para** acceder rapidamente a un caso
 
 **Criterios de aceptacion**
-- Se permite buscar por ID exacto
-- Si no existe, se muestra mensaje claro
+- Se permite buscar por ID exacto → `TicketQueryService.findById` retorna el ticket (TC-028 ♻️ REFACTOR)
+- Si no existe, se muestra mensaje claro → `TicketQueryService.findById` lanza `TicketNotFoundError` con mensaje "Ticket no encontrado" (TC-029 ♻️ REFACTOR)
+- Si el ID no tiene formato UUIDv4, se rechaza antes de consultar el repositorio → lanza `InvalidUuidFormatError` con mensaje "Formato de ID inválido" (TC-030 ♻️ REFACTOR)
+- Si el ID está vacío, se rechaza igual que un formato inválido → `findById("")` lanza `InvalidUuidFormatError` (TC-031 ♻️ REFACTOR)
 
 ---
 
@@ -84,6 +86,10 @@
 **Criterios de aceptacion**
 - Acepta un numero de linea valido
 - Retorna todos los tickets asociados
+- Dado un número de línea con tickets asociados, `TicketQueryService.findByLineNumber` retorna un arreglo con todos los tickets correspondientes (TC-032 ✅ GREEN)
+ - Dado un número de línea con tickets asociados, `TicketQueryService.findByLineNumber` retorna un arreglo con todos los tickets correspondientes (TC-032 ✅ REFACTOR)
+ - Dado un número de línea válido sin tickets asociados, `TicketQueryService.findByLineNumber` retorna un arreglo vacío — cubierto por la implementación de TC-032 (TC-033 ✅ REFACTOR)
+ - Dado un número de línea con formato inválido (letras, caracteres especiales, longitud distinta de 10 dígitos), `TicketQueryService.findByLineNumber` lanza un error de validación sin invocar el repositorio (TC-034 ✅ REFACTOR)
 
 ---
 
