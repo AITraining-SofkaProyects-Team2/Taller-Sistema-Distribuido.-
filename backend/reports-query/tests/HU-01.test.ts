@@ -22,13 +22,11 @@ import app from '../src/index'; // Suponiendo que el entrypoint es app.ts
  *     And el campo "pagination.totalPages" es 2
  */
 
+
 describe('TC-001 — Listado paginado con tamaño por defecto (HU-01)', () => {
   beforeAll(async () => {
-    // Aquí deberías poblar el repositorio con 25 tickets de prueba
-    // Esto puede requerir acceso directo al repositorio o a un endpoint de test
-    // Por ejemplo:
-    // await seedTickets(25);
-    // O lanzar un script de seed si existe
+    await request(app).post('/__test__/clear');
+    await request(app).post('/__test__/seed').send({ count: 25 });
   });
 
   it('debe retornar 20 tickets y paginación correcta cuando no se especifica limit', async () => {
@@ -62,13 +60,11 @@ describe('TC-001 — Listado paginado con tamaño por defecto (HU-01)', () => {
  *     And el campo "pagination.totalPages" es 5
  */
 
+
 describe('TC-002 — Listado paginado con tamaño configurable (HU-01)', () => {
   beforeAll(async () => {
-    // Aquí deberías poblar el repositorio con 50 tickets de prueba
-    // Esto puede requerir acceso directo al repositorio o a un endpoint de test
-    // Por ejemplo:
-    // await seedTickets(50);
-    // O lanzar un script de seed si existe
+    await request(app).post('/__test__/clear');
+    await request(app).post('/__test__/seed').send({ count: 50 });
   });
 
   it('debe retornar 10 tickets y paginación correcta cuando limit=10', async () => {
@@ -101,13 +97,11 @@ describe('TC-002 — Listado paginado con tamaño configurable (HU-01)', () => {
  *     And el campo "pagination.totalPages" es 3
  */
 
+
 describe('TC-003 — Indicación de total de resultados y página actual (HU-01)', () => {
   beforeAll(async () => {
-    // Aquí deberías poblar el repositorio con 55 tickets de prueba
-    // Esto puede requerir acceso directo al repositorio o a un endpoint de test
-    // Por ejemplo:
-    // await seedTickets(55);
-    // O lanzar un script de seed si existe
+    await request(app).post('/__test__/clear');
+    await request(app).post('/__test__/seed').send({ count: 55 });
   });
 
   it('debe retornar la metadata correcta de paginación y 15 tickets en la página 3', async () => {
@@ -141,11 +135,11 @@ describe('TC-003 — Indicación de total de resultados y página actual (HU-01)
  *     And los tickets de la página 2 continúan el orden ascendente sin duplicados ni saltos
  */
 
+
 describe('TC-004 — Ordenamiento consistente entre páginas (HU-01)', () => {
   beforeAll(async () => {
-    // Aquí deberías poblar el repositorio con 40 tickets de prueba con fechas de creación distintas
-    // Esto puede requerir acceso directo al repositorio o a un endpoint de test
-    // await seedTicketsWithDates(40);
+    await request(app).post('/__test__/clear');
+    await request(app).post('/__test__/seed').send({ count: 40 });
   });
 
   it('debe retornar los tickets ordenados ascendentemente por fecha de creación en ambas páginas', async () => {
@@ -195,11 +189,10 @@ describe('TC-004 — Ordenamiento consistente entre páginas (HU-01)', () => {
  *     And el campo "pagination.totalPages" es 0
  */
 
+
 describe('TC-005 — Lista vacía cuando no hay tickets (HU-01)', () => {
   beforeAll(async () => {
-    // Aquí deberías limpiar el repositorio para que no haya tickets
-    // Esto puede requerir acceso directo al repositorio o a un endpoint de test
-    // await clearTickets();
+    await request(app).post('/__test__/clear');
   });
 
   it('debe retornar un arreglo vacío y paginación en cero cuando no hay tickets', async () => {
@@ -232,11 +225,11 @@ describe('TC-005 — Lista vacía cuando no hay tickets (HU-01)', () => {
  *     And el campo "pagination.totalPages" es 3
  */
 
+
 describe('TC-006 — Solicitar página fuera de rango (HU-01)', () => {
   beforeAll(async () => {
-    // Aquí deberías poblar el repositorio con 30 tickets de prueba
-    // Esto puede requerir acceso directo al repositorio o a un endpoint de test
-    // await seedTickets(30);
+    await request(app).post('/__test__/clear');
+    await request(app).post('/__test__/seed').send({ count: 30 });
   });
 
   it('debe retornar un arreglo vacío y la metadata correcta cuando se solicita una página fuera de rango', async () => {
@@ -277,6 +270,9 @@ describe('TC-006 — Solicitar página fuera de rango (HU-01)', () => {
  */
 
 describe('TC-007 — Tamaño de página con valores inválidos (HU-01)', () => {
+  beforeAll(async () => {
+    await request(app).post('/__test__/clear');
+  });
   it('debe retornar 400 y mensaje de error para limit=0', async () => {
     const res = await request(app)
       .get('/api/tickets?limit=0');
