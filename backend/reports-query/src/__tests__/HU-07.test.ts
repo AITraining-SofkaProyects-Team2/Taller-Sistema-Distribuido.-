@@ -163,3 +163,107 @@ describe('TC-033 — Buscar por número de línea válido sin resultados', () =>
     });
   });
 });
+
+// ─────────────────────────────────────────────────────────────────────────────
+// TC-034 — Buscar con número de línea inválido
+// ─────────────────────────────────────────────────────────────────────────────
+describe('TC-034 — Buscar con número de línea inválido', () => {
+  let mockRepository: ITicketRepository;
+  let service: TicketQueryService;
+
+  beforeEach(() => {
+    mockRepository = {
+      findById: vi.fn(),
+      findAll: vi.fn(),
+      findByLineNumber: vi.fn(),
+      getMetrics: vi.fn(),
+    } as unknown as ITicketRepository;
+
+    service = new TicketQueryService(mockRepository);
+  });
+
+  // ── Partición de equivalencia: números de línea con letras ────────────────
+
+  describe('Given un lineNumber que contiene letras', () => {
+    it('When se solicita findByLineNumber("099ABC4567"), Then el servicio lanza un error de validación', async () => {
+      await expect(service.findByLineNumber('099ABC4567')).rejects.toThrow();
+    });
+
+    it('When se solicita findByLineNumber("099ABC4567"), Then el repositorio NO es invocado', async () => {
+      await service.findByLineNumber('099ABC4567').catch(() => {});
+      expect(mockRepository.findByLineNumber).not.toHaveBeenCalled();
+    });
+  });
+
+  // ── Partición de equivalencia: números de línea con caracteres especiales ─
+
+  describe('Given un lineNumber que contiene guiones', () => {
+    it('When se solicita findByLineNumber("099-123-456"), Then el servicio lanza un error de validación', async () => {
+      await expect(service.findByLineNumber('099-123-456')).rejects.toThrow();
+    });
+
+    it('When se solicita findByLineNumber("099-123-456"), Then el repositorio NO es invocado', async () => {
+      await service.findByLineNumber('099-123-456').catch(() => {});
+      expect(mockRepository.findByLineNumber).not.toHaveBeenCalled();
+    });
+  });
+
+  describe('Given un lineNumber que contiene prefijo internacional', () => {
+    it('When se solicita findByLineNumber("+593991234567"), Then el servicio lanza un error de validación', async () => {
+      await expect(service.findByLineNumber('+593991234567')).rejects.toThrow();
+    });
+
+    it('When se solicita findByLineNumber("+593991234567"), Then el repositorio NO es invocado', async () => {
+      await service.findByLineNumber('+593991234567').catch(() => {});
+      expect(mockRepository.findByLineNumber).not.toHaveBeenCalled();
+    });
+  });
+
+  // ── Partición de equivalencia: solo espacios ──────────────────────────────
+
+  describe('Given un lineNumber compuesto solo de espacios', () => {
+    it('When se solicita findByLineNumber("   "), Then el servicio lanza un error de validación', async () => {
+      await expect(service.findByLineNumber('   ')).rejects.toThrow();
+    });
+
+    it('When se solicita findByLineNumber("   "), Then el repositorio NO es invocado', async () => {
+      await service.findByLineNumber('   ').catch(() => {});
+      expect(mockRepository.findByLineNumber).not.toHaveBeenCalled();
+    });
+  });
+
+  // ── Valores límite: longitud ───────────────────────────────────────────────
+
+  describe('Valores límite de longitud', () => {
+    it('When se solicita findByLineNumber con 9 dígitos (por debajo del mínimo), Then lanza error de validación', async () => {
+      // Valor límite inferior: 9 dígitos → inválido (se esperan exactamente 10)
+      await expect(service.findByLineNumber('099123456')).rejects.toThrow();
+    });
+
+    it('When se solicita findByLineNumber con 9 dígitos, Then el repositorio NO es invocado', async () => {
+      await service.findByLineNumber('099123456').catch(() => {});
+      expect(mockRepository.findByLineNumber).not.toHaveBeenCalled();
+    });
+
+    it('When se solicita findByLineNumber con 11 dígitos (por encima del máximo), Then lanza error de validación', async () => {
+      // Valor límite superior: 11 dígitos → inválido
+      await expect(service.findByLineNumber('09912345678')).rejects.toThrow();
+    });
+
+    it('When se solicita findByLineNumber con 11 dígitos, Then el repositorio NO es invocado', async () => {
+      await service.findByLineNumber('09912345678').catch(() => {});
+      expect(mockRepository.findByLineNumber).not.toHaveBeenCalled();
+    });
+  });
+
+  // ── Tabla de decisión ─────────────────────────────────────────────────────
+  // | Valor           | Solo dígitos | Longitud 10 | Resultado         |
+  // |-----------------|:------------:|:-----------:|-------------------|
+  // | "0991234567"    |      ✓       |      ✓      | OK (ver TC-032)   |
+  // | "099ABC4567"    |      ✗       |      ✓      | Error validación  |
+  // | "099-123-456"   |      ✗       |      ✓      | Error validación  |
+  // | "+593991234567" |      ✗       |      ✗      | Error validación  |
+  // | "   "           |      ✗       |      ✗      | Error validación  |
+  // | "099123456"     |      ✓       |      ✗ (9)  | Error validación  |
+  // | "09912345678"   |      ✓       |      ✗ (11) | Error validación  |
+});
