@@ -48,7 +48,7 @@
 | [ ] | TC-037 | HU-08 | Query Service + Frontend | Ordenar por prioridad |
 | [ ] | TC-038 | HU-08 | Query Service + Frontend | Ordenar por estado |
 | [ ] | TC-039 | HU-08 | Query Service + Frontend | Campo de ordenamiento inválido |
-| [ ] | TC-040 | HU-09 | Query Service + Frontend | Visualizar total de tickets |
+| RED | TC-040 | HU-09 | Query Service + Frontend | Visualizar total de tickets |
 | [ ] | TC-041 | HU-09 | Query Service + Frontend | Distribución por estado |
 | [ ] | TC-042 | HU-09 | Query Service + Frontend | Distribución por prioridad |
 | [ ] | TC-043 | HU-09 | Query Service + Frontend | Distribución por tipo de incidente |
