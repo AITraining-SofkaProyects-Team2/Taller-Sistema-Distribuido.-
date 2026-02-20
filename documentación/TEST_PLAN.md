@@ -9,13 +9,13 @@
 
 | Completado | ID Test | Historia | Servicios afectados | Descripción |
 |:----------:|---------|-|---------|-------------|
-| [GREEN] | [TC-001](#TC-001---Listado-paginado-con-tamaño-por-defecto) | HU-01 | Query Service + Frontend | Listado paginado con tamaño por defecto |
-| [GREEN] | [TC-002](#TC-002---Listado-paginado-con-tamaño-configurable) | HU-01 | Query Service + Frontend | Listado paginado con tamaño configurable |
-| [GREEN] | [TC-003](#TC-003---Indicación-de-total-de-resultados-y-página-actual) | HU-01 | Query Service + Frontend | Indicación de total de resultados y página actual |
-| [GREEN] | [TC-004](#TC-004---Ordenamiento-consistente-entre-páginas) | HU-01 | Query Service + Frontend | Ordenamiento consistente entre páginas |
-| [GREEN] | [TC-005](#TC-005---Lista-vacía-cuando-no-hay-tickets) | HU-01 | Query Service + Frontend | Lista vacía cuando no hay tickets |
-| [GREEN] | [TC-006](#TC-006---Solicitar-página-fuera-de-rango) | HU-01 | Query Service + Frontend | Solicitar página fuera de rango |
-| [GREEN] | [TC-007](#TC-007---Tamaño-de-página-con-valores-inválidos) | HU-01 | Query Service + Frontend | Tamaño de página con valores inválidos |
+| [REFACTOR] | [TC-001](#TC-001---Listado-paginado-con-tamaño-por-defecto) | HU-01 | Query Service + Frontend | Listado paginado con tamaño por defecto |
+| [REFACTOR] | [TC-002](#TC-002---Listado-paginado-con-tamaño-configurable) | HU-01 | Query Service + Frontend | Listado paginado con tamaño configurable |
+| [REFACTOR] | [TC-003](#TC-003---Indicación-de-total-de-resultados-y-página-actual) | HU-01 | Query Service + Frontend | Indicación de total de resultados y página actual |
+| [REFACTOR] | [TC-004](#TC-004---Ordenamiento-consistente-entre-páginas) | HU-01 | Query Service + Frontend | Ordenamiento consistente entre páginas |
+| [REFACTOR] | [TC-005](#TC-005---Lista-vacía-cuando-no-hay-tickets) | HU-01 | Query Service + Frontend | Lista vacía cuando no hay tickets |
+| [REFACTOR] | [TC-006](#TC-006---Solicitar-página-fuera-de-rango) | HU-01 | Query Service + Frontend | Solicitar página fuera de rango |
+| [REFACTOR] | [TC-007](#TC-007---Tamaño-de-página-con-valores-inválidos) | HU-01 | Query Service + Frontend | Tamaño de página con valores inválidos |
 | [GREEN] | [TC-008](#TC-008---Filtrar-por-un-solo-estado-válido) | HU-02 | Query Service + Frontend | Filtrar por un solo estado válido |
 | [GREEN] | [TC-009](#TC-009---Filtrar-por-múltiples-estados-simultáneamente) | HU-02 | Query Service + Frontend | Filtrar por múltiples estados simultáneamente |
 | [GREEN] | [TC-010](#TC-010---Combinar-filtro-de-estado-con-otros-filtros) | HU-02 | Query Service + Frontend | Combinar filtro de estado con otros filtros |
@@ -1447,7 +1447,7 @@ Then el código de respuesta es 200
 - **ID de la Historia de Usuario**: HU-09
 - **Descripción**: Verificar que las métricas incluyen la distribución de tickets por prioridad.
 - **Precondiciones**: Existen tickets con diferentes prioridades.
-- **Servicio(s)**:** **Query Service** (cálculo de `byPriority` en `/api/tickets/metrics`) + **Frontend** (visualización)
+- **Servicio(s)**: **Query Service** (cálculo de `byPriority` en `/api/tickets/metrics`) + **Frontend** (visualización)
 
 **Pasos (Gherkin)**:
 ```gherkin

@@ -1,5 +1,7 @@
+
 import { getTicketRepository, Ticket } from '../repositories/ticketRepository';
 import { ALLOWED_SORT_FIELDS } from '../types/allowedSortFields';
+
 
 export async function getPaginatedTickets(
   page: number,
@@ -10,7 +12,7 @@ export async function getPaginatedTickets(
   status?: string,
   type?: string,
 ) {
-  console.log('DEBUG getPaginatedTickets sort=', sort, 'order=', order);
+  // Solo lógica de negocio real, sin auto-seed de tests
   const repo = getTicketRepository();
   let allTickets: Ticket[] = await repo.getAll();
 
