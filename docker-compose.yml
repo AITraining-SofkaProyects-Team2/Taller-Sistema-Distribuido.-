@@ -36,6 +36,27 @@ services:
     restart: unless-stopped
 
   # ============================================
+  # DATABASE (Postgres)
+  # ============================================
+  postgres:
+    image: postgres:15-alpine
+    container_name: postgres-db
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: tickets_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U user -d tickets_db"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+
+  # ============================================
   # WORKER SERVICE (Consumer)
   # ============================================
   consumer:
@@ -49,6 +70,11 @@ services:
     environment:
       RABBITMQ_URL: amqp://rabbitmq:5672
       HEALTH_PORT: "3001"
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_USER: user
+      DB_PASSWORD: password
+      DB_NAME: tickets_db
     healthcheck:
       test: ["CMD-SHELL", "wget -qO- http://localhost:3001/ || exit 1"]
       interval: 10s
@@ -59,6 +85,8 @@ services:
       - "3001:3001"
     depends_on:
       rabbitmq:
+        condition: service_healthy
+      postgres:
         condition: service_healthy
     restart: unless-stopped
 
@@ -87,3 +115,6 @@ services:
     depends_on:
       - producer
     restart: unless-stopped
+
+volumes:
+  postgres_data:

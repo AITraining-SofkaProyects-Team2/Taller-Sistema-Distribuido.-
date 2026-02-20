@@ -26,7 +26,7 @@ export class InMemoryIncidentRepository implements IIncidentRepository {
      * @param {Incident} incident - The incident to persist.
      * @returns {Incident} The same incident reference that was stored.
      */
-    save(incident: Incident): Incident {
+    async save(incident: Incident): Promise<Incident> {
         this.incidents.set(incident.ticketId, incident);
         logger.debug('Incident persisted', { ticketId: incident.ticketId });
         return incident;
