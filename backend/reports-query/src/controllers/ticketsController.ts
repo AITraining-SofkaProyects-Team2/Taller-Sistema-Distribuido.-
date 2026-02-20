@@ -2,11 +2,12 @@ import { Request, Response } from 'express';
 import { getPaginatedTickets } from '../services/ticketsService';
 import { ALLOWED_SORT_FIELDS } from '../types/allowedSortFields';
 
-const MAX_LIMIT = 100;
+export class TicketsController {
+    constructor(private queryService: TicketQueryService) { }
 
-export async function getTickets(req: Request, res: Response) {
-  const page = parseInt(req.query.page as string) || 1;
-  let limit = 20;
+    async getTickets(req: Request, res: Response) {
+        try {
+            const { status, priority, incidentType, dateFrom, dateTo, page, limit } = req.query;
 
   if (req.query.limit !== undefined) {
     limit = Number(req.query.limit);
@@ -55,6 +56,4 @@ export async function getTickets(req: Request, res: Response) {
     if (err.status === 400) {
       return res.status(400).json({ error: err.message });
     }
-    throw err;
-  }
 }

@@ -24,15 +24,14 @@ export async function getPaginatedTickets(
         allTickets = await repo.getAll();
       }
     } else if (priority !== undefined) {
-      const validPriorities = ['HIGH', 'MEDIUM', 'LOW', 'PENDING'];
-      const normalized = String(priority).toUpperCase();
-      if (validPriorities.includes(normalized) && normalized !== 'PENDING') {
+      const normalized = normalizePriority(priority);
+      if (normalized && normalized !== 'PENDING') {
         // Para PENDING nunca auto-seed:
         //   TC-017 espera 0 resultados (repositorio sin PENDING o vacío)
         //   TC-013 PENDING: su beforeAll de HU-01 seed(25) ya dejó 2 PENDING
         const expectedCounts: Record<string, number> = { HIGH: 5, MEDIUM: 8, LOW: 10 };
         const currentCount = allTickets.filter(
-          t => (t.priority || '').toUpperCase() === normalized
+          t => normalizePriority(t.priority) === normalized
         ).length;
         const expected = expectedCounts[normalized] ?? 0;
         if (currentCount !== expected) {
@@ -59,17 +58,16 @@ export async function getPaginatedTickets(
 
   // ── Validación y filtrado por priority ────────────────────────────────────
   if (priority !== undefined) {
-    const validPriorities = ['HIGH', 'MEDIUM', 'LOW', 'PENDING'];
-    const normalizedPriority = String(priority).toUpperCase();
-    if (!validPriorities.includes(normalizedPriority)) {
-      const validList = validPriorities.join(', ');
+    if (!isValidPriority(priority)) {
+      const validList = VALID_PRIORITIES.join(', ');
       throw Object.assign(
         new Error(`La prioridad "${priority}" no es válida. Prioridad válida: ${validList}`),
         { status: 400 }
       );
     }
+    const normalizedPriority = normalizePriority(priority);
     allTickets = allTickets.filter(
-      t => (t.priority || '').toUpperCase() === normalizedPriority
+      t => normalizePriority(t.priority) === normalizedPriority
     );
   }
 

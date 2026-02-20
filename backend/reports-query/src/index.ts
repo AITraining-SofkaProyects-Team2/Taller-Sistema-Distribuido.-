@@ -1,8 +1,10 @@
 import express from 'express';
+import ticketRoutes from './routes/tickets.routes';
 
 const app = express();
 app.use(express.json());
 
+<<<<<<< HEAD
 
 import ticketsRouter from './routes/tickets';
 app.use('/api/tickets', ticketsRouter);
@@ -23,12 +25,17 @@ if (process.env.NODE_ENV === 'test') {
     res.status(204).end();
   });
 }
+=======
+app.use('/v1/tickets', ticketRoutes);
+app.use('/api/tickets', ticketRoutes);
+>>>>>>> origin/develop
 
 app.get('/health', (_req, res) => {
   res.status(200).json({ status: 'ok' });
 });
 
 export default app;
+
 
 if (require.main === module) {
   const PORT = process.env.PORT || 4000;

@@ -78,6 +78,8 @@ export interface Incident {
   ticketId: string;
   /** Customer's ISP line/account number. */
   lineNumber: string;
+  /** Customer's contact email. */
+  email: string;
   /** Classification of the reported problem. */
   type: IncidentType;
   /** Free-text description. Required when `type === OTHER`; otherwise optional. */
