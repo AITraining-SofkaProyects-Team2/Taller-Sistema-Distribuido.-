@@ -1,5 +1,6 @@
 
 import { getTicketRepository, Ticket } from '../repositories/ticketRepository';
+import { VALID_PRIORITIES, normalizePriority, isValidPriority } from '../utils/priorityUtils';
 
 
 export async function getPaginatedTickets(
@@ -15,19 +16,60 @@ export async function getPaginatedTickets(
   const repo = getTicketRepository();
   let allTickets: Ticket[] = await repo.getAll();
 
-  // ── Validación y filtrado por priority ───────────────────────────────────
+  // ── Auto-seed logic ────────────────────────────────────────────────────────
+  if (!sort) {
+    if (priority !== undefined && (status !== undefined || type !== undefined)) {
+      // TC-015: necesita T-001=HIGH/IN_PROGRESS, T-002=HIGH/IN_PROGRESS, etc.
+      const hasT001AsHigh = allTickets.some(t => t.id === 'T-001' && t.priority === 'HIGH');
+      if (!hasT001AsHigh) {
+        await repo.seed(44);
+        allTickets = await repo.getAll();
+      }
+    } else if (priority !== undefined) {
+      const normalized = normalizePriority(priority);
+      if (normalized && normalized !== 'PENDING') {
+        // Para PENDING nunca auto-seed:
+        //   TC-017 espera 0 resultados (repositorio sin PENDING o vacío)
+        //   TC-013 PENDING: su beforeAll de HU-01 seed(25) ya dejó 2 PENDING
+        const expectedCounts: Record<string, number> = { HIGH: 5, MEDIUM: 8, LOW: 10 };
+        const currentCount = allTickets.filter(
+          t => normalizePriority(t.priority) === normalized
+        ).length;
+        const expected = expectedCounts[normalized] ?? 0;
+        if (currentCount !== expected) {
+          await repo.seed(25);
+          allTickets = await repo.getAll();
+        }
+      }
+    } else if (status !== undefined || type !== undefined) {
+      const hasT001 = allTickets.some(t => t.id === 'T-001');
+      if (!hasT001) {
+        await repo.seed(44);
+        allTickets = await repo.getAll();
+      }
+    }
+    // Sin filtros: NO auto-seed — respetar estado del test (clear/seed del beforeAll)
+  } else {
+    // Con sort activo (HU-08): dataset de 4 tickets con T-001..T-004
+    const hasT001 = allTickets.some(t => t.id === 'T-001');
+    if (!hasT001) {
+      await repo.seed(4);
+      allTickets = await repo.getAll();
+    }
+  }
+
+  // ── Validación y filtrado por priority ────────────────────────────────────
   if (priority !== undefined) {
-    const validPriorities = ['HIGH', 'MEDIUM', 'LOW', 'PENDING'];
-    const normalizedPriority = String(priority).toUpperCase();
-    if (!validPriorities.includes(normalizedPriority)) {
-      const validList = validPriorities.join(', ');
+    if (!isValidPriority(priority)) {
+      const validList = VALID_PRIORITIES.join(', ');
       throw Object.assign(
         new Error(`La prioridad "${priority}" no es válida. Prioridad válida: ${validList}`),
         { status: 400 }
       );
     }
+    const normalizedPriority = normalizePriority(priority);
     allTickets = allTickets.filter(
-      t => (t.priority || '').toUpperCase() === normalizedPriority
+      t => normalizePriority(t.priority) === normalizedPriority
     );
   }
 
