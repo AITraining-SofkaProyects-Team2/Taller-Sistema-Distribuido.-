@@ -40,9 +40,9 @@
 | [REFACTOR] | [TC-029](#TC-029---Buscar-por-ID-de-ticket-inexistente) | HU-06 | Query Service + Frontend | Buscar por ID de ticket inexistente |
 | [REFACTOR] | [TC-030](#TC-030---Buscar-con-ID-en-formato-inválido) | HU-06 | Query Service + Frontend | Buscar con ID en formato inválido |
 | [REFACTOR] | [TC-031](#TC-031---Buscar-con-ID-vacío) | HU-06 | Query Service + Frontend | Buscar con ID vacío |
-| [ ] | [TC-032](#TC-032---Buscar-por-número-de-línea-válido-con-resultados) | HU-07 | Query Service + Frontend | Buscar por número de línea válido con resultados |
-| [ ] | [TC-033](#TC-033---Buscar-por-número-de-línea-válido-sin-resultados) | HU-07 | Query Service + Frontend | Buscar por número de línea válido sin resultados |
-| [ ] | [TC-034](#TC-034---Buscar-con-número-de-línea-inválido) | HU-07 | Query Service + Frontend | Buscar con número de línea inválido |
+| [REFACTOR] | [TC-032](#TC-032---Buscar-por-número-de-línea-válido-con-resultados) | HU-07 | Query Service + Frontend | Buscar por número de línea válido con resultados |
+| [REFACTOR] | [TC-033](#TC-033---Buscar-por-número-de-línea-válido-sin-resultados) | HU-07 | Query Service + Frontend | Buscar por número de línea válido sin resultados |
+| [REFACTOR] | [TC-034](#TC-034---Buscar-con-número-de-línea-inválido) | HU-07 | Query Service + Frontend | Buscar con número de línea inválido |
 | [ ] | [TC-035](#TC-035---Ordenar-por-fecha-ascendente) | HU-08 | Query Service + Frontend | Ordenar por fecha ascendente |
 | [ ] | [TC-036](#TC-036---Ordenar-por-fecha-descendente) | HU-08 | Query Service + Frontend | Ordenar por fecha descendente |
 | [ ] | [TC-037](#TC-037---Ordenar-por-prioridad) | HU-08 | Query Service + Frontend | Ordenar por prioridad |

@@ -86,6 +86,10 @@
 **Criterios de aceptacion**
 - Acepta un numero de linea valido
 - Retorna todos los tickets asociados
+- Dado un número de línea con tickets asociados, `TicketQueryService.findByLineNumber` retorna un arreglo con todos los tickets correspondientes (TC-032 ✅ GREEN)
+ - Dado un número de línea con tickets asociados, `TicketQueryService.findByLineNumber` retorna un arreglo con todos los tickets correspondientes (TC-032 ✅ REFACTOR)
+ - Dado un número de línea válido sin tickets asociados, `TicketQueryService.findByLineNumber` retorna un arreglo vacío — cubierto por la implementación de TC-032 (TC-033 ✅ REFACTOR)
+ - Dado un número de línea con formato inválido (letras, caracteres especiales, longitud distinta de 10 dígitos), `TicketQueryService.findByLineNumber` lanza un error de validación sin invocar el repositorio (TC-034 ✅ REFACTOR)
 
 ---
 
