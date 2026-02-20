@@ -1,21 +1,11 @@
 import React from "react";
 import TicketList from "./TicketList";
-import Filters from "./Filters";
-import Metrics from "./Metrics";
-import Graphs from "./Graphs";
-import ExportButton from "./ExportButton";
-import RefreshButton from "./RefreshButton";
 import Layout from "../../components/layout/Layout";
 
 const DashboardPage: React.FC = () => {
   return (
     <Layout>
-      <h1>Dashboard de Gestión de Tickets</h1>
-      <Filters />
-      <Metrics />
-      <Graphs />
-      <ExportButton />
-      <RefreshButton />
+      <h1 className="text-3xl font-bold text-indigo-700 mb-8">Dashboard de Gestión de Tickets</h1>
       <TicketList />
     </Layout>
   );
