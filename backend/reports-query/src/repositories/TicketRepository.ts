@@ -7,7 +7,7 @@ export interface ITicketRepository {
 
 export class TicketRepository implements ITicketRepository {
     async findAll(filters: TicketFilters): Promise<PaginatedResponse<Ticket>> {
-        const { status, priority, type, page = 1, limit = 20 } = filters;
+        const { status, priority, type, dateFrom, dateTo, page = 1, limit = 20 } = filters;
         const offset = (page - 1) * limit;
 
         const whereClauses: string[] = [];
@@ -31,6 +31,16 @@ export class TicketRepository implements ITicketRepository {
         if (type) {
             whereClauses.push(`type = $${paramIndex++}`);
             values.push(type);
+        }
+
+        if (dateFrom) {
+            whereClauses.push(`created_at >= $${paramIndex++}`);
+            values.push(dateFrom);
+        }
+
+        if (dateTo) {
+            whereClauses.push(`created_at <= $${paramIndex++}`);
+            values.push(dateTo);
         }
 
         const whereSql = whereClauses.length > 0 ? `WHERE ${whereClauses.join(' AND ')}` : '';
@@ -64,7 +74,7 @@ export class TicketRepository implements ITicketRepository {
                 pool.query(countQuery, values)
             ]);
 
-            const tickets: Ticket[] = dataResult.rows.map(row => ({
+            const tickets: Ticket[] = dataResult.rows.map((row: any) => ({
                 ...row,
                 createdAt: row.createdAt.toISOString(),
                 processedAt: row.processedAt ? row.processedAt.toISOString() : null

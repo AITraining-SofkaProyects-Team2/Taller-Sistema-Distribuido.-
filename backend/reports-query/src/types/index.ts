@@ -47,6 +47,8 @@ export interface TicketFilters {
     status?: TicketStatus | TicketStatus[];
     priority?: TicketPriority;
     type?: IncidentType;
+    dateFrom?: string;
+    dateTo?: string;
     page?: number;
     limit?: number;
 }
