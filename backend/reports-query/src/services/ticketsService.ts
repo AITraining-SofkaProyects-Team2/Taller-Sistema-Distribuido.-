@@ -1,6 +1,6 @@
 
 import { getTicketRepository, Ticket } from '../repositories/ticketRepository';
-import { VALID_PRIORITIES, normalizePriority, isValidPriority } from '../utils/priorityUtils';
+import { ALLOWED_SORT_FIELDS } from '../types/allowedSortFields';
 
 
 export async function getPaginatedTickets(
@@ -110,7 +110,7 @@ export async function getPaginatedTickets(
       });
     } else {
       throw Object.assign(
-        new Error(`Campo de ordenamiento inválido: ${String(sort)}. Campos válidos: createdAt, priority, status.`),
+        new Error(`Campo de ordenamiento inválido: ${String(sort)}. Campos válidos: ${ALLOWED_SORT_FIELDS.join(', ')}.`),
         { status: 400 }
       );
     }
