@@ -72,7 +72,7 @@
 
 **Criterios de aceptacion**
 - Se permite buscar por ID exacto → `TicketQueryService.findById` retorna el ticket (TC-028 ✅ GREEN)
-- Si no existe, se muestra mensaje claro → `TicketQueryService.findById` lanza `TicketNotFoundError` con mensaje "Ticket no encontrado" (TC-029 🔴 RED)
+- Si no existe, se muestra mensaje claro → `TicketQueryService.findById` lanza `TicketNotFoundError` con mensaje "Ticket no encontrado" (TC-029 ✅ GREEN)
 
 ---
 
