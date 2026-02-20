@@ -14,7 +14,7 @@ const createMockChannel = (): Channel =>
     }) as unknown as Channel;
 
 const createMockRepository = (): IIncidentRepository => ({
-    save: vi.fn((incident) => incident),
+    save: vi.fn((incident) => Promise.resolve(incident)),
 });
 
 const silentLogger: ILogger = {
@@ -40,6 +40,7 @@ const buildMessage = (
 const validPayload = {
     ticketId: 'ticket-001',
     lineNumber: '0991234567',
+    email: 'test@example.com',
     type: IncidentType.NO_SERVICE,
     description: 'Sin servicio en la zona',
     createdAt: '2026-02-13T10:00:00Z',
@@ -222,7 +223,7 @@ describe('MessageHandler', () => {
 
     it('reintenta si el repositorio lanza error', async () => {
         const failRepo: IIncidentRepository = {
-            save: vi.fn(() => { throw new Error('DB error'); }),
+            save: vi.fn(async () => { throw new Error('DB error'); }),
         };
         const failHandler = new MessageHandler(channel, failRepo, silentLogger);
 
