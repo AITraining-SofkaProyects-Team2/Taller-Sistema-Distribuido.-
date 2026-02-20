@@ -124,8 +124,9 @@ services:
     container_name: frontend-service
     ports:
       - "80:80"
-    # depends_on:
-    #   - producer
+    depends_on:
+      - producer
+      - reports-query
     restart: no
 
 volumes:

@@ -66,11 +66,21 @@ export interface Metrics {
   };
 }
 
+export interface PaginatedResponse<T> {
+  data: T[];
+  pagination: {
+    page: number;
+    pageSize: number;
+    totalItems: number;
+    totalPages: number;
+  };
+}
+
 export interface IncidentRepository {
-  findAll(): Promise<Ticket[]>;
+  findAll(filters?: { limit?: number; page?: number }): Promise<PaginatedResponse<Ticket> | Ticket[]>;
   findById(id: string): Promise<Ticket | null>;
-  create(ticket: Ticket): Promise<Ticket>;
-  update(id: string, ticket: Partial<Ticket>): Promise<Ticket>;
+  create?(ticket: Ticket): Promise<Ticket>;
+  update?(id: string, ticket: Partial<Ticket>): Promise<Ticket>;
 }
 
 // ============================================================================
@@ -172,7 +182,8 @@ export class MetricsService {
    * @returns Objeto con totalTickets y distribuciones por estado, prioridad y tipo
    */
   async getMetrics(): Promise<Metrics> {
-    const tickets = await this.incidentRepository.findAll();
+    const result = await this.incidentRepository.findAll({ limit: 999999 });
+    const tickets = Array.isArray(result) ? result : result.data;
 
     return {
       totalTickets: tickets.length,
@@ -187,7 +198,8 @@ export class MetricsService {
    * @returns Número de tickets en el repositorio
    */
   async getTotalTickets(): Promise<number> {
-    const tickets = await this.incidentRepository.findAll();
+    const result = await this.incidentRepository.findAll({ limit: 999999 });
+    const tickets = Array.isArray(result) ? result : result.data;
     return tickets.length;
   }
 }

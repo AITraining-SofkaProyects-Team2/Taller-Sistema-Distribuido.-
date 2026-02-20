@@ -1,5 +1,5 @@
 import pool from '../config/database';
-import { Ticket, TicketFilters, PaginatedResponse } from '../types';
+import { Ticket, TicketFilters, TicketStatus, TicketPriority, IncidentType, PaginatedResponse } from '../types';
 import { ITicketRepository } from './ITicketRepository';
 
 export class TicketRepository implements ITicketRepository {
@@ -73,11 +73,11 @@ export class TicketRepository implements ITicketRepository {
 
             const tickets: Ticket[] = dataResult.rows.map((row: any) => ({
                 ...row,
-                createdAt: row.createdAt.toISOString(),
-                processedAt: row.processedAt ? row.processedAt.toISOString() : null
+                createdAt: typeof row.createdAt === 'string' ? row.createdAt : row.createdAt.toISOString(),
+                processedAt: row.processedAt ? (typeof row.processedAt === 'string' ? row.processedAt : row.processedAt.toISOString()) : null
             }));
 
-            const totalItems = parseInt(countResult.rows[0].count);
+            const totalItems = parseInt(countResult.rows[0].count, 10);
             const totalPages = Math.ceil(totalItems / limit);
 
             return {
@@ -86,8 +86,8 @@ export class TicketRepository implements ITicketRepository {
                     page,
                     pageSize: limit,
                     totalItems,
-                    totalPages
-                }
+                    totalPages,
+                },
             };
         } catch (error) {
             console.error('Error fetching tickets from database:', error);
@@ -132,3 +132,4 @@ export class TicketRepository implements ITicketRepository {
         return { metrics: result.rows };
     }
 }
+

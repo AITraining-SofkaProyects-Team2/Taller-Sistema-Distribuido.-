@@ -1,4 +1,4 @@
-import { TicketRepository } from '../repositories/ticketRepository';
+import { TicketRepository } from '../repositories/TicketRepository';
 import { Ticket, TicketFilters, PaginatedResponse } from '../types';
 import { ALLOWED_SORT_FIELDS } from '../types/allowedSortFields';
 

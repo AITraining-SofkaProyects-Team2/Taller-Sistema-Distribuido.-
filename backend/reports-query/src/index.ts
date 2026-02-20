@@ -1,7 +1,6 @@
 import express from 'express';
 import { MetricsService, IncidentRepository } from './services/metricsService';
 import ticketRoutes from './routes/tickets.routes';
-import ticketsRouter from './routes/tickets';
 
 /**
  * Crea la aplicación Express con las rutas configuradas
@@ -40,9 +39,7 @@ if (process.env.NODE_ENV === 'test') {
   app.post('/__test__/clear', (_req, res) => res.status(204).end());
 }
 
-app.use('/v1/tickets', ticketRoutes);
 app.use('/api/tickets', ticketRoutes);
-app.use('/api/tickets', ticketsRouter);
 
   // Instanciar servicio de métricas con el repositorio
   const metricsService = new MetricsService(repo);
