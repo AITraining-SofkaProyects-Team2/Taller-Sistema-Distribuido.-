@@ -2,93 +2,93 @@ services:
   # ============================================
   # MESSAGE BROKER
   # ============================================
-  rabbitmq:
-    image: rabbitmq:3-management-alpine
-    container_name: rabbitmq-complaints
-    ports:
-      - "5672:5672"
-      - "15672:15672"
-    healthcheck:
-      test: ["CMD", "rabbitmq-diagnostics", "-q", "ping"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
-      start_period: 15s
+  # rabbitmq:
+  #   image: rabbitmq:3-management-alpine
+  #   container_name: rabbitmq-complaints
+  #   ports:
+  #     - "5672:5672"
+  #     - "15672:15672"
+  #   healthcheck:
+  #     test: ["CMD", "rabbitmq-diagnostics", "-q", "ping"]
+  #     interval: 10s
+  #     timeout: 5s
+  #     retries: 5
+  #     start_period: 15s
 
   # ============================================
   # PRODUCER SERVICE (API)
   # ============================================
-  producer:
-    build:
-      context: ./backend/producer
-      dockerfile: Dockerfile
-    image: producer-service
-    container_name: producer-service
-    ports:
-      - "3000:3000"
-    env_file:
-      - ./backend/producer/.env.example
-    environment:
-      RABBITMQ_URL: amqp://rabbitmq:5672
-    depends_on:
-      rabbitmq:
-        condition: service_healthy
-    restart: unless-stopped
+  # producer:
+  #   build:
+  #     context: ./backend/producer
+  #     dockerfile: Dockerfile
+  #   image: producer-service
+  #   container_name: producer-service
+  #   ports:
+  #     - "3000:3000"
+  #   env_file:
+  #     - ./backend/producer/.env.example
+  #   environment:
+  #     RABBITMQ_URL: amqp://rabbitmq:5672
+  #   depends_on:
+  #     rabbitmq:
+  #       condition: service_healthy
+  #   restart: unless-stopped
 
   # ============================================
   # DATABASE (Postgres)
   # ============================================
-  postgres:
-    image: postgres:15-alpine
-    container_name: postgres-db
-    environment:
-      POSTGRES_USER: user
-      POSTGRES_PASSWORD: password
-      POSTGRES_DB: tickets_db
-    ports:
-      - "5432:5432"
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U user -d tickets_db"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
-    restart: unless-stopped
+  # postgres:
+  #   image: postgres:15-alpine
+  #   container_name: postgres-db
+  #   environment:
+  #     POSTGRES_USER: user
+  #     POSTGRES_PASSWORD: password
+  #     POSTGRES_DB: tickets_db
+  #   ports:
+  #     - "5432:5432"
+  #   volumes:
+  #     - postgres_data:/var/lib/postgresql/data
+  #   healthcheck:
+  #     test: ["CMD-SHELL", "pg_isready -U user -d tickets_db"]
+  #     interval: 10s
+  #     timeout: 5s
+  #     retries: 5
+  #   restart: unless-stopped
 
   # ============================================
   # WORKER SERVICE (Consumer)
   # ============================================
-  consumer:
-    build:
-      context: ./backend/consumer
-      dockerfile: Dockerfile
-    image: consumer-service
-    container_name: consumer-service
-    env_file:
-      - ./backend/consumer/.env.example
-    environment:
-      RABBITMQ_URL: amqp://rabbitmq:5672
-      HEALTH_PORT: "3001"
-      DB_HOST: postgres
-      DB_PORT: 5432
-      DB_USER: user
-      DB_PASSWORD: password
-      DB_NAME: tickets_db
-    healthcheck:
-      test: ["CMD-SHELL", "wget -qO- http://localhost:3001/ || exit 1"]
-      interval: 10s
-      timeout: 5s
-      retries: 3
-      start_period: 10s
-    ports:
-      - "3001:3001"
-    depends_on:
-      rabbitmq:
-        condition: service_healthy
-      postgres:
-        condition: service_healthy
-    restart: unless-stopped
+  # consumer:
+  #   build:
+  #     context: ./backend/consumer
+  #     dockerfile: Dockerfile
+  #   image: consumer-service
+  #   container_name: consumer-service
+  #   env_file:
+  #     - ./backend/consumer/.env.example
+  #   environment:
+  #     RABBITMQ_URL: amqp://rabbitmq:5672
+  #     HEALTH_PORT: "3001"
+  #     DB_HOST: postgres
+  #     DB_PORT: 5432
+  #     DB_USER: user
+  #     DB_PASSWORD: password
+  #     DB_NAME: tickets_db
+  #   healthcheck:
+  #     test: ["CMD-SHELL", "wget -qO- http://localhost:3001/ || exit 1"]
+  #     interval: 10s
+  #     timeout: 5s
+  #     retries: 3
+  #     start_period: 10s
+  #   ports:
+  #     - "3001:3001"
+  #   depends_on:
+  #     rabbitmq:
+  #       condition: service_healthy
+  #     postgres:
+  #       condition: service_healthy
+  #   restart: unless-stopped
 
   # ============================================
   # REPORTS QUERY SERVICE (EMPTY)
@@ -104,17 +104,17 @@ services:
   # ============================================
   # FRONTEND
   # ============================================
-  frontend:
-    build:
-      context: ./frontend
-      dockerfile: Dockerfile
-    image: frontend-service
-    container_name: frontend-service
-    ports:
-      - "80:80"
-    depends_on:
-      - producer
-    restart: unless-stopped
+  # frontend:
+  #   build:
+  #     context: ./frontend
+  #     dockerfile: Dockerfile
+  #   image: frontend-service
+  #   container_name: frontend-service
+  #   ports:
+  #     - "80:80"
+  #   depends_on:
+  #     - producer
+  #   restart: unless-stopped
 
 volumes:
   postgres_data:

@@ -84,6 +84,7 @@
 **Criterios de aceptacion**
 - Acepta un numero de linea valido
 - Retorna todos los tickets asociados
+- Dado un número de línea con tickets asociados, `TicketQueryService.findByLineNumber` retorna un arreglo con todos los tickets correspondientes (TC-032 🔴 RED)
 
 ---
 
