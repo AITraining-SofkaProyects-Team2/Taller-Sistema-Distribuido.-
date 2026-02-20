@@ -13,19 +13,67 @@ import app from '../src/index';
  * de una base de datos real o mocks, asegurando el aislamiento de datos.
  */
 
-// Mock de la capa de persistencia (se asume que se usará un patrón repositorio)
-// Esto permite que el test sea determinista incluso si hay una DB conectada.
+// Mock de la capa de persistencia
 vi.mock('../src/repositories/TicketRepository', () => {
+    const mockTickets = [
+        {
+            ticketId: '1',
+            lineNumber: '123',
+            email: 'test@test.com',
+            type: 'OTHER',
+            description: 'Test 1',
+            status: 'RECEIVED',
+            priority: 'HIGH',
+            createdAt: new Date().toISOString(),
+            processedAt: null
+        },
+        {
+            ticketId: '2',
+            lineNumber: '456',
+            email: 'test2@test.com',
+            type: 'OTHER',
+            description: 'Test 2',
+            status: 'IN_PROGRESS',
+            priority: 'MEDIUM',
+            createdAt: new Date().toISOString(),
+            processedAt: null
+        },
+        {
+            ticketId: '3',
+            lineNumber: '789',
+            email: 'test3@test.com',
+            type: 'OTHER',
+            description: 'Test 3',
+            status: 'RECEIVED',
+            priority: 'LOW',
+            createdAt: new Date().toISOString(),
+            processedAt: null
+        }
+    ];
+
     return {
         TicketRepository: vi.fn().mockImplementation(() => ({
-            findAll: vi.fn().mockResolvedValue({
-                data: [],
-                pagination: {
-                    page: 1,
-                    limit: 20,
-                    totalItems: 0,
-                    totalPages: 0
+            findAll: vi.fn().mockImplementation((filters) => {
+                let filtered = [...mockTickets];
+
+                if (filters.status) {
+                    const statusArray = Array.isArray(filters.status) ? filters.status : [filters.status];
+                    filtered = filtered.filter(t => statusArray.includes(t.status));
                 }
+
+                if (filters.priority) {
+                    filtered = filtered.filter(t => t.priority === filters.priority);
+                }
+
+                return Promise.resolve({
+                    data: filtered,
+                    pagination: {
+                        page: filters.page || 1,
+                        pageSize: filters.limit || 20,
+                        totalItems: filtered.length,
+                        totalPages: 1
+                    }
+                });
             })
         }))
     };
@@ -45,7 +93,7 @@ describe('HU-02 - Filtro por estado', () => {
     describe('TC-008 - Un solo estado válido', () => {
         it('Given existen tickets con diferentes estados, When se solicita "RECEIVED", Then solo retorna tickets "RECEIVED"', async () => {
             // En etapa GREEN, aquí se configuraría el mock para retornar datos específicos
-            const response = await request(app).get('/api/tickets?status=RECEIVED');
+            const response = await request(app).get('/v1/tickets?status=RECEIVED');
 
             expect(response.status).toBe(200);
             expect(Array.isArray(response.body.data)).toBe(true);
@@ -60,7 +108,7 @@ describe('HU-02 - Filtro por estado', () => {
         });
 
         it('When se solicita "IN_PROGRESS", Then solo retorna tickets "IN_PROGRESS"', async () => {
-            const response = await request(app).get('/api/tickets?status=IN_PROGRESS');
+            const response = await request(app).get('/v1/tickets?status=IN_PROGRESS');
 
             expect(response.status).toBe(200);
             response.body.data.forEach((ticket: any) => {
@@ -75,7 +123,7 @@ describe('HU-02 - Filtro por estado', () => {
      */
     describe('TC-009 - Múltiples estados', () => {
         it('Given existen tickets "RECEIVED" e "IN_PROGRESS", When se solicitan ambos, Then retorna la unión', async () => {
-            const response = await request(app).get('/api/tickets?status=RECEIVED&status=IN_PROGRESS');
+            const response = await request(app).get('/v1/tickets?status=RECEIVED&status=IN_PROGRESS');
 
             expect(response.status).toBe(200);
             const data = response.body.data;
@@ -100,7 +148,7 @@ describe('HU-02 - Filtro por estado', () => {
      */
     describe('TC-010 - Combinación con otros filtros', () => {
         it('Given tickets variados, When se solicita "IN_PROGRESS" y prioridad "HIGH", Then aplica intersección', async () => {
-            const response = await request(app).get('/api/tickets?status=IN_PROGRESS&priority=HIGH');
+            const response = await request(app).get('/v1/tickets?status=IN_PROGRESS&priority=HIGH');
 
             expect(response.status).toBe(200);
             response.body.data.forEach((ticket: any) => {
@@ -116,7 +164,7 @@ describe('HU-02 - Filtro por estado', () => {
      */
     describe('TC-011 - Estado inválido', () => {
         it('When se solicita un estado inexistente "CLOSED", Then responde HTTP 400', async () => {
-            const response = await request(app).get('/api/tickets?status=CLOSED');
+            const response = await request(app).get('/v1/tickets?status=CLOSED');
 
             expect(response.status).toBe(400);
             expect(response.body.message).toMatch(/no es un estado válido/i);
@@ -125,7 +173,7 @@ describe('HU-02 - Filtro por estado', () => {
         });
 
         it('When se solicita un estado en minúsculas "received", Then responde HTTP 400', async () => {
-            const response = await request(app).get('/api/tickets?status=received');
+            const response = await request(app).get('/v1/tickets?status=received');
             expect(response.status).toBe(400);
         });
     });
@@ -136,17 +184,13 @@ describe('HU-02 - Filtro por estado', () => {
      * Importante: Este test es clave para la robustez con DB real.
      */
     describe('TC-012 - Sin resultados', () => {
-        it('Given solo existen tickets "IN_PROGRESS", When se solicita "RECEIVED", Then retorna data vacía', async () => {
-            // Este test garantiza que el filtro funciona incluso si la DB tiene otros datos
-            const response = await request(app).get('/api/tickets?status=RECEIVED');
+        it('Given no existen tickets IN_PROGRESS con prioridad HIGH, When se solicita ambos, Then retorna data vacía', async () => {
+            // Este test garantiza que el filtro funciona incluso si no hay coincidencias
+            const response = await request(app).get('/v1/tickets?status=IN_PROGRESS&priority=HIGH');
 
             expect(response.status).toBe(200);
-            // Si el filtrado es correcto, NO debe haber tickets RECEIVED
-            const receivedInResult = response.body.data.filter((t: any) => t.status === 'RECEIVED');
-            expect(receivedInResult.length).toBe(0);
-
-            // Si el mock está configurado para que NO haya RECEIVED, el total debe ser 0
-            // expect(response.body.pagination.totalItems).toBe(0); 
+            expect(response.body.data.length).toBe(0);
+            expect(response.body.pagination.totalItems).toBe(0);
         });
     });
 

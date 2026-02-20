@@ -4,7 +4,7 @@ import ticketRoutes from './routes/tickets.routes';
 const app = express();
 app.use(express.json());
 
-app.use('/api/tickets', ticketRoutes);
+app.use('/v1/tickets', ticketRoutes);
 
 app.get('/health', (_req, res) => {
   res.status(200).json({ status: 'ok' });

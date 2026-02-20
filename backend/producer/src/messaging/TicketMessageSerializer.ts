@@ -28,6 +28,7 @@ export class TicketMessageSerializer implements IMessageSerializer {
         const payload: TicketEventPayload = {
             ticketId: ticket.ticketId,
             lineNumber: ticket.lineNumber,
+            email: ticket.email,
             type: ticket.incidentType,
             description: ticket.description,
             createdAt: ticket.createdAt.toISOString(),
