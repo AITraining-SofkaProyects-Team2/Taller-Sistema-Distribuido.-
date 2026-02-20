@@ -2,6 +2,7 @@ import { ITicketRepository } from '../repositories/ITicketRepository';
 import { Ticket } from '../types/Ticket';
 import { TicketNotFoundError } from '../errors/TicketNotFoundError';
 import { InvalidUuidFormatError } from '../errors/InvalidUuidFormatError';
+import { Ticket, TicketFilters, PaginatedResponse } from '../types';
 
 const UUID_V4_REGEX = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 
@@ -21,4 +22,9 @@ export class TicketQueryService {
 
     return ticket;
   }
+  
+  async getTickets(filters: TicketFilters): Promise<PaginatedResponse<Ticket>> {
+        return this.repository.findAll(filters);
+    }
 }
+

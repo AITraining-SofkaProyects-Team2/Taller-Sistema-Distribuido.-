@@ -5,6 +5,7 @@ import { IncidentType, Priority, IncidentStatus, Incident } from '../types';
 const buildIncident = (overrides?: Partial<Incident>): Incident => ({
     ticketId: 'ticket-001',
     lineNumber: '0991234567',
+    email: 'test@example.com',
     type: IncidentType.NO_SERVICE,
     description: 'Sin servicio',
     priority: Priority.HIGH,

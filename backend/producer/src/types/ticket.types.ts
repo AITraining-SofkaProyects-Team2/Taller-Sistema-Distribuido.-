@@ -92,6 +92,8 @@ export interface TicketEventPayload {
   ticketId: string;
   /** Customer's line/account number. */
   lineNumber: string;
+  /** Customer's contact email. */
+  email: string;
   /** Incident type (maps to {@link IncidentType} on the Consumer side). */
   type: IncidentType;
   /** Free-text description, or `null` if not applicable. */
