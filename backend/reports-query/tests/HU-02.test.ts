@@ -18,10 +18,19 @@ import app from '../src/index';
 vi.mock('../src/repositories/TicketRepository', () => {
     return {
         TicketRepository: vi.fn().mockImplementation(() => ({
-            findAll: vi.fn()
+            findAll: vi.fn().mockResolvedValue({
+                data: [],
+                pagination: {
+                    page: 1,
+                    limit: 20,
+                    totalItems: 0,
+                    totalPages: 0
+                }
+            })
         }))
     };
 });
+
 
 describe('HU-02 - Filtro por estado', () => {
 

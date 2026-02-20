@@ -16,11 +16,11 @@
 | [ ] | TC-005 | HU-01 | Query Service + Frontend | Lista vacía cuando no hay tickets |
 | [ ] | TC-006 | HU-01 | Query Service + Frontend | Solicitar página fuera de rango |
 | [ ] | TC-007 | HU-01 | Query Service + Frontend | Tamaño de página con valores inválidos |
-| [RED] | TC-008 | HU-02 | Query Service + Frontend | Filtrar por un solo estado válido |
-| [RED] | TC-009 | HU-02 | Query Service + Frontend | Filtrar por múltiples estados simultáneamente |
-| [RED] | TC-010 | HU-02 | Query Service + Frontend | Combinar filtro de estado con otros filtros |
-| [RED] | TC-011 | HU-02 | Query Service + Frontend | Filtrar con estado inválido |
-| [RED] | TC-012 | HU-02 | Query Service + Frontend | Filtrar por estado sin resultados coincidentes |
+| [GREEN] | TC-008 | HU-02 | Query Service + Frontend | Filtrar por un solo estado válido |
+| [GREEN] | TC-009 | HU-02 | Query Service + Frontend | Filtrar por múltiples estados simultáneamente |
+| [GREEN] | TC-010 | HU-02 | Query Service + Frontend | Combinar filtro de estado con otros filtros |
+| [GREEN] | TC-011 | HU-02 | Query Service + Frontend | Filtrar con estado inválido |
+| [GREEN] | TC-012 | HU-02 | Query Service + Frontend | Filtrar por estado sin resultados coincidentes |
 | [ ] | TC-013 | HU-03 | Query Service + Frontend | Filtrar por prioridad válida |
 | [ ] | TC-014 | HU-03 | Query Service + Frontend | Visualizar prioridades disponibles |
 | [ ] | TC-015 | HU-03 | Query Service + Frontend | Combinar filtro de prioridad con otros filtros |
