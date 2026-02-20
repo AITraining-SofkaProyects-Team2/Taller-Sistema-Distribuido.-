@@ -7,6 +7,7 @@ import { TicketQueryService } from '../services/TicketQueryService';
 import { ITicketRepository } from '../repositories/ITicketRepository';
 import { Ticket } from '../types/Ticket';
 import { TicketNotFoundError } from '../errors/TicketNotFoundError';
+import { InvalidUuidFormatError } from '../errors/InvalidUuidFormatError';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // TC-028 — Buscar por ID de ticket existente
@@ -180,6 +181,59 @@ describe('TC-029 — Buscar por ID de ticket inexistente', () => {
     it('When se solicita findById, Then NO retorna null (lanza error en su lugar)', async () => {
       // Then — debe rechazar, nunca resolver con null
       await expect(service.findById(NON_EXISTING_UUID)).rejects.toBeDefined();
+    });
+  });
+});
+
+// ─────────────────────────────────────────────────────────────────────────────
+// TC-030 — Buscar con ID en formato inválido
+// ─────────────────────────────────────────────────────────────────────────────
+describe('TC-030 — Buscar con ID en formato inválido', () => {
+  let mockRepository: ITicketRepository;
+  let service: TicketQueryService;
+
+  beforeEach(() => {
+    mockRepository = {
+      findById: vi.fn(),
+      findAll: vi.fn(),
+      findByLineNumber: vi.fn(),
+      getMetrics: vi.fn(),
+    } as unknown as ITicketRepository;
+
+    service = new TicketQueryService(mockRepository);
+  });
+
+  // ── Partición de equivalencia: formatos inválidos ─────────────────────────
+
+  const invalidIds = [
+    // Texto arbitrario
+    { label: 'texto arbitrario corto',   id: 'abc'                            },
+    { label: 'texto con guión',          id: 'ticket-001'                     },
+    // UUID sin guiones (32 hex chars)
+    { label: 'UUID sin guiones',         id: '550e8400e29b41d4a716446655440000' },
+    // Numérico
+    { label: 'numérico',                 id: '12345'                          },
+    // SQL injection
+    { label: 'SQL injection',            id: "'; DROP TABLE tickets; --"      },
+    // Valores límite
+    { label: 'UUID truncado (35 chars)', id: '550e8400-e29b-41d4-a716-44665544000' },
+    { label: 'UUID extendido (37 chars)', id: '550e8400-e29b-41d4-a716-4466554400000' },
+  ];
+
+  invalidIds.forEach(({ label, id }) => {
+    describe(`Given ID con formato inválido: ${label}`, () => {
+      it(`When se solicita findById("${id}"), Then lanza InvalidUuidFormatError`, async () => {
+        await expect(service.findById(id)).rejects.toThrow(InvalidUuidFormatError);
+      });
+
+      it(`When se solicita findById("${id}"), Then el mensaje de error indica formato inválido`, async () => {
+        await expect(service.findById(id)).rejects.toThrow('Formato de ID inválido');
+      });
+
+      it(`When se solicita findById("${id}"), Then el repositorio NO es invocado`, async () => {
+        await service.findById(id).catch(() => {});
+        expect(mockRepository.findById).not.toHaveBeenCalled();
+      });
     });
   });
 });
