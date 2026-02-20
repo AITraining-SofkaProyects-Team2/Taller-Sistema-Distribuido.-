@@ -1,5 +1,6 @@
 import { Request, Response } from 'express';
 import { getPaginatedTickets } from '../services/ticketsService';
+import { ALLOWED_SORT_FIELDS } from '../types/allowedSortFields';
 
 const MAX_LIMIT = 100;
 
@@ -32,8 +33,7 @@ export async function getTickets(req: Request, res: Response) {
       : undefined;
 
   // Validación temprana del campo de ordenamiento
-  const allowedSorts = ['createdAt', 'priority', 'status'];
-  if (sort !== undefined && !allowedSorts.includes(sort)) {
+  if (sort !== undefined && !ALLOWED_SORT_FIELDS.includes(sort)) {
     return res.status(400).json({
       error: `Campo de ordenamiento inválido: ${sort}`,
     });
