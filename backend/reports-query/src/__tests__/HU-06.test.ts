@@ -5,7 +5,7 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { TicketQueryService } from '../services/TicketQueryService';
 import { ITicketRepository } from '../repositories/ITicketRepository';
-import { Ticket } from '../types/Ticket';
+import { Ticket, IncidentType, TicketPriority, TicketStatus } from '../types';
 import { TicketNotFoundError } from '../errors/TicketNotFoundError';
 import { InvalidUuidFormatError } from '../errors/InvalidUuidFormatError';
 
@@ -21,12 +21,13 @@ describe('TC-028 — Buscar por ID de ticket existente', () => {
   const existingTicket: Ticket = {
     ticketId: EXISTING_UUID,
     lineNumber: '0991234567',
-    type: 'NO_SERVICE',
+    email: 'client@example.com',
+    type: IncidentType.NO_SERVICE,
     description: null,
-    priority: 'HIGH',
-    status: 'IN_PROGRESS',
-    createdAt: new Date('2026-01-01T00:00:00.000Z'),
-    processedAt: new Date('2026-01-01T01:00:00.000Z'),
+    priority: TicketPriority.HIGH,
+    status: TicketStatus.IN_PROGRESS,
+    createdAt: '2026-01-01T00:00:00.000Z',
+    processedAt: '2026-01-01T01:00:00.000Z',
   };
 
   beforeEach(() => {

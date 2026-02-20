@@ -5,7 +5,7 @@
 import { describe, it, expect, vi, beforeEach, beforeAll } from 'vitest';
 import { TicketQueryService } from '../services/TicketQueryService';
 import { ITicketRepository } from '../repositories/ITicketRepository';
-import { Ticket } from '../types/Ticket';
+import { Ticket, IncidentType, TicketPriority, TicketStatus } from '../types';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // TC-032 — Buscar por número de línea válido con resultados
@@ -20,32 +20,35 @@ describe('TC-032 — Buscar por número de línea válido con resultados', () =>
     {
       ticketId: '550e8400-e29b-41d4-a716-446655440001',
       lineNumber: VALID_LINE_NUMBER,
-      type: 'NO_SERVICE',
+      email: 'client1@example.com',
+      type: IncidentType.NO_SERVICE,
       description: null,
-      priority: 'HIGH',
-      status: 'IN_PROGRESS',
-      createdAt: new Date('2026-01-01T00:00:00.000Z'),
-      processedAt: new Date('2026-01-01T01:00:00.000Z'),
+      priority: TicketPriority.HIGH,
+      status: TicketStatus.IN_PROGRESS,
+      createdAt: '2026-01-01T00:00:00.000Z',
+      processedAt: '2026-01-01T01:00:00.000Z',
     },
     {
       ticketId: '550e8400-e29b-41d4-a716-446655440002',
       lineNumber: VALID_LINE_NUMBER,
-      type: 'INTERMITTENT_SERVICE',
+      email: 'client1@example.com',
+      type: IncidentType.INTERMITTENT_SERVICE,
       description: null,
-      priority: 'MEDIUM',
-      status: 'IN_PROGRESS',
-      createdAt: new Date('2026-01-02T00:00:00.000Z'),
-      processedAt: new Date('2026-01-02T01:00:00.000Z'),
+      priority: TicketPriority.MEDIUM,
+      status: TicketStatus.IN_PROGRESS,
+      createdAt: '2026-01-02T00:00:00.000Z',
+      processedAt: '2026-01-02T01:00:00.000Z',
     },
     {
       ticketId: '550e8400-e29b-41d4-a716-446655440003',
       lineNumber: VALID_LINE_NUMBER,
-      type: 'SLOW_CONNECTION',
+      email: 'client1@example.com',
+      type: IncidentType.SLOW_CONNECTION,
       description: null,
-      priority: 'MEDIUM',
-      status: 'RECEIVED',
-      createdAt: new Date('2026-01-03T00:00:00.000Z'),
-      processedAt: new Date('2026-01-03T01:00:00.000Z'),
+      priority: TicketPriority.MEDIUM,
+      status: TicketStatus.RECEIVED,
+      createdAt: '2026-01-03T00:00:00.000Z',
+      processedAt: '2026-01-03T01:00:00.000Z',
     },
   ];
 

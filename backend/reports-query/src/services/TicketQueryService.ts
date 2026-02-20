@@ -1,5 +1,4 @@
 import { ITicketRepository } from '../repositories/ITicketRepository';
-import { Ticket } from '../types/Ticket';
 import { TicketNotFoundError } from '../errors/TicketNotFoundError';
 import { InvalidUuidFormatError } from '../errors/InvalidUuidFormatError';
 import { Ticket, TicketFilters, PaginatedResponse } from '../types';
@@ -34,6 +33,5 @@ export class TicketQueryService {
     }
     return this.repository.findByLineNumber(lineNumber);
   }
-}
 }
 
