@@ -71,8 +71,8 @@
 **Para** acceder rapidamente a un caso
 
 **Criterios de aceptacion**
-- Se permite buscar por ID exacto
-- Si no existe, se muestra mensaje claro
+- Se permite buscar por ID exacto → `TicketQueryService.findById` retorna el ticket (TC-028 ✅ GREEN)
+- Si no existe, se muestra mensaje claro → `TicketQueryService.findById` lanza `TicketNotFoundError` con mensaje "Ticket no encontrado" (TC-029 🔴 RED)
 
 ---
 

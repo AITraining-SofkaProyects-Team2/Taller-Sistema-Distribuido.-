@@ -6,6 +6,7 @@ import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { TicketQueryService } from '../services/TicketQueryService';
 import { ITicketRepository } from '../repositories/ITicketRepository';
 import { Ticket } from '../types/Ticket';
+import { TicketNotFoundError } from '../errors/TicketNotFoundError';
 
 // ─────────────────────────────────────────────────────────────────────────────
 // TC-028 — Buscar por ID de ticket existente
@@ -130,6 +131,55 @@ describe('TC-028 — Buscar por ID de ticket existente', () => {
     it('When se solicita findById, Then el servicio NO lanza excepción para un UUID existente', async () => {
       // Then — no debe rechazar
       await expect(service.findById(EXISTING_UUID)).resolves.not.toThrow();
+    });
+  });
+});
+
+// ─────────────────────────────────────────────────────────────────────────────
+// TC-029 — Buscar por ID de ticket inexistente
+// ─────────────────────────────────────────────────────────────────────────────
+describe('TC-029 — Buscar por ID de ticket inexistente', () => {
+  let mockRepository: ITicketRepository;
+  let service: TicketQueryService;
+
+  const NON_EXISTING_UUID = '99999999-aaaa-bbbb-cccc-000000000000';
+
+  beforeEach(() => {
+    mockRepository = {
+      findById: vi.fn().mockResolvedValue(null),
+      findAll: vi.fn(),
+      findByLineNumber: vi.fn(),
+      getMetrics: vi.fn(),
+    } as unknown as ITicketRepository;
+
+    service = new TicketQueryService(mockRepository);
+  });
+
+  // ── Partición de equivalencia: UUIDv4 con formato válido pero sin registro ─
+
+  describe('Given no existe un ticket con ticketId "99999999-aaaa-bbbb-cccc-000000000000" en el sistema', () => {
+    it('When se solicita findById con ese UUID, Then lanza TicketNotFoundError', async () => {
+      // When / Then
+      await expect(service.findById(NON_EXISTING_UUID)).rejects.toThrow(TicketNotFoundError);
+    });
+
+    it('When se solicita findById con ese UUID, Then el mensaje del error es "Ticket no encontrado"', async () => {
+      // When / Then
+      await expect(service.findById(NON_EXISTING_UUID)).rejects.toThrow('Ticket no encontrado');
+    });
+
+    it('When se solicita findById, Then el repositorio es invocado exactamente una vez', async () => {
+      // When
+      await service.findById(NON_EXISTING_UUID).catch(() => {});
+
+      // Then
+      expect(mockRepository.findById).toHaveBeenCalledOnce();
+      expect(mockRepository.findById).toHaveBeenCalledWith(NON_EXISTING_UUID);
+    });
+
+    it('When se solicita findById, Then NO retorna null (lanza error en su lugar)', async () => {
+      // Then — debe rechazar, nunca resolver con null
+      await expect(service.findById(NON_EXISTING_UUID)).rejects.toBeDefined();
     });
   });
 });
