@@ -43,7 +43,7 @@ export class TicketsController {
                 const statuses = Array.isArray(status) ? status : [status];
                 const validatedStatuses: TicketStatus[] = [];
                 for (const s of statuses) {
-                    if (typeof s !== 'string' || !isValidTicketStatus(s)) {
+                    if (typeof s !== 'string' || !validStatuses.includes(s as TicketStatus)) {
                         return res.status(400).json({
                             message: `"${s}" no es un estado válido`,
                             validValues: validStatuses
@@ -56,7 +56,7 @@ export class TicketsController {
 
             let priorityFilter: TicketPriority | undefined;
             if (priority) {
-                if (typeof priority !== 'string' || !isValidTicketPriority(priority)) {
+                if (typeof priority !== 'string' || !validPriorities.includes(priority as TicketPriority)) {
                     return res.status(400).json({
                         message: `"${priority}" no es una prioridad válida`,
                         validValues: validPriorities
@@ -67,7 +67,7 @@ export class TicketsController {
 
             let typeFilter: IncidentType | undefined;
             if (incidentType) {
-                if (typeof incidentType !== 'string' || !isValidIncidentType(incidentType)) {
+                if (typeof incidentType !== 'string' || !validIncidentTypes.includes(incidentType as IncidentType)) {
                     return res.status(400).json({
                         error: 'Bad Request',
                         message: `El tipo de incidente no es válido: ${incidentType}`,

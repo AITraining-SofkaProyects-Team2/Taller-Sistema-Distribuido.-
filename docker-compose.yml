@@ -33,7 +33,7 @@ services:
     depends_on:
       rabbitmq:
         condition: service_healthy
-    restart: unless-stopped
+    restart: no
 
   # ============================================
   # DATABASE (Postgres)
@@ -54,7 +54,7 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
-    restart: unless-stopped
+    restart: no
 
   # ============================================
   # WORKER SERVICE (Consumer)
@@ -88,7 +88,7 @@ services:
         condition: service_healthy
       postgres:
         condition: service_healthy
-    restart: unless-stopped
+    restart: no
 
   # ============================================
   # REPORTS QUERY SERVICE (EMPTY)
@@ -111,7 +111,7 @@ services:
     depends_on:
       postgres:
         condition: service_healthy
-    restart: unless-stopped
+    restart: no
 
   # ============================================
   # FRONTEND
@@ -124,9 +124,9 @@ services:
     container_name: frontend-service
     ports:
       - "80:80"
-    depends_on:
-      - producer
-    restart: unless-stopped
+    # depends_on:
+    #   - producer
+    restart: no
 
 volumes:
   postgres_data:

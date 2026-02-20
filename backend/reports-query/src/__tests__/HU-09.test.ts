@@ -1,6 +1,7 @@
 import { describe, it, expect, beforeEach, vi } from 'vitest';
 import request from 'supertest';
 import express from 'express';
+import { createApp } from '../index';
 
 /**
  * HU-09 — Métricas Agregadas
@@ -34,52 +35,29 @@ import express from 'express';
  */
 
 describe('HU-09 — Métricas Agregadas', () => {
-  let app: express.Application;
+  let app: any;
+  let mockIncidentRepository: any;
 
   beforeEach(() => {
-    // Crear un nuevo app para cada test
-    app = express();
-    app.use(express.json());
-
-    // Mock del repositorio de incidentes (inyectado en el servicio)
-    const mockIncidentRepository = {
+    // Crear un nuevo mock del repositorio para cada test
+    mockIncidentRepository = {
       findAll: vi.fn(),
       findById: vi.fn(),
       create: vi.fn(),
       update: vi.fn(),
     };
 
-    // Servicio de métricas que debería existir
-    const metricsService = {
-      getTotalTickets: vi.fn(),
-      getMetrics: vi.fn(),
-    };
-
-    // Controlador provisional que será reemplazado en la implementación
-    app.get('/api/tickets/metrics', async (_req, res) => {
-      try {
-        // Placeholder: esta ruta será implementada en la siguiente fase (GREEN)
-        res.status(200).json({
-          totalTickets: 0,
-          byStatus: {},
-          byPriority: {},
-          byType: {},
-        });
-      } catch (error) {
-        res.status(500).json({ error: 'Internal server error' });
-      }
-    });
-
-    // Exponer el mock para los tests
-    (app as any).mockIncidentRepository = mockIncidentRepository;
-    (app as any).metricsService = metricsService;
+    // Inyectar el repositorio mock en la aplicación
+    // Esto hace que los tests usen la implementación real de MetricsService
+    // con datos mock, validando la lógica de agregación de métricas
+    app = createApp(mockIncidentRepository);
   });
 
   describe('TC-040 — Visualizar total de tickets', () => {
     describe('Partición de equivalencia: Sin tickets (0)', () => {
       it('debería retornar totalTickets = 0 cuando el repositorio está vacío', async () => {
         // Given: existen 0 tickets procesados en el sistema
-        const incidentRepository = (app as any).mockIncidentRepository;
+        const incidentRepository = mockIncidentRepository;
         incidentRepository.findAll.mockResolvedValue([]);
 
         // When: el operador solicita GET /api/tickets/metrics
@@ -110,7 +88,7 @@ describe('HU-09 — Métricas Agregadas', () => {
           },
         ];
 
-        const incidentRepository = (app as any).mockIncidentRepository;
+        const incidentRepository = mockIncidentRepository;
         incidentRepository.findAll.mockResolvedValue(mockTickets);
 
         // When: el operador solicita GET /api/tickets/metrics
@@ -137,7 +115,7 @@ describe('HU-09 — Métricas Agregadas', () => {
           createdAt: new Date().toISOString(),
         }));
 
-        const incidentRepository = (app as any).mockIncidentRepository;
+        const incidentRepository = mockIncidentRepository;
         incidentRepository.findAll.mockResolvedValue(mockTickets);
 
         // When: el operador solicita GET /api/tickets/metrics
@@ -164,7 +142,7 @@ describe('HU-09 — Métricas Agregadas', () => {
           createdAt: new Date().toISOString(),
         }));
 
-        const incidentRepository = (app as any).mockIncidentRepository;
+        const incidentRepository = mockIncidentRepository;
         incidentRepository.findAll.mockResolvedValue(mockTickets);
 
         // When: el operador solicita GET /api/tickets/metrics
@@ -193,7 +171,7 @@ describe('HU-09 — Métricas Agregadas', () => {
           createdAt: new Date().toISOString(),
         }));
 
-        const incidentRepository = (app as any).mockIncidentRepository;
+        const incidentRepository = mockIncidentRepository;
         incidentRepository.findAll.mockResolvedValue(mockTickets);
 
         // When: el operador solicita GET /api/tickets/metrics
@@ -220,7 +198,7 @@ describe('HU-09 — Métricas Agregadas', () => {
           createdAt: new Date().toISOString(),
         }));
 
-        const incidentRepository = (app as any).mockIncidentRepository;
+        const incidentRepository = mockIncidentRepository;
         incidentRepository.findAll.mockResolvedValue(mockTickets);
 
         // When: el operador solicita GET /api/tickets/metrics
@@ -251,7 +229,7 @@ describe('HU-09 — Métricas Agregadas', () => {
           },
         ];
 
-        const incidentRepository = (app as any).mockIncidentRepository;
+        const incidentRepository = mockIncidentRepository;
         incidentRepository.findAll.mockResolvedValue(mockTickets);
 
         // When: el operador solicita GET /api/tickets/metrics
@@ -267,7 +245,7 @@ describe('HU-09 — Métricas Agregadas', () => {
 
       it('debería retornar totalTickets como número entero no negativo', async () => {
         // Given: existen 0 tickets (caso límite)
-        const incidentRepository = (app as any).mockIncidentRepository;
+        const incidentRepository = mockIncidentRepository;
         incidentRepository.findAll.mockResolvedValue([]);
 
         // When: el operador solicita GET /api/tickets/metrics
@@ -311,7 +289,7 @@ describe('HU-09 — Métricas Agregadas', () => {
     describe('Partición de equivalencia: Sin tickets (0)', () => {
       it('debería retornar byStatus con valores 0 cuando el repositorio está vacío', async () => {
         // Given: existen 0 tickets en el sistema
-        const incidentRepository = (app as any).mockIncidentRepository;
+        const incidentRepository = mockIncidentRepository;
         incidentRepository.findAll.mockResolvedValue([]);
 
         // When: el operador solicita GET /api/tickets/metrics
@@ -342,7 +320,7 @@ describe('HU-09 — Métricas Agregadas', () => {
           createdAt: new Date().toISOString(),
         }));
 
-        const incidentRepository = (app as any).mockIncidentRepository;
+        const incidentRepository = mockIncidentRepository;
         incidentRepository.findAll.mockResolvedValue(mockTickets);
 
         // When: el operador solicita GET /api/tickets/metrics
@@ -372,7 +350,7 @@ describe('HU-09 — Métricas Agregadas', () => {
           createdAt: new Date().toISOString(),
         }));
 
-        const incidentRepository = (app as any).mockIncidentRepository;
+        const incidentRepository = mockIncidentRepository;
         incidentRepository.findAll.mockResolvedValue(mockTickets);
 
         // When: el operador solicita GET /api/tickets/metrics
@@ -415,7 +393,7 @@ describe('HU-09 — Métricas Agregadas', () => {
           })),
         ];
 
-        const incidentRepository = (app as any).mockIncidentRepository;
+        const incidentRepository = mockIncidentRepository;
         incidentRepository.findAll.mockResolvedValue(mockTickets);
 
         // When: el operador solicita GET /api/tickets/metrics
@@ -459,7 +437,7 @@ describe('HU-09 — Métricas Agregadas', () => {
           })),
         ];
 
-        const incidentRepository = (app as any).mockIncidentRepository;
+        const incidentRepository = mockIncidentRepository;
         incidentRepository.findAll.mockResolvedValue(mockTickets);
 
         // When: el operador solicita GET /api/tickets/metrics
@@ -503,7 +481,7 @@ describe('HU-09 — Métricas Agregadas', () => {
           })),
         ];
 
-        const incidentRepository = (app as any).mockIncidentRepository;
+        const incidentRepository = mockIncidentRepository;
         incidentRepository.findAll.mockResolvedValue(mockTickets);
 
         // When: el operador solicita GET /api/tickets/metrics
@@ -541,7 +519,7 @@ describe('HU-09 — Métricas Agregadas', () => {
           },
         ];
 
-        const incidentRepository = (app as any).mockIncidentRepository;
+        const incidentRepository = mockIncidentRepository;
         incidentRepository.findAll.mockResolvedValue(mockTickets);
 
         // When: el operador solicita GET /api/tickets/metrics
@@ -573,7 +551,7 @@ describe('HU-09 — Métricas Agregadas', () => {
           },
         ];
 
-        const incidentRepository = (app as any).mockIncidentRepository;
+        const incidentRepository = mockIncidentRepository;
         incidentRepository.findAll.mockResolvedValue(mockTickets);
 
         // When: el operador solicita GET /api/tickets/metrics
@@ -628,7 +606,7 @@ describe('HU-09 — Métricas Agregadas', () => {
     describe('Partición de equivalencia: Sin tickets (0)', () => {
       it('debería retornar byPriority con valores 0 cuando el repositorio está vacío', async () => {
         // Given: existen 0 tickets en el sistema
-        const incidentRepository = (app as any).mockIncidentRepository;
+        const incidentRepository = mockIncidentRepository;
         incidentRepository.findAll.mockResolvedValue([]);
 
         // When: el operador solicita GET /api/tickets/metrics
@@ -659,7 +637,7 @@ describe('HU-09 — Métricas Agregadas', () => {
           createdAt: new Date().toISOString(),
         }));
 
-        const incidentRepository = (app as any).mockIncidentRepository;
+        const incidentRepository = mockIncidentRepository;
         incidentRepository.findAll.mockResolvedValue(mockTickets);
 
         // When: el operador solicita GET /api/tickets/metrics
@@ -691,7 +669,7 @@ describe('HU-09 — Métricas Agregadas', () => {
           createdAt: new Date().toISOString(),
         }));
 
-        const incidentRepository = (app as any).mockIncidentRepository;
+        const incidentRepository = mockIncidentRepository;
         incidentRepository.findAll.mockResolvedValue(mockTickets);
 
         // When: el operador solicita GET /api/tickets/metrics
@@ -722,7 +700,7 @@ describe('HU-09 — Métricas Agregadas', () => {
           createdAt: new Date().toISOString(),
         }));
 
-        const incidentRepository = (app as any).mockIncidentRepository;
+        const incidentRepository = mockIncidentRepository;
         incidentRepository.findAll.mockResolvedValue(mockTickets);
 
         // When: el operador solicita GET /api/tickets/metrics
@@ -753,7 +731,7 @@ describe('HU-09 — Métricas Agregadas', () => {
           createdAt: new Date().toISOString(),
         }));
 
-        const incidentRepository = (app as any).mockIncidentRepository;
+        const incidentRepository = mockIncidentRepository;
         incidentRepository.findAll.mockResolvedValue(mockTickets);
 
         // When: el operador solicita GET /api/tickets/metrics
@@ -813,7 +791,7 @@ describe('HU-09 — Métricas Agregadas', () => {
           })),
         ];
 
-        const incidentRepository = (app as any).mockIncidentRepository;
+        const incidentRepository = mockIncidentRepository;
         incidentRepository.findAll.mockResolvedValue(mockTickets);
 
         // When: el operador solicita GET /api/tickets/metrics
@@ -879,7 +857,7 @@ describe('HU-09 — Métricas Agregadas', () => {
           })),
         ];
 
-        const incidentRepository = (app as any).mockIncidentRepository;
+        const incidentRepository = mockIncidentRepository;
         incidentRepository.findAll.mockResolvedValue(mockTickets);
 
         // When: el operador solicita GET /api/tickets/metrics
@@ -941,7 +919,7 @@ describe('HU-09 — Métricas Agregadas', () => {
           })),
         ];
 
-        const incidentRepository = (app as any).mockIncidentRepository;
+        const incidentRepository = mockIncidentRepository;
         incidentRepository.findAll.mockResolvedValue(mockTickets);
 
         // When: el operador solicita GET /api/tickets/metrics
@@ -995,7 +973,7 @@ describe('HU-09 — Métricas Agregadas', () => {
           },
         ];
 
-        const incidentRepository = (app as any).mockIncidentRepository;
+        const incidentRepository = mockIncidentRepository;
         incidentRepository.findAll.mockResolvedValue(mockTickets);
 
         // When: el operador solicita GET /api/tickets/metrics
@@ -1029,7 +1007,7 @@ describe('HU-09 — Métricas Agregadas', () => {
           },
         ];
 
-        const incidentRepository = (app as any).mockIncidentRepository;
+        const incidentRepository = mockIncidentRepository;
         incidentRepository.findAll.mockResolvedValue(mockTickets);
 
         // When: el operador solicita GET /api/tickets/metrics
@@ -1088,7 +1066,7 @@ describe('HU-09 — Métricas Agregadas', () => {
     describe('Partición de equivalencia: Sin tickets (0)', () => {
       it('debería retornar byType con valores 0 cuando el repositorio está vacío', async () => {
         // Given: existen 0 tickets en el sistema
-        const incidentRepository = (app as any).mockIncidentRepository;
+        const incidentRepository = mockIncidentRepository;
         incidentRepository.findAll.mockResolvedValue([]);
 
         // When: el operador solicita GET /api/tickets/metrics
@@ -1119,7 +1097,7 @@ describe('HU-09 — Métricas Agregadas', () => {
           createdAt: new Date().toISOString(),
         }));
 
-        const incidentRepository = (app as any).mockIncidentRepository;
+        const incidentRepository = mockIncidentRepository;
         incidentRepository.findAll.mockResolvedValue(mockTickets);
 
         // When: el operador solicita GET /api/tickets/metrics
@@ -1153,7 +1131,7 @@ describe('HU-09 — Métricas Agregadas', () => {
           createdAt: new Date().toISOString(),
         }));
 
-        const incidentRepository = (app as any).mockIncidentRepository;
+        const incidentRepository = mockIncidentRepository;
         incidentRepository.findAll.mockResolvedValue(mockTickets);
 
         // When: el operador solicita GET /api/tickets/metrics
@@ -1186,7 +1164,7 @@ describe('HU-09 — Métricas Agregadas', () => {
           createdAt: new Date().toISOString(),
         }));
 
-        const incidentRepository = (app as any).mockIncidentRepository;
+        const incidentRepository = mockIncidentRepository;
         incidentRepository.findAll.mockResolvedValue(mockTickets);
 
         // When: el operador solicita GET /api/tickets/metrics
@@ -1219,7 +1197,7 @@ describe('HU-09 — Métricas Agregadas', () => {
           createdAt: new Date().toISOString(),
         }));
 
-        const incidentRepository = (app as any).mockIncidentRepository;
+        const incidentRepository = mockIncidentRepository;
         incidentRepository.findAll.mockResolvedValue(mockTickets);
 
         // When: el operador solicita GET /api/tickets/metrics
@@ -1252,7 +1230,7 @@ describe('HU-09 — Métricas Agregadas', () => {
           createdAt: new Date().toISOString(),
         }));
 
-        const incidentRepository = (app as any).mockIncidentRepository;
+        const incidentRepository = mockIncidentRepository;
         incidentRepository.findAll.mockResolvedValue(mockTickets);
 
         // When: el operador solicita GET /api/tickets/metrics
@@ -1285,7 +1263,7 @@ describe('HU-09 — Métricas Agregadas', () => {
           createdAt: new Date().toISOString(),
         }));
 
-        const incidentRepository = (app as any).mockIncidentRepository;
+        const incidentRepository = mockIncidentRepository;
         incidentRepository.findAll.mockResolvedValue(mockTickets);
 
         // When: el operador solicita GET /api/tickets/metrics
@@ -1363,7 +1341,7 @@ describe('HU-09 — Métricas Agregadas', () => {
           },
         ];
 
-        const incidentRepository = (app as any).mockIncidentRepository;
+        const incidentRepository = mockIncidentRepository;
         incidentRepository.findAll.mockResolvedValue(mockTickets);
 
         // When: el operador solicita GET /api/tickets/metrics
@@ -1451,7 +1429,7 @@ describe('HU-09 — Métricas Agregadas', () => {
           })),
         ];
 
-        const incidentRepository = (app as any).mockIncidentRepository;
+        const incidentRepository = mockIncidentRepository;
         incidentRepository.findAll.mockResolvedValue(mockTickets);
 
         // When: el operador solicita GET /api/tickets/metrics
@@ -1523,7 +1501,7 @@ describe('HU-09 — Métricas Agregadas', () => {
           })),
         ];
 
-        const incidentRepository = (app as any).mockIncidentRepository;
+        const incidentRepository = mockIncidentRepository;
         incidentRepository.findAll.mockResolvedValue(mockTickets);
 
         // When: el operador solicita GET /api/tickets/metrics
@@ -1561,7 +1539,7 @@ describe('HU-09 — Métricas Agregadas', () => {
           },
         ];
 
-        const incidentRepository = (app as any).mockIncidentRepository;
+        const incidentRepository = mockIncidentRepository;
         incidentRepository.findAll.mockResolvedValue(mockTickets);
 
         // When: el operador solicita GET /api/tickets/metrics
@@ -1597,7 +1575,7 @@ describe('HU-09 — Métricas Agregadas', () => {
           },
         ];
 
-        const incidentRepository = (app as any).mockIncidentRepository;
+        const incidentRepository = mockIncidentRepository;
         incidentRepository.findAll.mockResolvedValue(mockTickets);
 
         // When: el operador solicita GET /api/tickets/metrics
@@ -1649,7 +1627,7 @@ describe('HU-09 — Métricas Agregadas', () => {
         // Given: existen 0 tickets en el sistema
         const mockTickets: any[] = [];
 
-        const incidentRepository = (app as any).mockIncidentRepository;
+        const incidentRepository = mockIncidentRepository;
         incidentRepository.findAll.mockResolvedValue(mockTickets);
 
         // When: el operador solicita GET /api/tickets/metrics
@@ -1721,7 +1699,7 @@ describe('HU-09 — Métricas Agregadas', () => {
           },
         ];
 
-        const incidentRepository = (app as any).mockIncidentRepository;
+        const incidentRepository = mockIncidentRepository;
         incidentRepository.findAll.mockResolvedValue(mockTickets);
 
         // When: el operador solicita GET /api/tickets/metrics
@@ -1757,7 +1735,7 @@ describe('HU-09 — Métricas Agregadas', () => {
           createdAt: new Date().toISOString(),
         }));
 
-        const incidentRepository = (app as any).mockIncidentRepository;
+        const incidentRepository = mockIncidentRepository;
         incidentRepository.findAll.mockResolvedValue(mockTickets);
 
         // When: el operador solicita GET /api/tickets/metrics
@@ -1827,7 +1805,7 @@ describe('HU-09 — Métricas Agregadas', () => {
           })),
         ];
 
-        const incidentRepository = (app as any).mockIncidentRepository;
+        const incidentRepository = mockIncidentRepository;
         incidentRepository.findAll.mockResolvedValue(mockTickets);
 
         // When: el operador solicita GET /api/tickets/metrics
@@ -1863,7 +1841,7 @@ describe('HU-09 — Métricas Agregadas', () => {
           createdAt: new Date().toISOString(),
         }));
 
-        const incidentRepository = (app as any).mockIncidentRepository;
+        const incidentRepository = mockIncidentRepository;
         incidentRepository.findAll.mockResolvedValue(mockTickets);
 
         // When: el operador solicita GET /api/tickets/metrics
@@ -1898,7 +1876,7 @@ describe('HU-09 — Métricas Agregadas', () => {
           createdAt: new Date().toISOString(),
         }));
 
-        const incidentRepository = (app as any).mockIncidentRepository;
+        const incidentRepository = mockIncidentRepository;
         incidentRepository.findAll.mockResolvedValue(mockTickets);
 
         // When: el operador solicita GET /api/tickets/metrics
@@ -1943,7 +1921,7 @@ describe('HU-09 — Métricas Agregadas', () => {
           })),
         ];
 
-        const incidentRepository = (app as any).mockIncidentRepository;
+        const incidentRepository = mockIncidentRepository;
         incidentRepository.findAll.mockResolvedValue(mockTickets);
 
         // When: el operador solicita GET /api/tickets/metrics
@@ -1990,7 +1968,7 @@ describe('HU-09 — Métricas Agregadas', () => {
           })),
         ];
 
-        const incidentRepository = (app as any).mockIncidentRepository;
+        const incidentRepository = mockIncidentRepository;
         incidentRepository.findAll.mockResolvedValue(mockTickets);
 
         // When: el operador solicita GET /api/tickets/metrics

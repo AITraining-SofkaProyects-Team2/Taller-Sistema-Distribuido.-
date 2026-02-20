@@ -1,20 +1,9 @@
 import pool from '../config/database';
-import { Ticket, TicketFilters, TicketStatus, TicketPriority, IncidentType, PaginatedResponse } from '../types';
+import { Ticket, TicketFilters, PaginatedResponse } from '../types';
 import { ITicketRepository } from './ITicketRepository';
 
 export class TicketRepository implements ITicketRepository {
-    async findAll(filters?: TicketFilters): Promise<Ticket[]> {
-        if (!filters) {
-            // Si no hay filtros, retornar todos los tickets como array simple
-            const query = 'SELECT ticket_id as "ticketId", line_number as "lineNumber", email, type, description, status, priority, created_at as "createdAt", processed_at as "processedAt" FROM tickets ORDER BY created_at DESC';
-            const result = await pool.query(query);
-            return result.rows.map((row: any) => ({
-                ...row,
-                createdAt: row.createdAt.toISOString(),
-                processedAt: row.processedAt ? row.processedAt.toISOString() : null
-            }));
-        }
-
+    async findAll(filters: TicketFilters): Promise<PaginatedResponse<Ticket>> {
         const { status, priority, type, dateFrom, dateTo, page = 1, limit = 20 } = filters;
         const offset = (page - 1) * limit;
 
@@ -84,11 +73,22 @@ export class TicketRepository implements ITicketRepository {
 
             const tickets: Ticket[] = dataResult.rows.map((row: any) => ({
                 ...row,
-                createdAt: typeof row.createdAt === 'string' ? row.createdAt : row.createdAt.toISOString(),
-                processedAt: row.processedAt ? (typeof row.processedAt === 'string' ? row.processedAt : row.processedAt.toISOString()) : null
+                createdAt: row.createdAt.toISOString(),
+                processedAt: row.processedAt ? row.processedAt.toISOString() : null
             }));
 
-            return tickets;
+            const totalItems = parseInt(countResult.rows[0].count);
+            const totalPages = Math.ceil(totalItems / limit);
+
+            return {
+                data: tickets,
+                pagination: {
+                    page,
+                    pageSize: limit,
+                    totalItems,
+                    totalPages
+                }
+            };
         } catch (error) {
             console.error('Error fetching tickets from database:', error);
             throw error;
@@ -132,4 +132,3 @@ export class TicketRepository implements ITicketRepository {
         return { metrics: result.rows };
     }
 }
-

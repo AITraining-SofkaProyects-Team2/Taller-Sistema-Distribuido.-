@@ -24,8 +24,21 @@ export class TicketQueryService {
   }
   
   async getTickets(filters: TicketFilters): Promise<PaginatedResponse<Ticket>> {
-    return this.repository.findAll(filters);
-  }
+        const tickets = await this.repository.findAll(filters);
+        // Convertir a PaginatedResponse si es necesario
+        if (Array.isArray(tickets)) {
+            return {
+                data: tickets,
+                pagination: {
+                    page: 1,
+                    pageSize: tickets.length,
+                    totalItems: tickets.length,
+                    totalPages: 1
+                }
+            };
+        }
+        return tickets;
+    }
   
   async findByLineNumber(lineNumber: string): Promise<Ticket[]> {
     if (!LINE_NUMBER_REGEX.test(lineNumber)) {
