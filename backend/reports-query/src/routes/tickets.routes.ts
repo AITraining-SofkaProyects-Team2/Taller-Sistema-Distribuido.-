@@ -1,7 +1,7 @@
 import { Router } from 'express';
-import { TicketsController } from '../controllers/TicketsController';
+import { TicketsController } from '../controllers/ticketsController';
 import { TicketQueryService } from '../services/TicketQueryService';
-import { TicketRepository } from '../repositories/TicketRepository';
+import { TicketRepository } from '../repositories/ticketRepository';
 
 const router = Router();
 const repository = new TicketRepository();

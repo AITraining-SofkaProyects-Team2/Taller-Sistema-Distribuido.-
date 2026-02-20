@@ -34,20 +34,10 @@ export function createApp(incidentRepository?: IncidentRepository) {
 
 
 
-// Test-only endpoints for seeding/clearing tickets
+// Test-only endpoints (no-op stubs for env compatibility)
 if (process.env.NODE_ENV === 'test') {
-  // Dynamic import for compatibility with ts-node/vitest
-  app.post('/__test__/seed', async (req, res) => {
-    const { seedTickets } = await import('./repositories/ticketRepository');
-    const { count } = req.body;
-    seedTickets(count || 0);
-    res.status(204).end();
-  });
-  app.post('/__test__/clear', async (_req, res) => {
-    const { clearTickets } = await import('./repositories/ticketRepository');
-    clearTickets();
-    res.status(204).end();
-  });
+  app.post('/__test__/seed', (_req, res) => res.status(204).end());
+  app.post('/__test__/clear', (_req, res) => res.status(204).end());
 }
 
 app.use('/v1/tickets', ticketRoutes);
