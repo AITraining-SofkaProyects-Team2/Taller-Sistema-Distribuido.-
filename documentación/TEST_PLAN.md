@@ -10,12 +10,12 @@
 | Completado | ID Test | Historia | Servicios afectados | Descripción |
 |:----------:|---------|-|---------|-------------|
 | [RED] | TC-001 | HU-01 | Query Service + Frontend | Listado paginado con tamaño por defecto |
-| [ ] | TC-002 | HU-01 | Query Service + Frontend | Listado paginado con tamaño configurable |
-| [ ] | TC-003 | HU-01 | Query Service + Frontend | Indicación de total de resultados y página actual |
-| [ ] | TC-004 | HU-01 | Query Service + Frontend | Ordenamiento consistente entre páginas |
-| [ ] | TC-005 | HU-01 | Query Service + Frontend | Lista vacía cuando no hay tickets |
-| [ ] | TC-006 | HU-01 | Query Service + Frontend | Solicitar página fuera de rango |
-| [ ] | TC-007 | HU-01 | Query Service + Frontend | Tamaño de página con valores inválidos |
+| [RED] | TC-002 | HU-01 | Query Service + Frontend | Listado paginado con tamaño configurable |
+| [RED] | TC-003 | HU-01 | Query Service + Frontend | Indicación de total de resultados y página actual |
+| [RED] | TC-004 | HU-01 | Query Service + Frontend | Ordenamiento consistente entre páginas |
+| [RED] | TC-005 | HU-01 | Query Service + Frontend | Lista vacía cuando no hay tickets |
+| [RED] | TC-006 | HU-01 | Query Service + Frontend | Solicitar página fuera de rango |
+| [RED] | TC-007 | HU-01 | Query Service + Frontend | Tamaño de página con valores inválidos |
 | [ ] | TC-008 | HU-02 | Query Service + Frontend | Filtrar por un solo estado válido |
 | [ ] | TC-009 | HU-02 | Query Service + Frontend | Filtrar por múltiples estados simultáneamente |
 | [ ] | TC-010 | HU-02 | Query Service + Frontend | Combinar filtro de estado con otros filtros |
