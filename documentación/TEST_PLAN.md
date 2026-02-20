@@ -43,11 +43,11 @@
 | [ ] | TC-032 | HU-07 | Query Service + Frontend | Buscar por número de línea válido con resultados |
 | [ ] | TC-033 | HU-07 | Query Service + Frontend | Buscar por número de línea válido sin resultados |
 | [ ] | TC-034 | HU-07 | Query Service + Frontend | Buscar con número de línea inválido |
-| [RED] | TC-035 | HU-08 | Query Service + Frontend | Ordenar por fecha ascendente |
-| [RED] | TC-036 | HU-08 | Query Service + Frontend | Ordenar por fecha descendente |
-| [RED] | TC-037 | HU-08 | Query Service + Frontend | Ordenar por prioridad |
-| [RED] | TC-038 | HU-08 | Query Service + Frontend | Ordenar por estado |
-| [RED] | TC-039 | HU-08 | Query Service + Frontend | Campo de ordenamiento inválido |
+| [GREEN] | TC-035 | HU-08 | Query Service + Frontend | Ordenar por fecha ascendente |
+| [GREEN] | TC-036 | HU-08 | Query Service + Frontend | Ordenar por fecha descendente |
+| [GREEN] | TC-037 | HU-08 | Query Service + Frontend | Ordenar por prioridad |
+| [GREEN] | TC-038 | HU-08 | Query Service + Frontend | Ordenar por estado |
+| [GREEN] | TC-039 | HU-08 | Query Service + Frontend | Campo de ordenamiento inválido |
 | [ ] | TC-040 | HU-09 | Query Service + Frontend | Visualizar total de tickets |
 | [ ] | TC-041 | HU-09 | Query Service + Frontend | Distribución por estado |
 | [ ] | TC-042 | HU-09 | Query Service + Frontend | Distribución por prioridad |
