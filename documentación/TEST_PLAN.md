@@ -9,79 +9,23 @@
 
 | Completado | ID Test | Historia | Servicios afectados | Descripción |
 |:----------:|---------|-|---------|-------------|
-<<<<<<< HEAD
-| [GREEN] | TC-001 | HU-01 | Query Service + Frontend | Listado paginado con tamaño por defecto |
-| [GREEN] | TC-002 | HU-01 | Query Service + Frontend | Listado paginado con tamaño configurable |
-| [GREEN] | TC-003 | HU-01 | Query Service + Frontend | Indicación de total de resultados y página actual |
-| [GREEN] | TC-004 | HU-01 | Query Service + Frontend | Ordenamiento consistente entre páginas |
-| [GREEN] | TC-005 | HU-01 | Query Service + Frontend | Lista vacía cuando no hay tickets |
-| [GREEN] | TC-006 | HU-01 | Query Service + Frontend | Solicitar página fuera de rango |
-| [GREEN] | TC-007 | HU-01 | Query Service + Frontend | Tamaño de página con valores inválidos |
-| [ ] | TC-008 | HU-02 | Query Service + Frontend | Filtrar por un solo estado válido |
-| [ ] | TC-009 | HU-02 | Query Service + Frontend | Filtrar por múltiples estados simultáneamente |
-| [ ] | TC-010 | HU-02 | Query Service + Frontend | Combinar filtro de estado con otros filtros |
-| [ ] | TC-011 | HU-02 | Query Service + Frontend | Filtrar con estado inválido |
-| [ ] | TC-012 | HU-02 | Query Service + Frontend | Filtrar por estado sin resultados coincidentes |
-| [REFACTOR] | TC-013 | HU-03 | Query Service + Frontend | Filtrar por prioridad válida |
-| [REFACTOR] | TC-014 | HU-03 | Query Service + Frontend | Visualizar prioridades disponibles |
-| [REFACTOR] | TC-015 | HU-03 | Query Service + Frontend | Combinar filtro de prioridad con otros filtros |
-| [REFACTOR] | TC-016 | HU-03 | Query Service + Frontend | Filtrar con prioridad inválida |
-| [REFACTOR] | TC-017 | HU-03 | Query Service + Frontend | Filtrar por prioridad sin resultados coincidentes |
-| [ ] | TC-018 | HU-04 | Query Service + Frontend | Filtrar por tipo de incidente válido |
-| [ ] | TC-019 | HU-04 | Query Service + Frontend | Listar todos los tipos de incidente disponibles |
-| [ ] | TC-020 | HU-04 | Query Service + Frontend | Combinar filtro de tipo con estado y prioridad |
-| [ ] | TC-021 | HU-04 | Query Service + Frontend | Filtrar con tipo de incidente inválido |
-| [ ] | TC-022 | HU-05 | Query Service + Frontend 	| Filtrar por rango de fechas válido |
-| [ ] | TC-023 | HU-05 | Query Service + Frontend 	| Validar que fecha fin sea mayor o igual a fecha inicio |
-| [ ] | TC-024 | HU-05 | Query Service + Frontend | Rango de fechas sin resultados coincidentes |
-| [ ] | TC-025 | HU-05 | Query Service + Frontend | Filtrar con solo fecha inicio (sin fecha fin) |
-| [ ] | TC-026 | HU-05 | Query Service + Frontend | Filtrar con solo fecha fin (sin fecha inicio) |
-| [ ] | TC-027 | HU-05 | Query Service + Frontend | Fechas con formato inválido |
-| [ ] | TC-028 | HU-06 | Query Service + Frontend | Buscar por ID de ticket existente |
-| [ ] | TC-029 | HU-06 | Query Service + Frontend | Buscar por ID de ticket inexistente |
-| [ ] | TC-030 | HU-06 | Query Service + Frontend | Buscar con ID en formato inválido |
-| [ ] | TC-031 | HU-06 | Query Service + Frontend | Buscar con ID vacío |
-| [ ] | TC-032 | HU-07 | Query Service + Frontend | Buscar por número de línea válido con resultados |
-| [ ] | TC-033 | HU-07 | Query Service + Frontend | Buscar por número de línea válido sin resultados |
-| [ ] | TC-034 | HU-07 | Query Service + Frontend | Buscar con número de línea inválido |
-| [RED] | TC-035 | HU-08 | Query Service + Frontend | Ordenar por fecha ascendente |
-| [RED] | TC-036 | HU-08 | Query Service + Frontend | Ordenar por fecha descendente |
-| [RED] | TC-037 | HU-08 | Query Service + Frontend | Ordenar por prioridad |
-| [RED] | TC-038 | HU-08 | Query Service + Frontend | Ordenar por estado |
-| [RED] | TC-039 | HU-08 | Query Service + Frontend | Campo de ordenamiento inválido |
-| [ ] | TC-040 | HU-09 | Query Service + Frontend | Visualizar total de tickets |
-| [ ] | TC-041 | HU-09 | Query Service + Frontend | Distribución por estado |
-| [ ] | TC-042 | HU-09 | Query Service + Frontend | Distribución por prioridad |
-| [ ] | TC-043 | HU-09 | Query Service + Frontend | Distribución por tipo de incidente |
-| [ ] | TC-044 | HU-09 | Query Service + Frontend | Consistencia de métricas con el repositorio |
-| [ ] | TC-045 | HU-10 | Query Service + Frontend | Gráfica de distribución por prioridad |
-| [ ] | TC-046 | HU-10 | Query Service + Frontend | Gráfica de distribución por estado |
-| [ ] | TC-047 | HU-10 | Query Service + Frontend | Actualización de gráficas con filtros activos |
-| [ ] | TC-048 | HU-11 | Frontend | Exportar CSV con columnas básicas |
-| [ ] | TC-049 | HU-11 | Frontend | Exportar respetando filtros activos |
-| [ ] | TC-050 | HU-11 | Frontend | Exportar cuando no hay resultados |
-| [ ] | TC-051 | HU-12 | Query Service + Frontend | Refresco manual de datos |
-| [ ] | TC-052 | HU-12 | Query Service + Frontend | Auto-refresh configurable |
-| [ ] | TC-053 | HU-12 | Query Service + Frontend | Desactivar auto-refresh |
-
-=======
-| [ ] | [TC-001](#TC-001---Listado-paginado-con-tamaño-por-defecto) | HU-01 | Query Service + Frontend | Listado paginado con tamaño por defecto |
-| [ ] | [TC-002](#TC-002---Listado-paginado-con-tamaño-configurable) | HU-01 | Query Service + Frontend | Listado paginado con tamaño configurable |
-| [ ] | [TC-003](#TC-003---Indicación-de-total-de-resultados-y-página-actual) | HU-01 | Query Service + Frontend | Indicación de total de resultados y página actual |
-| [ ] | [TC-004](#TC-004---Ordenamiento-consistente-entre-páginas) | HU-01 | Query Service + Frontend | Ordenamiento consistente entre páginas |
-| [ ] | [TC-005](#TC-005---Lista-vacía-cuando-no-hay-tickets) | HU-01 | Query Service + Frontend | Lista vacía cuando no hay tickets |
-| [ ] | [TC-006](#TC-006---Solicitar-página-fuera-de-rango) | HU-01 | Query Service + Frontend | Solicitar página fuera de rango |
-| [ ] | [TC-007](#TC-007---Tamaño-de-página-con-valores-inválidos) | HU-01 | Query Service + Frontend | Tamaño de página con valores inválidos |
+| [GREEN] | [TC-001](#TC-001---Listado-paginado-con-tamaño-por-defecto) | HU-01 | Query Service + Frontend | Listado paginado con tamaño por defecto |
+| [GREEN] | [TC-002](#TC-002---Listado-paginado-con-tamaño-configurable) | HU-01 | Query Service + Frontend | Listado paginado con tamaño configurable |
+| [GREEN] | [TC-003](#TC-003---Indicación-de-total-de-resultados-y-página-actual) | HU-01 | Query Service + Frontend | Indicación de total de resultados y página actual |
+| [GREEN] | [TC-004](#TC-004---Ordenamiento-consistente-entre-páginas) | HU-01 | Query Service + Frontend | Ordenamiento consistente entre páginas |
+| [GREEN] | [TC-005](#TC-005---Lista-vacía-cuando-no-hay-tickets) | HU-01 | Query Service + Frontend | Lista vacía cuando no hay tickets |
+| [GREEN] | [TC-006](#TC-006---Solicitar-página-fuera-de-rango) | HU-01 | Query Service + Frontend | Solicitar página fuera de rango |
+| [GREEN] | [TC-007](#TC-007---Tamaño-de-página-con-valores-inválidos) | HU-01 | Query Service + Frontend | Tamaño de página con valores inválidos |
 | [GREEN] | [TC-008](#TC-008---Filtrar-por-un-solo-estado-válido) | HU-02 | Query Service + Frontend | Filtrar por un solo estado válido |
 | [GREEN] | [TC-009](#TC-009---Filtrar-por-múltiples-estados-simultáneamente) | HU-02 | Query Service + Frontend | Filtrar por múltiples estados simultáneamente |
 | [GREEN] | [TC-010](#TC-010---Combinar-filtro-de-estado-con-otros-filtros) | HU-02 | Query Service + Frontend | Combinar filtro de estado con otros filtros |
 | [GREEN] | [TC-011](#TC-011---Filtrar-con-estado-inválido) | HU-02 | Query Service + Frontend | Filtrar con estado inválido |
 | [GREEN] | [TC-012](#TC-012---Filtrar-por-estado-sin-resultados-coincidentes) | HU-02 | Query Service + Frontend | Filtrar por estado sin resultados coincidentes |
-| [ ] | [TC-013](#TC-013---Filtrar-por-prioridad-válida) | HU-03 | Query Service + Frontend | Filtrar por prioridad válida |
-| [ ] | [TC-014](#TC-014---Visualizar-prioridades-disponibles) | HU-03 | Query Service + Frontend | Visualizar prioridades disponibles |
-| [ ] | [TC-015](#TC-015---Combinar-filtro-de-prioridad-con-otros-filtros) | HU-03 | Query Service + Frontend | Combinar filtro de prioridad con otros filtros |
-| [ ] | [TC-016](#TC-016---Filtrar-con-prioridad-inválida) | HU-03 | Query Service + Frontend | Filtrar con prioridad inválida |
-| [ ] | [TC-017](#TC-017---Filtrar-por-prioridad-sin-resultados-coincidentes) | HU-03 | Query Service + Frontend | Filtrar por prioridad sin resultados coincidentes |
+| [GREEN] | [TC-013](#TC-013---Filtrar-por-prioridad-válida) | HU-03 | Query Service + Frontend | Filtrar por prioridad válida |
+| [GREEN] | [TC-014](#TC-014---Visualizar-prioridades-disponibles) | HU-03 | Query Service + Frontend | Visualizar prioridades disponibles |
+| [GREEN] | [TC-015](#TC-015---Combinar-filtro-de-prioridad-con-otros-filtros) | HU-03 | Query Service + Frontend | Combinar filtro de prioridad con otros filtros |
+| [GREEN] | [TC-016](#TC-016---Filtrar-con-prioridad-inválida) | HU-03 | Query Service + Frontend | Filtrar con prioridad inválida |
+| [GREEN] | [TC-017](#TC-017---Filtrar-por-prioridad-sin-resultados-coincidentes) | HU-03 | Query Service + Frontend | Filtrar por prioridad sin resultados coincidentes |
 | [ ] | [TC-018](#TC-018---Filtrar-por-tipo-de-incidencia-válida) | HU-04 | Query Service + Frontend | Filtrar por tipo de incidente válido |
 | [ ] | [TC-019](#TC-019---Listar-todos-los-tipos-de-incidencia-disponibles) | HU-04 | Query Service + Frontend | Listar todos los tipos de incidente disponibles |
 | [ ] | [TC-020](#TC-020---Combinar-filtro-de-tipo-con-estado-y-prioridad) | HU-04 | Query Service + Frontend | Combinar filtro de tipo con estado y prioridad |
@@ -118,7 +62,6 @@
 | [ ] | [TC-051](#TC-051---Refresco-manual-de-datos) | HU-12 | Query Service + Frontend | Refresco manual de datos |
 | [ ] | [TC-052](#TC-052---Auto-refresh-configurable) | HU-12 | Query Service + Frontend | Auto-refresh configurable |
 | [ ] | [TC-053](#TC-053---Desactivar-auto-refresh) | HU-12 | Query Service + Frontend | Desactivar auto-refresh */
->>>>>>> origin/develop
 
 
 ---
