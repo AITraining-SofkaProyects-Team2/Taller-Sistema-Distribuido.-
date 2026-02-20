@@ -17,5 +17,5 @@ export interface IIncidentRepository {
      * @param {Incident} incident - The fully processed incident to save.
      * @returns {Incident} The persisted incident (may include generated fields).
      */
-    save(incident: Incident): Promise<Incident>;
+    save(incident: Incident): Incident;
 }

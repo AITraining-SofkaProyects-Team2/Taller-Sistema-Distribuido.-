@@ -1,19 +1,17 @@
 import { RabbitMQConnectionManager } from './messaging/RabbitMQConnectionManager';
 import { MessageHandler } from './messaging/MessageHandler';
-import { PostgresIncidentRepository } from './repositories/PostgresIncidentRepository';
+import { InMemoryIncidentRepository } from './repositories/InMemoryIncidentRepository';
 import { ExponentialBackoff } from './utils/ExponentialBackoff';
 import { startHealthServer } from './lifecycle/healthServer';
 import { registerGracefulShutdown } from './lifecycle/gracefulShutdown';
 import { logger } from './utils/logger';
-import { initializeDatabase } from './utils/database';
 
 const connectionManager = RabbitMQConnectionManager.getInstance();
-const incidentRepository = new PostgresIncidentRepository();
+const incidentRepository = new InMemoryIncidentRepository();
 const backoff = new ExponentialBackoff({ initialDelay: 1000, maxDelay: 30000, factor: 2 });
 
 const startConsumer = async () => {
   try {
-    await initializeDatabase();
     await connectionManager.connect();
 
     const channel = connectionManager.getChannel();

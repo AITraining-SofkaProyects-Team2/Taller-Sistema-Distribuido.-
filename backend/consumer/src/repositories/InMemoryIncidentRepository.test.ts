@@ -22,30 +22,30 @@ describe('InMemoryIncidentRepository', () => {
         repo = new InMemoryIncidentRepository();
     });
 
-    it('guarda un incidente y lo retorna', async () => {
+    it('guarda un incidente y lo retorna', () => {
         const incident = buildIncident();
-        const saved = await repo.save(incident);
+        const saved = repo.save(incident);
 
         expect(saved).toEqual(incident);
     });
 
-    it('permite guardar múltiples incidentes', async () => {
+    it('permite guardar múltiples incidentes', () => {
         const i1 = buildIncident({ ticketId: 'ticket-001' });
         const i2 = buildIncident({ ticketId: 'ticket-002' });
 
-        await repo.save(i1);
-        await repo.save(i2);
+        repo.save(i1);
+        repo.save(i2);
 
         // Both should save without error (no exception thrown)
-        expect(await repo.save(buildIncident({ ticketId: 'ticket-003' }))).toBeDefined();
+        expect(repo.save(buildIncident({ ticketId: 'ticket-003' }))).toBeDefined();
     });
 
-    it('sobrescribe un incidente con el mismo ticketId', async () => {
+    it('sobrescribe un incidente con el mismo ticketId', () => {
         const original = buildIncident({ priority: Priority.LOW });
         const updated = buildIncident({ priority: Priority.HIGH });
 
-        await repo.save(original);
-        const result = await repo.save(updated);
+        repo.save(original);
+        const result = repo.save(updated);
 
         expect(result.priority).toBe(Priority.HIGH);
     });
