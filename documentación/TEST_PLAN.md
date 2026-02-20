@@ -39,7 +39,7 @@
 | [GREEN] | [TC-028](#TC-028---Buscar-por-ID-de-ticket-existente) | HU-06 | Query Service + Frontend | Buscar por ID de ticket existente |
 | [GREEN] | [TC-029](#TC-029---Buscar-por-ID-de-ticket-inexistente) | HU-06 | Query Service + Frontend | Buscar por ID de ticket inexistente |
 | [GREEN] | [TC-030](#TC-030---Buscar-con-ID-en-formato-inválido) | HU-06 | Query Service + Frontend | Buscar con ID en formato inválido |
-| [RED] | [TC-031](#TC-031---Buscar-con-ID-vacío) | HU-06 | Query Service + Frontend | Buscar con ID vacío |
+| [GREEN] | [TC-031](#TC-031---Buscar-con-ID-vacío) | HU-06 | Query Service + Frontend | Buscar con ID vacío |
 | [ ] | [TC-032](#TC-032---Buscar-por-número-de-línea-válido-con-resultados) | HU-07 | Query Service + Frontend | Buscar por número de línea válido con resultados |
 | [ ] | [TC-033](#TC-033---Buscar-por-número-de-línea-válido-sin-resultados) | HU-07 | Query Service + Frontend | Buscar por número de línea válido sin resultados |
 | [ ] | [TC-034](#TC-034---Buscar-con-número-de-línea-inválido) | HU-07 | Query Service + Frontend | Buscar con número de línea inválido |

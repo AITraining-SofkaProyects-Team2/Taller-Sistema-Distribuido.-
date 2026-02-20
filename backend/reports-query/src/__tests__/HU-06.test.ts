@@ -240,9 +240,6 @@ describe('TC-030 — Buscar con ID en formato inválido', () => {
 
 // ───────────────────────────────────────────────────────────────────────────────
 // TC-031 — Buscar con ID vacío
-// Nota: a nivel de servicio, "" tiene longitud 0 ≠ 36, por lo que la validación
-// de formato (implementada en TC-030) ya cubre este caso. Los tests pasan GREEN
-// de inmediato porque la implementación de TC-030 generalizó la guardia.
 // ───────────────────────────────────────────────────────────────────────────────
 describe('TC-031 — Buscar con ID vacío', () => {
   let mockRepository: ITicketRepository;
