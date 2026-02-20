@@ -1,13 +1,57 @@
 import express from 'express';
+import { MetricsService, IncidentRepository } from './services/metricsService';
 
-const app = express();
-app.use(express.json());
+/**
+ * Crea la aplicación Express con las rutas configuradas
+ * @param incidentRepository - Repositorio de incidentes a usar
+ * @returns Instancia de Express configurada
+ */
+export function createApp(incidentRepository?: IncidentRepository) {
+  const app = express();
+  app.use(express.json());
 
-// TODO: Import and use routes here
+  // Si no se proporciona repositorio, crear uno en memoria para desarrollo
+  let repo = incidentRepository;
+  if (!repo) {
+    repo = {
+      async findAll() {
+        return [];
+      },
+      async findById(_id: string) {
+        return null;
+      },
+      async create(_ticket) {
+        throw new Error('Not implemented');
+      },
+      async update(_id: string, _ticket) {
+        throw new Error('Not implemented');
+      },
+    };
+  }
 
-app.get('/health', (_req, res) => {
-  res.status(200).json({ status: 'ok' });
-});
+  // Instanciar servicio de métricas con el repositorio
+  const metricsService = new MetricsService(repo);
+
+  // Rutas de salud
+  app.get('/health', (_req, res) => {
+    res.status(200).json({ status: 'ok' });
+  });
+
+  // Ruta de métricas agregadas
+  app.get('/api/tickets/metrics', async (_req, res) => {
+    try {
+      const metrics = await metricsService.getMetrics();
+      res.status(200).json(metrics);
+    } catch (error) {
+      res.status(500).json({ error: 'Internal server error' });
+    }
+  });
+
+  return app;
+}
+
+// Crear app por defecto para ejecución standalone
+const app = createApp();
 
 export default app;
 
@@ -18,3 +62,4 @@ if (require.main === module) {
     console.log(`Reports Query service listening on port ${PORT}`);
   });
 }
+
