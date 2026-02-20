@@ -1,28 +1,19 @@
-export enum TicketStatus {
-    RECEIVED = 'RECEIVED',
-    IN_PROGRESS = 'IN_PROGRESS'
-}
+export type TicketStatus = 'RECEIVED' | 'IN_PROGRESS';
 
-export enum TicketPriority {
-    HIGH = 'HIGH',
-    MEDIUM = 'MEDIUM',
-    LOW = 'LOW',
-    PENDING = 'PENDING'
-}
+export type TicketPriority = 'HIGH' | 'MEDIUM' | 'LOW' | 'PENDING';
 
-export enum IncidentType {
-    NO_SERVICE = 'NO_SERVICE',
-    INTERMITTENT_SERVICE = 'INTERMITTENT_SERVICE',
-    SLOW_CONNECTION = 'SLOW_CONNECTION',
-    ROUTER_ISSUE = 'ROUTER_ISSUE',
-    BILLING_QUESTION = 'BILLING_QUESTION',
-    OTHER = 'OTHER'
-}
+export type IncidentType =
+  | 'NO_SERVICE'
+  | 'INTERMITTENT_SERVICE'
+  | 'SLOW_CONNECTION'
+  | 'ROUTER_ISSUE'
+  | 'BILLING_QUESTION'
+  | 'OTHER';
 
 export interface Ticket {
     ticketId: string;
     lineNumber: string;
-    email: string;
+    email?: string;
     type: IncidentType;
     description: string | null;
     status: TicketStatus;

@@ -48,11 +48,11 @@
 | [ ] | [TC-037](#TC-037---Ordenar-por-prioridad) | HU-08 | Query Service + Frontend | Ordenar por prioridad |
 | [ ] | [TC-038](#TC-038---Ordenar-por-estado) | HU-08 | Query Service + Frontend | Ordenar por estado |
 | [ ] | [TC-039](#TC-039---Campo-de-ordenamiento-inválido) | HU-08 | Query Service + Frontend | Campo de ordenamiento inválido |
-| [ ] | [TC-040](#TC-040---Visualizar-total-de-tickets) | HU-09 | Query Service + Frontend | Visualizar total de tickets |
-| [ ] | [TC-041](#TC-041---Distribución-por-estado) | HU-09 | Query Service + Frontend | Distribución por estado |
-| [ ] | [TC-042](#TC-042---Distribución-por-prioridad) | HU-09 | Query Service + Frontend | Distribución por prioridad |
-| [ ] | [TC-043](#TC-043---Distribución-por-tipo-de-incidente) | HU-09 | Query Service + Frontend | Distribución por tipo de incidente |
-| [ ] | [TC-044](#TC-044---Consistencia-de-métricas-con-el-repositorio) | HU-09 | Query Service + Frontend | Consistencia de métricas con el repositorio |
+| [GREEN] | [TC-040](#TC-040---Visualizar-total-de-tickets) | HU-09 | Query Service + Frontend | Visualizar total de tickets |
+| [GREEN] | [TC-041](#TC-041---Distribución-por-estado) | HU-09 | Query Service + Frontend | Distribución por estado |
+| [GREEN] | [TC-042](#TC-042---Distribución-por-prioridad) | HU-09 | Query Service + Frontend | Distribución por prioridad |
+| [GREEN] | [TC-043](#TC-043---Distribución-por-tipo-de-incidente) | HU-09 | Query Service + Frontend | Distribución por tipo de incidente |
+| [GREEN] | [TC-044](#TC-044---Consistencia-de-métricas-con-el-repositorio) | HU-09 | Query Service + Frontend | Consistencia de métricas con el repositorio |
 | [ ] | [TC-045](#TC-045---Gráfica-de-distribución-por-prioridad) | HU-10 | Query Service + Frontend | Gráfica de distribución por prioridad |
 | [ ] | [TC-046](#TC-046---Gráfica-de-distribución-por-estado) | HU-10 | Query Service + Frontend | Gráfica de distribución por estado |
 | [ ] | [TC-047](#TC-047---Actualización-de-gráficas-con-filtros-activos) | HU-10 | Query Service + Frontend | Actualización de gráficas con filtros activos |

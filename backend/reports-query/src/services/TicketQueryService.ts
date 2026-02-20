@@ -1,8 +1,18 @@
 import { ITicketRepository } from '../repositories/ITicketRepository';
-import { Ticket } from '../types/Ticket';
 import { TicketNotFoundError } from '../errors/TicketNotFoundError';
 import { InvalidUuidFormatError } from '../errors/InvalidUuidFormatError';
-import { Ticket, TicketFilters, PaginatedResponse } from '../types';
+import { Ticket, TicketFilters } from '../types';
+
+// PaginatedResponse para mantener compatibilidad con getTickets
+interface PaginatedResponse<T> {
+  data: T[];
+  pagination: {
+    page: number;
+    pageSize: number;
+    totalItems: number;
+    totalPages: number;
+  };
+}
 
 const UUID_V4_REGEX = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
 const LINE_NUMBER_REGEX = /^\d{10}$/;
@@ -25,7 +35,20 @@ export class TicketQueryService {
   }
   
   async getTickets(filters: TicketFilters): Promise<PaginatedResponse<Ticket>> {
-        return this.repository.findAll(filters);
+        const tickets = await this.repository.findAll(filters);
+        // Convertir a PaginatedResponse si es necesario
+        if (Array.isArray(tickets)) {
+            return {
+                data: tickets,
+                pagination: {
+                    page: 1,
+                    pageSize: tickets.length,
+                    totalItems: tickets.length,
+                    totalPages: 1
+                }
+            };
+        }
+        return tickets;
     }
   
     async findByLineNumber(lineNumber: string): Promise<Ticket[]> {
@@ -34,6 +57,5 @@ export class TicketQueryService {
     }
     return this.repository.findByLineNumber(lineNumber);
   }
-}
 }
 
