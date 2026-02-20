@@ -24,8 +24,8 @@ describe('TC-032 — Buscar por número de línea válido con resultados', () =>
       description: null,
       priority: 'HIGH',
       status: 'IN_PROGRESS',
-      createdAt: new Date('2026-01-01T00:00:00.000Z'),
-      processedAt: new Date('2026-01-01T01:00:00.000Z'),
+      createdAt: '2026-01-01T00:00:00.000Z',
+      processedAt: '2026-01-01T01:00:00.000Z',
     },
     {
       ticketId: '550e8400-e29b-41d4-a716-446655440002',
@@ -34,8 +34,8 @@ describe('TC-032 — Buscar por número de línea válido con resultados', () =>
       description: null,
       priority: 'MEDIUM',
       status: 'IN_PROGRESS',
-      createdAt: new Date('2026-01-02T00:00:00.000Z'),
-      processedAt: new Date('2026-01-02T01:00:00.000Z'),
+      createdAt: '2026-01-02T00:00:00.000Z',
+      processedAt: '2026-01-02T01:00:00.000Z',
     },
     {
       ticketId: '550e8400-e29b-41d4-a716-446655440003',
@@ -44,8 +44,8 @@ describe('TC-032 — Buscar por número de línea válido con resultados', () =>
       description: null,
       priority: 'MEDIUM',
       status: 'RECEIVED',
-      createdAt: new Date('2026-01-03T00:00:00.000Z'),
-      processedAt: new Date('2026-01-03T01:00:00.000Z'),
+      createdAt: '2026-01-03T00:00:00.000Z',
+      processedAt: '2026-01-03T01:00:00.000Z',
     },
   ];
 

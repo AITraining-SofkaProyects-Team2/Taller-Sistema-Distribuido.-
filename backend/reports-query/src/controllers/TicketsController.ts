@@ -2,6 +2,30 @@ import { Request, Response } from 'express';
 import { TicketQueryService } from '../services/TicketQueryService';
 import { TicketStatus, TicketPriority, IncidentType } from '../types';
 
+// Type guards for validation
+function isValidTicketStatus(value: string): value is TicketStatus {
+    return ['RECEIVED', 'IN_PROGRESS'].includes(value);
+}
+
+function isValidTicketPriority(value: string): value is TicketPriority {
+    return ['HIGH', 'MEDIUM', 'LOW', 'PENDING'].includes(value);
+}
+
+function isValidIncidentType(value: string): value is IncidentType {
+    return ['NO_SERVICE', 'INTERMITTENT_SERVICE', 'SLOW_CONNECTION', 'ROUTER_ISSUE', 'BILLING_QUESTION', 'OTHER'].includes(value);
+}
+
+const VALID_STATUSES = ['RECEIVED', 'IN_PROGRESS'];
+const VALID_PRIORITIES = ['HIGH', 'MEDIUM', 'LOW', 'PENDING'];
+const VALID_INCIDENT_TYPES = [
+  'NO_SERVICE',
+  'INTERMITTENT_SERVICE',
+  'SLOW_CONNECTION',
+  'ROUTER_ISSUE',
+  'BILLING_QUESTION',
+  'OTHER'
+];
+
 export class TicketsController {
     constructor(private queryService: TicketQueryService) { }
 
@@ -10,45 +34,47 @@ export class TicketsController {
             const { status, priority, incidentType, dateFrom, dateTo, page, limit } = req.query;
 
             // Validation
-            const validStatuses = Object.values(TicketStatus) as string[];
-            const validPriorities = Object.values(TicketPriority) as string[];
-            const validIncidentTypes = Object.values(IncidentType) as string[];
+            const validStatuses = VALID_STATUSES;
+            const validPriorities = VALID_PRIORITIES;
+            const validIncidentTypes = VALID_INCIDENT_TYPES;
 
             let statusFilter: TicketStatus[] | undefined;
             if (status) {
                 const statuses = Array.isArray(status) ? status : [status];
+                const validatedStatuses: TicketStatus[] = [];
                 for (const s of statuses) {
-                    if (typeof s !== 'string' || !validStatuses.includes(s)) {
+                    if (typeof s !== 'string' || !isValidTicketStatus(s)) {
                         return res.status(400).json({
                             message: `"${s}" no es un estado válido`,
                             validValues: validStatuses
                         });
                     }
+                    validatedStatuses.push(s);
                 }
-                statusFilter = statuses as TicketStatus[];
+                statusFilter = validatedStatuses;
             }
 
             let priorityFilter: TicketPriority | undefined;
             if (priority) {
-                if (typeof priority !== 'string' || !validPriorities.includes(priority)) {
+                if (typeof priority !== 'string' || !isValidTicketPriority(priority)) {
                     return res.status(400).json({
                         message: `"${priority}" no es una prioridad válida`,
                         validValues: validPriorities
                     });
                 }
-                priorityFilter = priority as TicketPriority;
+                priorityFilter = priority;
             }
 
             let typeFilter: IncidentType | undefined;
             if (incidentType) {
-                if (typeof incidentType !== 'string' || !validIncidentTypes.includes(incidentType)) {
+                if (typeof incidentType !== 'string' || !isValidIncidentType(incidentType)) {
                     return res.status(400).json({
                         error: 'Bad Request',
                         message: `El tipo de incidente no es válido: ${incidentType}`,
                         validValues: validIncidentTypes
                     });
                 }
-                typeFilter = incidentType as IncidentType;
+                typeFilter = incidentType;
             }
 
             // Date validation

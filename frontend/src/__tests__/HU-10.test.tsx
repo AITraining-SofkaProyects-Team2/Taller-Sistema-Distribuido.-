@@ -1,5 +1,8 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
-import { render, screen, waitFor } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
+import PriorityChart from '../components/charts/PriorityChart';
+import StatusChart from '../components/charts/StatusChart';
+import type { MetricsData, StatusData } from '../components/charts/types';
 
 /**
  * HU-10 — Visualización gráfica
@@ -30,46 +33,6 @@ import { render, screen, waitFor } from '@testing-library/react';
  * - Todo en una prioridad: 25 HIGH, 0 en el resto (Válido - 1 segmento dominante)
  * - Sin tickets: 0 en todas (Válido - gráfica vacía o mensaje)
  */
-
-// Este componente será implementado en la siguiente fase (GREEN)
-// Por ahora, importarlo causará un error porque el archivo no existe
-// import { PriorityChart } from '../components/charts/PriorityChart';
-
-// Para la etapa RED, creamos un mock del componente que será mejorado en GREEN
-interface MetricsData {
-  HIGH: number;
-  MEDIUM: number;
-  LOW: number;
-  PENDING: number;
-}
-
-// Componente placeholder que será reemplazado en la fase GREEN
-// con una implementación real usando Chart.js, Recharts, o similar
-const PriorityChart = ({ data }: { data: MetricsData | null }) => {
-  if (!data) return null;
-  
-  return (
-    <div data-testid="priority-chart" data-chart-type="priority">
-      <div data-testid="chart-title">Distribución por Prioridad</div>
-      {data && (
-        <>
-          <div data-testid="chart-legend">
-            <ul data-testid="legend-items">
-              {Object.entries(data).map(([priority, count]) => (
-                <li key={priority} data-testid={`legend-${priority.toLowerCase()}`}>
-                  {priority}: {count}
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div data-testid="chart-data" data-chart-data={JSON.stringify(data)}>
-            {/* Placeholder para gráfica real: canvas/svg con Chart.js, Recharts, etc. */}
-          </div>
-        </>
-      )}
-    </div>
-  );
-};
 
 describe('HU-10 — Visualización gráfica', () => {
   beforeEach(() => {
@@ -378,38 +341,6 @@ describe('HU-10 — Visualización gráfica', () => {
    * - Todo en un estado: 25 RECEIVED, 0 IN_PROGRESS (Válido)
    * - Sin tickets: 0 en ambos estados (Válido)
    */
-
-  interface StatusData {
-    RECEIVED: number;
-    IN_PROGRESS: number;
-  }
-
-  // Componente placeholder para gráfica de distribución por estado
-  const StatusChart = ({ data }: { data: StatusData | null }) => {
-    if (!data) return null;
-    
-    return (
-      <div data-testid="status-chart" data-chart-type="status">
-        <div data-testid="chart-title">Distribución por Estado</div>
-        {data && (
-          <>
-            <div data-testid="chart-legend">
-              <ul data-testid="legend-items">
-                {Object.entries(data).map(([status, count]) => (
-                  <li key={status} data-testid={`legend-${status.toLowerCase()}`}>
-                    {status}: {count}
-                  </li>
-                ))}
-              </ul>
-            </div>
-            <div data-testid="chart-data" data-chart-data={JSON.stringify(data)}>
-              {/* Placeholder para gráfica real */}
-            </div>
-          </>
-        )}
-      </div>
-    );
-  };
 
   describe('TC-046 — Gráfica de distribución por estado', () => {
     describe('Partición de equivalencia: Sin tickets (0)', () => {

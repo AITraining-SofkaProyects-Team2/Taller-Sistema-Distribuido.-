@@ -433,7 +433,7 @@ describe('HU-09 — Métricas Agregadas', () => {
         expect(response.body.byStatus.IN_PROGRESS).toBe(13);
 
         // And: la suma de todos los valores de "byStatus" es igual a "totalTickets"
-        const totalByStatus = Object.values(response.body.byStatus).reduce((acc, val) => acc + (val as number), 0);
+        const totalByStatus = Object.values(response.body.byStatus).reduce((acc: number, val) => acc + (val as number), 0);
         expect(totalByStatus).toBe(response.body.totalTickets);
         expect(totalByStatus).toBe(25);
       });
@@ -515,7 +515,7 @@ describe('HU-09 — Métricas Agregadas', () => {
         expect(response.status).toBe(200);
 
         // And: la suma de todos los valores de "byStatus" es igual a "totalTickets"
-        const totalByStatus = Object.values(response.body.byStatus).reduce((acc, val) => acc + (val as number), 0);
+        const totalByStatus = Object.values(response.body.byStatus).reduce((acc: number, val) => acc + (val as number), 0);
         expect(totalByStatus).toBe(response.body.totalTickets);
         expect(totalByStatus).toBe(25);
       });
@@ -588,7 +588,7 @@ describe('HU-09 — Métricas Agregadas', () => {
         expect(response.body.byStatus.RECEIVED).toBe(1);
 
         // And: la suma es igual a totalTickets que debe ser 1
-        const totalByStatus = Object.values(response.body.byStatus).reduce((acc, val) => acc + (val as number), 0);
+        const totalByStatus = Object.values(response.body.byStatus).reduce((acc: number, val) => acc + (val as number), 0);
         expect(totalByStatus).toBe(1);
         expect(totalByStatus).toBe(response.body.totalTickets);
       });
@@ -837,7 +837,7 @@ describe('HU-09 — Métricas Agregadas', () => {
         expect(response.body.byPriority.PENDING).toBe(2);
 
         // And: la suma de todos los valores de "byPriority" es igual a "totalTickets"
-        const totalByPriority = Object.values(response.body.byPriority).reduce((acc, val) => acc + (val as number), 0);
+        const totalByPriority = Object.values(response.body.byPriority).reduce((acc: number, val) => acc + (val as number), 0);
         expect(totalByPriority).toBe(response.body.totalTickets);
         expect(totalByPriority).toBe(25);
       });
@@ -897,7 +897,7 @@ describe('HU-09 — Métricas Agregadas', () => {
         expect(response.body.byPriority.PENDING).toBe(6);
 
         // And: la suma es igual a totalTickets
-        const totalByPriority = Object.values(response.body.byPriority).reduce((acc, val) => acc + (val as number), 0);
+        const totalByPriority = Object.values(response.body.byPriority).reduce((acc: number, val) => acc + (val as number), 0);
         expect(totalByPriority).toBe(response.body.totalTickets);
         expect(totalByPriority).toBe(24);
       });
@@ -953,7 +953,7 @@ describe('HU-09 — Métricas Agregadas', () => {
         expect(response.status).toBe(200);
 
         // And: la suma de todos los valores de "byPriority" es igual a "totalTickets"
-        const totalByPriority = Object.values(response.body.byPriority).reduce((acc, val) => acc + (val as number), 0);
+        const totalByPriority = Object.values(response.body.byPriority).reduce((acc: number, val) => acc + (val as number), 0);
         expect(totalByPriority).toBe(response.body.totalTickets);
         expect(totalByPriority).toBe(25);
       });
@@ -1044,7 +1044,7 @@ describe('HU-09 — Métricas Agregadas', () => {
         expect(response.body.byPriority.HIGH).toBe(1);
 
         // And: la suma es igual a totalTickets que debe ser 1
-        const totalByPriority = Object.values(response.body.byPriority).reduce((acc, val) => acc + (val as number), 0);
+        const totalByPriority = Object.values(response.body.byPriority).reduce((acc: number, val) => acc + (val as number), 0);
         expect(totalByPriority).toBe(1);
         expect(totalByPriority).toBe(response.body.totalTickets);
       });
@@ -1393,7 +1393,7 @@ describe('HU-09 — Métricas Agregadas', () => {
         expect(response.body.byType.OTHER).toBe(1);
 
         // And: la suma de todos los valores de "byType" es igual a "totalTickets"
-        const totalByType = Object.values(response.body.byType).reduce((acc, val) => acc + (val as number), 0);
+        const totalByType = Object.values(response.body.byType).reduce((acc: number, val) => acc + (val as number), 0);
         expect(totalByType).toBe(response.body.totalTickets);
         expect(totalByType).toBe(18);
       });
@@ -1471,7 +1471,7 @@ describe('HU-09 — Métricas Agregadas', () => {
         expect(response.body.byType.OTHER).toBe(3);
 
         // And: la suma es igual a totalTickets
-        const totalByType = Object.values(response.body.byType).reduce((acc, val) => acc + (val as number), 0);
+        const totalByType = Object.values(response.body.byType).reduce((acc: number, val) => acc + (val as number), 0);
         expect(totalByType).toBe(response.body.totalTickets);
         expect(totalByType).toBe(18);
       });
@@ -1535,7 +1535,7 @@ describe('HU-09 — Métricas Agregadas', () => {
         expect(response.status).toBe(200);
 
         // And: la suma de todos los valores de "byType" es igual a "totalTickets"
-        const totalByType = Object.values(response.body.byType).reduce((acc, val) => acc + (val as number), 0);
+        const totalByType = Object.values(response.body.byType).reduce((acc: number, val) => acc + (val as number), 0);
         expect(totalByType).toBe(response.body.totalTickets);
         expect(totalByType).toBe(18);
       });
@@ -1612,7 +1612,7 @@ describe('HU-09 — Métricas Agregadas', () => {
         expect(response.body.byType.NO_SERVICE).toBe(1);
 
         // And: la suma es igual a totalTickets que debe ser 1
-        const totalByType = Object.values(response.body.byType).reduce((acc, val) => acc + (val as number), 0);
+        const totalByType = Object.values(response.body.byType).reduce((acc: number, val) => acc + (val as number), 0);
         expect(totalByType).toBe(1);
         expect(totalByType).toBe(response.body.totalTickets);
       });
@@ -1662,15 +1662,15 @@ describe('HU-09 — Métricas Agregadas', () => {
         expect(metricsResponse.body.totalTickets).toBe(0);
 
         // And: la suma de byStatus es igual a totalTickets
-        const totalByStatus = Object.values(metricsResponse.body.byStatus).reduce((acc, val) => acc + (val as number), 0);
+        const totalByStatus = Object.values(metricsResponse.body.byStatus).reduce((acc: number, val) => acc + (val as number), 0);
         expect(totalByStatus).toBe(metricsResponse.body.totalTickets);
 
         // And: la suma de byPriority es igual a totalTickets
-        const totalByPriority = Object.values(metricsResponse.body.byPriority).reduce((acc, val) => acc + (val as number), 0);
+        const totalByPriority = Object.values(metricsResponse.body.byPriority).reduce((acc: number, val) => acc + (val as number), 0);
         expect(totalByPriority).toBe(metricsResponse.body.totalTickets);
 
         // And: la suma de byType es igual a totalTickets
-        const totalByType = Object.values(metricsResponse.body.byType).reduce((acc, val) => acc + (val as number), 0);
+        const totalByType = Object.values(metricsResponse.body.byType).reduce((acc: number, val) => acc + (val as number), 0);
         expect(totalByType).toBe(metricsResponse.body.totalTickets);
       });
     });
@@ -1734,15 +1734,15 @@ describe('HU-09 — Métricas Agregadas', () => {
         expect(metricsResponse.body.totalTickets).toBe(5);
 
         // And: la suma de byStatus coincide con totalTickets
-        const totalByStatus = Object.values(metricsResponse.body.byStatus).reduce((acc, val) => acc + (val as number), 0);
+        const totalByStatus = Object.values(metricsResponse.body.byStatus).reduce((acc: number, val) => acc + (val as number), 0);
         expect(totalByStatus).toBe(metricsResponse.body.totalTickets);
 
         // And: la suma de byPriority coincide con totalTickets
-        const totalByPriority = Object.values(metricsResponse.body.byPriority).reduce((acc, val) => acc + (val as number), 0);
+        const totalByPriority = Object.values(metricsResponse.body.byPriority).reduce((acc: number, val) => acc + (val as number), 0);
         expect(totalByPriority).toBe(metricsResponse.body.totalTickets);
 
         // And: la suma de byType coincide con totalTickets
-        const totalByType = Object.values(metricsResponse.body.byType).reduce((acc, val) => acc + (val as number), 0);
+        const totalByType = Object.values(metricsResponse.body.byType).reduce((acc: number, val) => acc + (val as number), 0);
         expect(totalByType).toBe(metricsResponse.body.totalTickets);
       });
 
@@ -1770,13 +1770,13 @@ describe('HU-09 — Métricas Agregadas', () => {
         expect(metricsResponse.body.totalTickets).toBe(10);
 
         // And: todas las distribuciones suman a totalTickets
-        const totalByStatus = Object.values(metricsResponse.body.byStatus).reduce((acc, val) => acc + (val as number), 0);
+        const totalByStatus = Object.values(metricsResponse.body.byStatus).reduce((acc: number, val) => acc + (val as number), 0);
         expect(totalByStatus).toBe(10);
 
-        const totalByPriority = Object.values(metricsResponse.body.byPriority).reduce((acc, val) => acc + (val as number), 0);
+        const totalByPriority = Object.values(metricsResponse.body.byPriority).reduce((acc: number, val) => acc + (val as number), 0);
         expect(totalByPriority).toBe(10);
 
-        const totalByType = Object.values(metricsResponse.body.byType).reduce((acc, val) => acc + (val as number), 0);
+        const totalByType = Object.values(metricsResponse.body.byType).reduce((acc: number, val) => acc + (val as number), 0);
         expect(totalByType).toBe(10);
       });
     });
@@ -1840,15 +1840,15 @@ describe('HU-09 — Métricas Agregadas', () => {
         expect(metricsResponse.body.totalTickets).toBe(25);
 
         // And: la suma de "byStatus" coincide con totalTickets
-        const totalByStatus = Object.values(metricsResponse.body.byStatus).reduce((acc, val) => acc + (val as number), 0);
+        const totalByStatus = Object.values(metricsResponse.body.byStatus).reduce((acc: number, val) => acc + (val as number), 0);
         expect(totalByStatus).toBe(25);
 
         // And: la suma de "byPriority" coincide con totalTickets
-        const totalByPriority = Object.values(metricsResponse.body.byPriority).reduce((acc, val) => acc + (val as number), 0);
+        const totalByPriority = Object.values(metricsResponse.body.byPriority).reduce((acc: number, val) => acc + (val as number), 0);
         expect(totalByPriority).toBe(25);
 
         // And: la suma de "byType" coincide con totalTickets
-        const totalByType = Object.values(metricsResponse.body.byType).reduce((acc, val) => acc + (val as number), 0);
+        const totalByType = Object.values(metricsResponse.body.byType).reduce((acc: number, val) => acc + (val as number), 0);
         expect(totalByType).toBe(25);
       });
 
@@ -1876,9 +1876,9 @@ describe('HU-09 — Métricas Agregadas', () => {
         expect(metricsResponse.body.totalTickets).toBe(20);
 
         // And: todas las sumas coinciden
-        const totalByStatus = Object.values(metricsResponse.body.byStatus).reduce((acc, val) => acc + (val as number), 0);
-        const totalByPriority = Object.values(metricsResponse.body.byPriority).reduce((acc, val) => acc + (val as number), 0);
-        const totalByType = Object.values(metricsResponse.body.byType).reduce((acc, val) => acc + (val as number), 0);
+        const totalByStatus = Object.values(metricsResponse.body.byStatus).reduce((acc: number, val) => acc + (val as number), 0);
+        const totalByPriority = Object.values(metricsResponse.body.byPriority).reduce((acc: number, val) => acc + (val as number), 0);
+        const totalByType = Object.values(metricsResponse.body.byType).reduce((acc: number, val) => acc + (val as number), 0);
 
         expect(totalByStatus).toBe(20);
         expect(totalByPriority).toBe(20);
@@ -1911,9 +1911,9 @@ describe('HU-09 — Métricas Agregadas', () => {
         expect(metricsResponse.body.totalTickets).toBe(100);
 
         // And: todas las sumas son consistentes con totalTickets
-        const totalByStatus = Object.values(metricsResponse.body.byStatus).reduce((acc, val) => acc + (val as number), 0);
-        const totalByPriority = Object.values(metricsResponse.body.byPriority).reduce((acc, val) => acc + (val as number), 0);
-        const totalByType = Object.values(metricsResponse.body.byType).reduce((acc, val) => acc + (val as number), 0);
+        const totalByStatus = Object.values(metricsResponse.body.byStatus).reduce((acc: number, val) => acc + (val as number), 0);
+        const totalByPriority = Object.values(metricsResponse.body.byPriority).reduce((acc: number, val) => acc + (val as number), 0);
+        const totalByType = Object.values(metricsResponse.body.byType).reduce((acc: number, val) => acc + (val as number), 0);
 
         expect(totalByStatus).toBe(100);
         expect(totalByPriority).toBe(100);
@@ -1955,9 +1955,9 @@ describe('HU-09 — Métricas Agregadas', () => {
         expect(metricsResponse.body.totalTickets).toBe(15);
 
         // And: cada categoría suma exactamente 15 (sin duplicados)
-        const totalByStatus = Object.values(metricsResponse.body.byStatus).reduce((acc, val) => acc + (val as number), 0);
-        const totalByPriority = Object.values(metricsResponse.body.byPriority).reduce((acc, val) => acc + (val as number), 0);
-        const totalByType = Object.values(metricsResponse.body.byType).reduce((acc, val) => acc + (val as number), 0);
+        const totalByStatus = Object.values(metricsResponse.body.byStatus).reduce((acc: number, val) => acc + (val as number), 0);
+        const totalByPriority = Object.values(metricsResponse.body.byPriority).reduce((acc: number, val) => acc + (val as number), 0);
+        const totalByType = Object.values(metricsResponse.body.byType).reduce((acc: number, val) => acc + (val as number), 0);
 
         expect(totalByStatus).toBe(15);
         expect(totalByPriority).toBe(15);

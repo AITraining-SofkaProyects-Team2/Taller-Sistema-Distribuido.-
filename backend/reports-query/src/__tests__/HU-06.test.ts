@@ -25,8 +25,8 @@ describe('TC-028 — Buscar por ID de ticket existente', () => {
     description: null,
     priority: 'HIGH',
     status: 'IN_PROGRESS',
-    createdAt: new Date('2026-01-01T00:00:00.000Z'),
-    processedAt: new Date('2026-01-01T01:00:00.000Z'),
+    createdAt: '2026-01-01T00:00:00.000Z',
+    processedAt: '2026-01-01T01:00:00.000Z',
   };
 
   beforeEach(() => {
