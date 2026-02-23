@@ -42,16 +42,7 @@ const DEFAULT_DISTRIBUTIONS = {
 // INTERFACES PÚBLICAS
 // ============================================================================
 
-export interface Ticket {
-  ticketId: string;
-  lineNumber: string;
-  type: string;
-  priority: string;
-  status: string;
-  description?: string | null;
-  createdAt: string;
-  processedAt?: string;
-}
+import type { Ticket, PaginatedResponse } from '../types/Ticket';
 
 export interface Metrics {
   totalTickets: number;
@@ -63,16 +54,6 @@ export interface Metrics {
   };
   byType: {
     [key: string]: number;
-  };
-}
-
-export interface PaginatedResponse<T> {
-  data: T[];
-  pagination: {
-    page: number;
-    pageSize: number;
-    totalItems: number;
-    totalPages: number;
   };
 }
 

@@ -1,5 +1,6 @@
 import express from 'express';
 import { MetricsService, IncidentRepository } from './services/metricsService';
+import { TicketRepository } from './repositories/TicketRepository';
 import ticketRoutes from './routes/tickets.routes';
 
 /**
@@ -11,9 +12,12 @@ export function createApp(incidentRepository?: IncidentRepository) {
   const app = express();
   app.use(express.json());
 
-  // Si no se proporciona repositorio, crear uno en memoria para desarrollo
-  let repo = incidentRepository;
-  if (!repo) {
+  // Si no se proporciona repositorio, crear uno apropiado según el entorno.
+  // En tests usamos un stub in-memory; en ejecución normal usamos `TicketRepository` (Postgres).
+  let repo: IncidentRepository;
+  if (incidentRepository) {
+    repo = incidentRepository;
+  } else if (process.env.NODE_ENV === 'test') {
     repo = {
       async findAll() {
         return [];
@@ -28,6 +32,9 @@ export function createApp(incidentRepository?: IncidentRepository) {
         throw new Error('Not implemented');
       },
     };
+  } else {
+    // En entorno real, usar la implementación que conecta a Postgres
+    repo = new TicketRepository();
   }
 
 

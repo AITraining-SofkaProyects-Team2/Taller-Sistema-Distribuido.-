@@ -38,4 +38,10 @@ export const ticketsService = {
     const queryString = buildQueryString(filters);
     return reportsClient.get<PaginatedResponse<Ticket>>(`/api/tickets${queryString}`);
   },
+  /**
+   * Fetch aggregated metrics for tickets.
+   */
+  getMetrics: async (): Promise<any> => {
+    return reportsClient.get(`/api/tickets/metrics`);
+  },
 };

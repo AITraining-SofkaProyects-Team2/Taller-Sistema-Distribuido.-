@@ -16,7 +16,9 @@ export class HttpClient {
   private readonly defaultHeaders: Record<string, string>;
 
   constructor(config?: Partial<HttpClientConfig>) {
-    this.baseUrl = config?.baseUrl || API_BASE_URL;
+    // Allow explicitly passing an empty string as baseUrl to make requests
+    // relative to the current origin (useful when the app is served behind a proxy).
+    this.baseUrl = config && config.baseUrl !== undefined ? config.baseUrl : API_BASE_URL;
     this.defaultHeaders = {
       'Content-Type': 'application/json',
       ...config?.defaultHeaders,
