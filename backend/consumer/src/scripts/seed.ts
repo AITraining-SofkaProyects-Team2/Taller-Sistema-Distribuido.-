@@ -21,38 +21,45 @@ const sampleTickets = (): SeedTicket[] => {
       ticket_id: randomUUID(),
       line_number: 'LN-1001',
       email: 'user1@example.com',
-      type: 'outage',
+      type: 'NO_SERVICE',
       description: 'Customer reports total service outage',
-      priority: 'high',
-      status: 'open',
+      priority: 'HIGH',
+      status: 'RECEIVED',
       created_at: now,
     },
     {
       ticket_id: randomUUID(),
       line_number: 'LN-1002',
       email: 'user2@example.com',
-      type: 'latency',
+      type: 'INTERMITTENT_SERVICE',
       description: 'Intermittent high latency observed',
-      priority: 'medium',
-      status: 'open',
+      priority: 'MEDIUM',
+      status: 'RECEIVED',
       created_at: now,
     },
     {
       ticket_id: randomUUID(),
       line_number: 'LN-1003',
       email: null,
-      type: 'billing',
+      type: 'BILLING_QUESTION',
       description: 'Question about charges',
-      priority: 'low',
-      status: 'closed',
+      priority: 'LOW',
+      status: 'IN_PROGRESS',
       created_at: now,
     },
   ];
 
   // generate 32 additional tickets to reach 35 total
-  const types = ['outage', 'latency', 'billing', 'installation', 'maintenance'];
-  const priorities = ['low', 'medium', 'high'];
-  const statuses = ['open', 'in_progress', 'closed'];
+  const types = [
+    'NO_SERVICE',
+    'INTERMITTENT_SERVICE',
+    'SLOW_CONNECTION',
+    'ROUTER_ISSUE',
+    'BILLING_QUESTION',
+    'OTHER',
+  ];
+  const priorities = ['HIGH', 'MEDIUM', 'LOW'];
+  const statuses = ['RECEIVED', 'IN_PROGRESS'];
 
   for (let i = 4; i <= 35; i++) {
     const idx = i - 4;
