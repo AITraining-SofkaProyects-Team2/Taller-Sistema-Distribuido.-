@@ -22,6 +22,8 @@ const buildQueryString = (filters: TicketFilters): string => {
   if (filters.dateTo) params.append('dateTo', filters.dateTo);
   if (filters.page) params.append('page', String(filters.page));
   if (filters.limit) params.append('limit', String(filters.limit));
+  if (filters.ticketId) params.append('ticketId', filters.ticketId);
+  if (filters.lineNumber) params.append('lineNumber', filters.lineNumber);
 
   const qs = params.toString();
   return qs ? `?${qs}` : '';
