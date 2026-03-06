@@ -129,7 +129,7 @@ export class MessageHandler {
             };
 
             // Persist in Consumer repository (§2.2 decision)
-            await this.repository.save(processedIncident);
+            this.repository.save(processedIncident);
 
             this.logger.info('Incident processed and persisted', {
                 ticketId: processedIncident.ticketId,

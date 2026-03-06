@@ -14,7 +14,7 @@ const createMockChannel = (): Channel =>
     }) as unknown as Channel;
 
 const createMockRepository = (): IIncidentRepository => ({
-    save: vi.fn((incident) => Promise.resolve(incident)),
+    save: vi.fn((incident) => incident),
 });
 
 const silentLogger: ILogger = {
@@ -223,7 +223,7 @@ describe('MessageHandler', () => {
 
     it('reintenta si el repositorio lanza error', async () => {
         const failRepo: IIncidentRepository = {
-            save: vi.fn(async () => { throw new Error('DB error'); }),
+            save: vi.fn(() => { throw new Error('DB error'); }),
         };
         const failHandler = new MessageHandler(channel, failRepo, silentLogger);
 
