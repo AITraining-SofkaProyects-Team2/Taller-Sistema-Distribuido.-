@@ -46,12 +46,10 @@ class RabbitMQConnectionManager implements IConnectionManager {
      * @returns {Promise<void>} Se resuelve cuando la conexión se establece con éxito.
      * @throws {Error} Si la conexión falla.
      */
-    async connect(): Promise<void> {
+    async connect(retries = 5, delay = 2000): Promise<void> {
+    if (this.connection) return;
 
-        if (this.connection) {
-            return; // Already connected
-        }
-
+    for (let i = 0; i < retries; i++) {
         try {
             logger.info('Connecting to RabbitMQ...', { url: rabbitmqConfig.url });
 
@@ -67,13 +65,22 @@ class RabbitMQConnectionManager implements IConnectionManager {
             });
 
             this.setupEventHandlers();
+            return; // ← éxito, salimos
+
         } catch (error) {
             const errorMessage = error instanceof Error ? error.message : 'Unknown error';
-            logger.error('Failed to connect to RabbitMQ', { error: errorMessage });
-            throw error;
+            logger.error(`Failed to connect to RabbitMQ (attempt ${i + 1}/${retries})`, { error: errorMessage });
+
+            if (i < retries - 1) {
+                logger.info(`Retrying in ${delay}ms...`);
+                await new Promise(res => setTimeout(res, delay));
+                delay *= 2; // backoff exponencial
+            } else {
+                throw error; // agotamos los reintentos, ahora sí lanzamos el error
+            }
         }
     }
-
+}
     /**
      * Cierra el canal y la conexión activa de RabbitMQ de forma segura.
      * 

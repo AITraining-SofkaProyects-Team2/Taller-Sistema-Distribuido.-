@@ -1,4 +1,5 @@
 import type { FC } from 'react';
+import { Link } from 'react-router-dom';
 
 const Header: FC = () => {
     return (
@@ -14,6 +15,18 @@ const Header: FC = () => {
                         <span className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-violet-600">
                             Atlas Fiber
                         </span>
+                    </div>
+                    <div className="flex gap-2">
+                        <Link to="/">
+                            <button className="px-4 py-2 bg-gray-200 text-gray-800 rounded hover:bg-gray-300 transition-colors cursor-pointer">
+                                Inicio
+                            </button>
+                        </Link>
+                        <Link to="/dashboard">
+                            <button className="px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700 transition-colors cursor-pointer">
+                                Ir a Dashboard
+                            </button>
+                        </Link>
                     </div>
                 </div>
             </div>

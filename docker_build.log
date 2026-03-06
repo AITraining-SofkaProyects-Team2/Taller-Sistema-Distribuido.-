@@ -1,0 +1,542 @@
+ Image producer-service Building 
+ Image consumer-service Building 
+ Image reports-query-service Building 
+ Image frontend-service Building 
+#1 [internal] load local bake definitions
+#1 reading from stdin 2.35kB done
+#1 DONE 0.0s
+
+#2 [frontend internal] load build definition from Dockerfile
+#2 transferring dockerfile: 428B 0.0s done
+#2 DONE 0.0s
+
+#3 [producer internal] load build definition from Dockerfile
+#3 transferring dockerfile: 959B done
+#3 DONE 0.0s
+
+#4 [consumer internal] load build definition from Dockerfile
+#4 transferring dockerfile: 347B 0.0s done
+#4 DONE 0.0s
+
+#5 [reports-query internal] load build definition from Dockerfile
+#5 transferring dockerfile: 320B 0.0s done
+#5 DONE 0.0s
+
+#6 [reports-query internal] load metadata for docker.io/library/node:20-alpine
+#6 ...
+
+#7 [auth] library/nginx:pull token for registry-1.docker.io
+#7 DONE 0.0s
+
+#8 [auth] library/node:pull token for registry-1.docker.io
+#8 DONE 0.0s
+
+#9 [consumer internal] load metadata for docker.io/library/node:18-alpine
+#9 DONE 1.1s
+
+#6 [reports-query internal] load metadata for docker.io/library/node:20-alpine
+#6 DONE 1.1s
+
+#10 [reports-query internal] load .dockerignore
+#10 transferring context: 2B done
+#10 DONE 0.0s
+
+#11 [producer internal] load .dockerignore
+#11 transferring context: 2B done
+#11 DONE 0.0s
+
+#12 [consumer internal] load .dockerignore
+#12 transferring context: 73B done
+#12 DONE 0.0s
+
+#13 [reports-query 1/8] FROM docker.io/library/node:20-alpine@sha256:09e2b3d9726018aecf269bd35325f46bf75046a643a66d28360ec71132750ec8
+#13 resolve docker.io/library/node:20-alpine@sha256:09e2b3d9726018aecf269bd35325f46bf75046a643a66d28360ec71132750ec8 0.0s done
+#13 DONE 0.0s
+
+#14 [consumer builder 1/6] FROM docker.io/library/node:18-alpine@sha256:8d6421d663b4c28fd3ebc498332f249011d118945588d0a35cb9bc4b8ca09d9e
+#14 resolve docker.io/library/node:18-alpine@sha256:8d6421d663b4c28fd3ebc498332f249011d118945588d0a35cb9bc4b8ca09d9e 0.0s done
+#14 DONE 0.0s
+
+#15 [producer internal] load build context
+#15 transferring context: 2.48kB done
+#15 DONE 0.0s
+
+#16 [consumer internal] load build context
+#16 transferring context: 1.92kB done
+#16 DONE 0.0s
+
+#17 [reports-query internal] load build context
+#17 transferring context: 1.25kB done
+#17 DONE 0.0s
+
+#18 [reports-query 6/8] COPY src ./src
+#18 CACHED
+
+#19 [reports-query 5/8] COPY tsconfig.json vitest.config.ts ./
+#19 CACHED
+
+#20 [reports-query 7/8] COPY tests ./tests
+#20 CACHED
+
+#21 [reports-query 3/8] COPY package.json ./
+#21 CACHED
+
+#22 [reports-query 4/8] RUN npm install
+#22 CACHED
+
+#23 [reports-query 8/8] RUN npx tsc
+#23 CACHED
+
+#24 [producer builder 6/7] COPY src ./src
+#24 CACHED
+
+#25 [producer builder 4/7] RUN npm ci
+#25 CACHED
+
+#26 [producer production 4/6] RUN npm ci --only=production
+#26 CACHED
+
+#27 [producer 2/8] WORKDIR /app
+#27 CACHED
+
+#28 [producer builder 5/7] COPY tsconfig.json ./
+#28 CACHED
+
+#29 [producer builder 7/7] RUN npm run build
+#29 CACHED
+
+#30 [producer production 5/6] COPY --from=builder /app/dist ./dist
+#30 CACHED
+
+#31 [producer builder 3/7] COPY package*.json ./
+#31 CACHED
+
+#32 [producer production 6/6] RUN addgroup -g 1001 -S nodejs &&     adduser -S producer -u 1001 -G nodejs
+#32 CACHED
+
+#33 [consumer builder 5/6] COPY . .
+#33 CACHED
+
+#34 [consumer builder 3/6] COPY package*.json tsconfig.json ./
+#34 CACHED
+
+#35 [consumer builder 4/6] RUN npm install
+#35 CACHED
+
+#36 [consumer stage-1 4/5] RUN npm install --omit=dev
+#36 CACHED
+
+#37 [consumer builder 2/6] WORKDIR /app
+#37 CACHED
+
+#38 [consumer stage-1 3/5] COPY package*.json ./
+#38 CACHED
+
+#39 [consumer builder 6/6] RUN npm run build
+#39 CACHED
+
+#40 [consumer stage-1 5/5] COPY --from=builder /app/dist ./dist
+#40 CACHED
+
+#41 [consumer] exporting to image
+#41 exporting layers done
+#41 exporting manifest sha256:bba9c9257f7fb39c78c3f00439c074b1f7a3a4cd2cf28ef117f01fef6f71c4b0 done
+#41 exporting config sha256:16c9dc99d54b386b29f5cc6f55a9f386d55a4b8c82555bbd7b708460cbca9348 done
+#41 exporting attestation manifest sha256:8b8065265db0fa73e69b28d7b3af918feda6d4684367989e311149278fb41ca4
+#41 exporting attestation manifest sha256:8b8065265db0fa73e69b28d7b3af918feda6d4684367989e311149278fb41ca4 0.0s done
+#41 exporting manifest list sha256:4f3161426b36e995208fec14618006d098f2bda7de6c505d9571e403b4ad008c 0.0s done
+#41 naming to docker.io/library/consumer-service:latest done
+#41 unpacking to docker.io/library/consumer-service:latest done
+#41 DONE 0.1s
+
+#42 [producer] exporting to image
+#42 exporting layers done
+#42 exporting manifest sha256:fa15d8f701a5c21626df3d7169ac4758141877285127876ff6481f252d64e96c done
+#42 exporting config sha256:f89f429bc01fb2fb3834a4a114c2a35eec7df8651554ccb9f6bb68cb10f8854c done
+#42 exporting attestation manifest sha256:f74d96b61a6846f4f9a708e9e619229d752c524a4e73714d3554920cbdb393e2 0.0s done
+#42 exporting manifest list sha256:2f7179e56b884ba04e17603a99bf17f39c01da0e03c2631cb77f9f71018238a7 0.0s done
+#42 naming to docker.io/library/producer-service:latest done
+#42 unpacking to docker.io/library/producer-service:latest done
+#42 DONE 0.1s
+
+#43 [reports-query] exporting to image
+#43 exporting layers done
+#43 exporting manifest sha256:a7a016e04a46538f56a986985acc364e77bc35bb7d6575ce9a1313871ee27fbe done
+#43 exporting config sha256:f3c693e2da55a1d3c9a4e27b9f538e5a3cf3af89b69114541ad65a3c32e6fe16 done
+#43 exporting attestation manifest sha256:489bf258ac444734ba22681d081d9bc0e5f45e01379de14955698e766b97340e 0.0s done
+#43 exporting manifest list sha256:263f14f70c14cc70cf619f2aa41be5742f9acb07bfb34dc2fb584a2e4feda29f 0.0s done
+#43 naming to docker.io/library/reports-query-service:latest done
+#43 unpacking to docker.io/library/reports-query-service:latest 0.0s done
+#43 DONE 0.1s
+
+#44 [frontend internal] load metadata for docker.io/library/nginx:alpine
+#44 DONE 1.4s
+
+#13 [frontend 1/8] FROM docker.io/library/node:20-alpine@sha256:09e2b3d9726018aecf269bd35325f46bf75046a643a66d28360ec71132750ec8
+#13 resolve docker.io/library/node:20-alpine@sha256:09e2b3d9726018aecf269bd35325f46bf75046a643a66d28360ec71132750ec8 0.0s done
+#13 DONE 0.0s
+
+#45 [frontend internal] load .dockerignore
+#45 transferring context: 2B done
+#45 DONE 0.0s
+
+#46 [frontend stage-1 1/2] FROM docker.io/library/nginx:alpine@sha256:1d13701a5f9f3fb01aaa88cef2344d65b6b5bf6b7d9fa4cf0dca557a8d7702ba
+#46 resolve docker.io/library/nginx:alpine@sha256:1d13701a5f9f3fb01aaa88cef2344d65b6b5bf6b7d9fa4cf0dca557a8d7702ba 0.1s done
+#46 DONE 0.1s
+
+#47 [consumer] resolving provenance for metadata file
+#47 DONE 0.1s
+
+#48 [producer] resolving provenance for metadata file
+#48 DONE 0.1s
+
+#49 [reports-query] resolving provenance for metadata file
+#49 DONE 0.0s
+
+#50 [frontend internal] load build context
+#50 transferring context: 758.03kB 0.5s done
+#50 DONE 0.5s
+
+#27 [frontend 2/8] WORKDIR /app
+#27 CACHED
+
+#51 [frontend builder 3/6] COPY package*.json ./
+#51 CACHED
+
+#52 [frontend builder 4/6] RUN npm install
+#52 CACHED
+
+#53 [frontend builder 5/6] COPY . .
+#53 CACHED
+
+#54 [frontend builder 6/6] RUN npm run build
+#54 CACHED
+
+#55 [frontend stage-1 2/2] COPY --from=builder /app/dist /usr/share/nginx/html
+#55 CACHED
+
+#56 [frontend] exporting to image
+#56 exporting layers done
+#56 exporting manifest sha256:c7daae705ee4a8852f69568c1a5bc440d2161d963699406a070481beceef835c done
+#56 exporting config sha256:cfacead5377d90b30c0e5d50b388210aacab53c01b1a44b587a2b74fc45b7ee1 done
+#56 exporting attestation manifest sha256:912109a52a5c6055caed30bba45f73dcf393d38f74270008226fa74b887d7273 0.0s done
+#56 exporting manifest list sha256:23d050bb15b843b45a7d97bde5645e68e5c7d0c03a8e875a3e3f167607021d94 done
+#56 naming to docker.io/library/frontend-service:latest done
+#56 unpacking to docker.io/library/frontend-service:latest done
+#56 DONE 0.1s
+
+#57 [frontend] resolving provenance for metadata file
+#57 DONE 0.0s
+ Image frontend-service Built 
+ Image reports-query-service Built 
+ Image consumer-service Built 
+ Image producer-service Built 
+ Network taller-sistema-distribuido-_default Creating 
+ Network taller-sistema-distribuido-_default Created 
+ Container postgres-db Creating 
+ Container rabbitmq-complaints Creating 
+ Container postgres-db Created 
+ Container reports-query-service Creating 
+ Container rabbitmq-complaints Created 
+ Container consumer-service Creating 
+ Container producer-service Creating 
+ Container producer-service Created 
+ Container frontend-service Creating 
+ Container consumer-service Created 
+ Container reports-query-service Created 
+ Container frontend-service Created 
+Attaching to consumer-service, frontend-service, postgres-db, producer-service, rabbitmq-complaints, reports-query-service
+ Container postgres-db Starting 
+ Container rabbitmq-complaints Starting 
+ Container postgres-db Started 
+ Container postgres-db Waiting 
+ Container rabbitmq-complaints Started 
+ Container rabbitmq-complaints Waiting 
+ Container rabbitmq-complaints Waiting 
+ Container postgres-db Waiting 
+postgres-db  | 
+postgres-db  | PostgreSQL Database directory appears to contain a database; Skipping initialization
+postgres-db  | 
+postgres-db  | 2026-02-20 16:25:50.781 UTC [1] LOG:  starting PostgreSQL 15.16 on aarch64-unknown-linux-musl, compiled by gcc (Alpine 15.2.0) 15.2.0, 64-bit
+postgres-db  | 2026-02-20 16:25:50.781 UTC [1] LOG:  listening on IPv4 address "0.0.0.0", port 5432
+postgres-db  | 2026-02-20 16:25:50.781 UTC [1] LOG:  listening on IPv6 address "::", port 5432
+postgres-db  | 2026-02-20 16:25:50.788 UTC [1] LOG:  listening on Unix socket "/var/run/postgresql/.s.PGSQL.5432"
+postgres-db  | 2026-02-20 16:25:50.811 UTC [28] LOG:  database system was shut down at 2026-02-20 16:24:41 UTC
+postgres-db  | 2026-02-20 16:25:50.825 UTC [1] LOG:  database system is ready to accept connections
+rabbitmq-complaints  | =INFO REPORT==== 20-Feb-2026::16:25:51.468438 ===
+rabbitmq-complaints  |     alarm_handler: {set,{system_memory_high_watermark,[]}}
+rabbitmq-complaints  | 2026-02-20 16:25:53.458052+00:00 [notice] <0.44.0> Application syslog exited with reason: stopped
+rabbitmq-complaints  | 2026-02-20 16:25:53.461331+00:00 [notice] <0.254.0> Logging: switching to configured handler(s); following messages may not be visible in this log output
+rabbitmq-complaints  | [38;5;87m2026-02-20 16:25:53.461878+00:00 [notice] <0.254.0> Logging: configured log handlers are now ACTIVE[0m
+rabbitmq-complaints  | 2026-02-20 16:25:53.466629+00:00 [info] <0.254.0> ra: starting system quorum_queues[0m
+rabbitmq-complaints  | 2026-02-20 16:25:53.466652+00:00 [info] <0.254.0> starting Ra system: quorum_queues in directory: /var/lib/rabbitmq/mnesia/rabbit@9dd07d76a841/quorum/rabbit@9dd07d76a841[0m
+rabbitmq-complaints  | 2026-02-20 16:25:53.498555+00:00 [info] <0.268.0> ra system 'quorum_queues' running pre init for 0 registered servers[0m
+rabbitmq-complaints  | 2026-02-20 16:25:53.503279+00:00 [info] <0.269.0> ra: meta data store initialised for system quorum_queues. 0 record(s) recovered[0m
+rabbitmq-complaints  | [38;5;87m2026-02-20 16:25:53.510584+00:00 [notice] <0.274.0> WAL: ra_log_wal init, open tbls: ra_log_open_mem_tables, closed tbls: ra_log_closed_mem_tables[0m
+rabbitmq-complaints  | 2026-02-20 16:25:53.519139+00:00 [info] <0.254.0> ra: starting system coordination[0m
+rabbitmq-complaints  | 2026-02-20 16:25:53.519165+00:00 [info] <0.254.0> starting Ra system: coordination in directory: /var/lib/rabbitmq/mnesia/rabbit@9dd07d76a841/coordination/rabbit@9dd07d76a841[0m
+rabbitmq-complaints  | 2026-02-20 16:25:53.519967+00:00 [info] <0.282.0> ra system 'coordination' running pre init for 0 registered servers[0m
+rabbitmq-complaints  | 2026-02-20 16:25:53.520364+00:00 [info] <0.283.0> ra: meta data store initialised for system coordination. 0 record(s) recovered[0m
+rabbitmq-complaints  | [38;5;87m2026-02-20 16:25:53.520461+00:00 [notice] <0.288.0> WAL: ra_coordination_log_wal init, open tbls: ra_coordination_log_open_mem_tables, closed tbls: ra_coordination_log_closed_mem_tables[0m
+rabbitmq-complaints  | 2026-02-20 16:25:53.522062+00:00 [info] <0.254.0> ra: starting system coordination[0m
+rabbitmq-complaints  | 2026-02-20 16:25:53.522082+00:00 [info] <0.254.0> starting Ra system: coordination in directory: /var/lib/rabbitmq/mnesia/rabbit@9dd07d76a841/coordination/rabbit@9dd07d76a841[0m
+rabbitmq-complaints  | 2026-02-20 16:25:53.574770+00:00 [info] <0.254.0> Waiting for Khepri leader for 30000 ms, 9 retries left[0m
+rabbitmq-complaints  | [38;5;87m2026-02-20 16:25:53.577023+00:00 [notice] <0.292.0> RabbitMQ metadata store: candidate -> leader in term: 1 machine version: 1[0m
+rabbitmq-complaints  | 2026-02-20 16:25:53.585735+00:00 [info] <0.254.0> Khepri leader elected[0m
+rabbitmq-complaints  | 2026-02-20 16:25:53.585772+00:00 [info] <0.254.0> Waiting for Khepri projections for 30000 ms, 9 retries left[0m
+rabbitmq-complaints  | 2026-02-20 16:25:53.759795+00:00 [info] <0.254.0> [0m
+rabbitmq-complaints  | 2026-02-20 16:25:53.759795+00:00 [info] <0.254.0>  Starting RabbitMQ 3.13.7 on Erlang 26.2.5.16 [jit][0m
+rabbitmq-complaints  | 2026-02-20 16:25:53.759795+00:00 [info] <0.254.0>  Copyright (c) 2007-2024 Broadcom Inc and/or its subsidiaries[0m
+rabbitmq-complaints  | 2026-02-20 16:25:53.759795+00:00 [info] <0.254.0>  Licensed under the MPL 2.0. Website: https://rabbitmq.com[0m
+rabbitmq-complaints  | 
+rabbitmq-complaints  |   ##  ##      RabbitMQ 3.13.7
+rabbitmq-complaints  |   ##  ##
+rabbitmq-complaints  |   ##########  Copyright (c) 2007-2024 Broadcom Inc and/or its subsidiaries
+rabbitmq-complaints  |   ######  ##
+rabbitmq-complaints  |   ##########  Licensed under the MPL 2.0. Website: https://rabbitmq.com
+rabbitmq-complaints  | 
+rabbitmq-complaints  |   Erlang:      26.2.5.16 [jit]
+rabbitmq-complaints  |   TLS Library: OpenSSL - OpenSSL 3.1.8 11 Feb 2025
+rabbitmq-complaints  |   Release series support status: see https://www.rabbitmq.com/release-information
+rabbitmq-complaints  | 
+rabbitmq-complaints  |   Doc guides:  https://www.rabbitmq.com/docs
+rabbitmq-complaints  |   Support:     https://www.rabbitmq.com/docs/contact
+rabbitmq-complaints  |   Tutorials:   https://www.rabbitmq.com/tutorials
+rabbitmq-complaints  |   Monitoring:  https://www.rabbitmq.com/docs/monitoring
+rabbitmq-complaints  |   Upgrading:   https://www.rabbitmq.com/docs/upgrade
+rabbitmq-complaints  | 
+rabbitmq-complaints  |   Logs: <stdout>
+rabbitmq-complaints  | 
+rabbitmq-complaints  |   Config file(s): /etc/rabbitmq/conf.d/10-defaults.conf
+rabbitmq-complaints  | 
+rabbitmq-complaints  |   Starting broker...2026-02-20 16:25:53.760662+00:00 [info] <0.254.0> [0m
+rabbitmq-complaints  | 2026-02-20 16:25:53.760662+00:00 [info] <0.254.0>  node           : rabbit@9dd07d76a841[0m
+rabbitmq-complaints  | 2026-02-20 16:25:53.760662+00:00 [info] <0.254.0>  home dir       : /var/lib/rabbitmq[0m
+rabbitmq-complaints  | 2026-02-20 16:25:53.760662+00:00 [info] <0.254.0>  config file(s) : /etc/rabbitmq/conf.d/10-defaults.conf[0m
+rabbitmq-complaints  | 2026-02-20 16:25:53.760662+00:00 [info] <0.254.0>  cookie hash    : 8qRpfJvIHPRBq8e7gWuGYA==[0m
+rabbitmq-complaints  | 2026-02-20 16:25:53.760662+00:00 [info] <0.254.0>  log(s)         : <stdout>[0m
+rabbitmq-complaints  | 2026-02-20 16:25:53.760662+00:00 [info] <0.254.0>  data dir       : /var/lib/rabbitmq/mnesia/rabbit@9dd07d76a841[0m
+rabbitmq-complaints  | 2026-02-20 16:25:54.004745+00:00 [info] <0.254.0> Running boot step pre_boot defined by app rabbit[0m
+rabbitmq-complaints  | 2026-02-20 16:25:54.004819+00:00 [info] <0.254.0> Running boot step rabbit_global_counters defined by app rabbit[0m
+rabbitmq-complaints  | 2026-02-20 16:25:54.005150+00:00 [info] <0.254.0> Running boot step rabbit_osiris_metrics defined by app rabbit[0m
+rabbitmq-complaints  | 2026-02-20 16:25:54.005265+00:00 [info] <0.254.0> Running boot step rabbit_core_metrics defined by app rabbit[0m
+rabbitmq-complaints  | 2026-02-20 16:25:54.006812+00:00 [info] <0.254.0> Running boot step rabbit_alarm defined by app rabbit[0m
+rabbitmq-complaints  | 2026-02-20 16:25:54.016364+00:00 [info] <0.329.0> Memory high watermark set to 1567 MiB (1643634688 bytes) of 3918 MiB (4109086720 bytes) total[0m
+rabbitmq-complaints  | 2026-02-20 16:25:54.018470+00:00 [info] <0.331.0> Enabling free disk space monitoring (disk free space: 221453803520, total memory: 4109086720)[0m
+rabbitmq-complaints  | 2026-02-20 16:25:54.018501+00:00 [info] <0.331.0> Disk free limit set to 50MB[0m
+rabbitmq-complaints  | 2026-02-20 16:25:54.019510+00:00 [info] <0.254.0> Running boot step code_server_cache defined by app rabbit[0m
+rabbitmq-complaints  | 2026-02-20 16:25:54.019556+00:00 [info] <0.254.0> Running boot step file_handle_cache defined by app rabbit[0m
+rabbitmq-complaints  | 2026-02-20 16:25:54.024712+00:00 [info] <0.334.0> Limiting to approx 1048479 file handles (943629 sockets)[0m
+rabbitmq-complaints  | 2026-02-20 16:25:54.024818+00:00 [info] <0.335.0> FHC read buffering: OFF[0m
+rabbitmq-complaints  | 2026-02-20 16:25:54.024840+00:00 [info] <0.335.0> FHC write buffering: ON[0m
+rabbitmq-complaints  | 2026-02-20 16:25:54.025190+00:00 [info] <0.254.0> Running boot step worker_pool defined by app rabbit[0m
+rabbitmq-complaints  | 2026-02-20 16:25:54.025230+00:00 [info] <0.315.0> Will use 8 processes for default worker pool[0m
+rabbitmq-complaints  | 2026-02-20 16:25:54.025250+00:00 [info] <0.315.0> Starting worker pool 'worker_pool' with 8 processes in it[0m
+rabbitmq-complaints  | 2026-02-20 16:25:54.026047+00:00 [info] <0.254.0> Running boot step database defined by app rabbit[0m
+rabbitmq-complaints  | 2026-02-20 16:25:54.026320+00:00 [info] <0.254.0> Peer discovery: configured backend: rabbit_peer_discovery_classic_config[0m
+rabbitmq-complaints  | [38;5;87m2026-02-20 16:25:54.026987+00:00 [notice] <0.316.0> Feature flags: attempt to enable `detailed_queues_endpoint`...[0m
+rabbitmq-complaints  | [38;5;87m2026-02-20 16:25:54.073759+00:00 [notice] <0.316.0> Feature flags: `detailed_queues_endpoint` enabled[0m
+rabbitmq-complaints  | [38;5;87m2026-02-20 16:25:54.073852+00:00 [notice] <0.316.0> Feature flags: attempt to enable `quorum_queue_non_voters`...[0m
+rabbitmq-complaints  | [38;5;87m2026-02-20 16:25:54.124904+00:00 [notice] <0.316.0> Feature flags: `quorum_queue_non_voters` enabled[0m
+rabbitmq-complaints  | [38;5;87m2026-02-20 16:25:54.125394+00:00 [notice] <0.316.0> Feature flags: attempt to enable `stream_update_config_command`...[0m
+rabbitmq-complaints  | [38;5;87m2026-02-20 16:25:54.198530+00:00 [notice] <0.316.0> Feature flags: `stream_update_config_command` enabled[0m
+rabbitmq-complaints  | [38;5;87m2026-02-20 16:25:54.198638+00:00 [notice] <0.316.0> Feature flags: attempt to enable `stream_filtering`...[0m
+rabbitmq-complaints  | [38;5;87m2026-02-20 16:25:54.288119+00:00 [notice] <0.316.0> Feature flags: `stream_filtering` enabled[0m
+rabbitmq-complaints  | [38;5;87m2026-02-20 16:25:54.288227+00:00 [notice] <0.316.0> Feature flags: attempt to enable `stream_sac_coordinator_unblock_group`...[0m
+rabbitmq-complaints  | [38;5;87m2026-02-20 16:25:54.364925+00:00 [notice] <0.316.0> Feature flags: `stream_sac_coordinator_unblock_group` enabled[0m
+rabbitmq-complaints  | [38;5;87m2026-02-20 16:25:54.364995+00:00 [notice] <0.316.0> Feature flags: attempt to enable `restart_streams`...[0m
+rabbitmq-complaints  | [38;5;87m2026-02-20 16:25:54.414985+00:00 [notice] <0.316.0> Feature flags: `restart_streams` enabled[0m
+rabbitmq-complaints  | [38;5;87m2026-02-20 16:25:54.415076+00:00 [notice] <0.316.0> Feature flags: attempt to enable `message_containers`...[0m
+rabbitmq-complaints  | [38;5;87m2026-02-20 16:25:54.467604+00:00 [notice] <0.316.0> Feature flags: `message_containers` enabled[0m
+rabbitmq-complaints  | [38;5;87m2026-02-20 16:25:54.467763+00:00 [notice] <0.316.0> Feature flags: attempt to enable `message_containers_deaths_v2`...[0m
+rabbitmq-complaints  | [38;5;87m2026-02-20 16:25:54.511115+00:00 [notice] <0.316.0> Feature flags: `message_containers_deaths_v2` enabled[0m
+rabbitmq-complaints  | 2026-02-20 16:25:54.511284+00:00 [info] <0.254.0> DB: virgin node -> run peer discovery[0m
+rabbitmq-complaints  | [38;5;214m2026-02-20 16:25:54.511313+00:00 [warning] <0.254.0> Classic peer discovery backend: list of nodes does not contain the local node [][0m
+rabbitmq-complaints  | [38;5;87m2026-02-20 16:25:54.518414+00:00 [notice] <0.44.0> Application mnesia exited with reason: stopped[0m
+rabbitmq-complaints  | 2026-02-20 16:25:54.595711+00:00 [info] <0.254.0> Waiting for Mnesia tables for 30000 ms, 9 retries left[0m
+rabbitmq-complaints  | 2026-02-20 16:25:54.595774+00:00 [info] <0.254.0> Successfully synced tables from a peer[0m
+rabbitmq-complaints  | 2026-02-20 16:25:54.595821+00:00 [info] <0.254.0> Waiting for Mnesia tables for 30000 ms, 9 retries left[0m
+rabbitmq-complaints  | 2026-02-20 16:25:54.595853+00:00 [info] <0.254.0> Successfully synced tables from a peer[0m
+rabbitmq-complaints  | 2026-02-20 16:25:54.598032+00:00 [info] <0.254.0> Waiting for Mnesia tables for 30000 ms, 9 retries left[0m
+rabbitmq-complaints  | 2026-02-20 16:25:54.598079+00:00 [info] <0.254.0> Successfully synced tables from a peer[0m
+rabbitmq-complaints  | 2026-02-20 16:25:54.598162+00:00 [info] <0.254.0> Running boot step tracking_metadata_store defined by app rabbit[0m
+rabbitmq-complaints  | 2026-02-20 16:25:54.598232+00:00 [info] <0.562.0> Setting up a table for connection tracking on this node: tracked_connection[0m
+rabbitmq-complaints  | 2026-02-20 16:25:54.598259+00:00 [info] <0.562.0> Setting up a table for per-vhost connection counting on this node: tracked_connection_per_vhost[0m
+rabbitmq-complaints  | 2026-02-20 16:25:54.598303+00:00 [info] <0.562.0> Setting up a table for per-user connection counting on this node: tracked_connection_per_user[0m
+rabbitmq-complaints  | 2026-02-20 16:25:54.598324+00:00 [info] <0.562.0> Setting up a table for channel tracking on this node: tracked_channel[0m
+rabbitmq-complaints  | 2026-02-20 16:25:54.598351+00:00 [info] <0.562.0> Setting up a table for channel tracking on this node: tracked_channel_per_user[0m
+rabbitmq-complaints  | 2026-02-20 16:25:54.598413+00:00 [info] <0.254.0> Running boot step networking_metadata_store defined by app rabbit[0m
+rabbitmq-complaints  | 2026-02-20 16:25:54.598619+00:00 [info] <0.254.0> Running boot step feature_flags defined by app rabbit[0m
+rabbitmq-complaints  | 2026-02-20 16:25:54.598720+00:00 [info] <0.254.0> Running boot step codec_correctness_check defined by app rabbit[0m
+rabbitmq-complaints  | 2026-02-20 16:25:54.598847+00:00 [info] <0.254.0> Running boot step external_infrastructure defined by app rabbit[0m
+rabbitmq-complaints  | 2026-02-20 16:25:54.598885+00:00 [info] <0.254.0> Running boot step rabbit_event defined by app rabbit[0m
+rabbitmq-complaints  | 2026-02-20 16:25:54.598988+00:00 [info] <0.254.0> Running boot step rabbit_registry defined by app rabbit[0m
+rabbitmq-complaints  | 2026-02-20 16:25:54.599026+00:00 [info] <0.254.0> Running boot step rabbit_auth_mechanism_amqplain defined by app rabbit[0m
+rabbitmq-complaints  | 2026-02-20 16:25:54.599067+00:00 [info] <0.254.0> Running boot step rabbit_auth_mechanism_cr_demo defined by app rabbit[0m
+rabbitmq-complaints  | 2026-02-20 16:25:54.599089+00:00 [info] <0.254.0> Running boot step rabbit_auth_mechanism_plain defined by app rabbit[0m
+rabbitmq-complaints  | 2026-02-20 16:25:54.599104+00:00 [info] <0.254.0> Running boot step rabbit_exchange_type_direct defined by app rabbit[0m
+rabbitmq-complaints  | 2026-02-20 16:25:54.599132+00:00 [info] <0.254.0> Running boot step rabbit_exchange_type_fanout defined by app rabbit[0m
+rabbitmq-complaints  | 2026-02-20 16:25:54.599150+00:00 [info] <0.254.0> Running boot step rabbit_exchange_type_headers defined by app rabbit[0m
+rabbitmq-complaints  | 2026-02-20 16:25:54.599165+00:00 [info] <0.254.0> Running boot step rabbit_exchange_type_topic defined by app rabbit[0m
+rabbitmq-complaints  | 2026-02-20 16:25:54.599180+00:00 [info] <0.254.0> Running boot step rabbit_mirror_queue_mode_all defined by app rabbit[0m
+rabbitmq-complaints  | 2026-02-20 16:25:54.599200+00:00 [info] <0.254.0> Running boot step rabbit_mirror_queue_mode_exactly defined by app rabbit[0m
+rabbitmq-complaints  | 2026-02-20 16:25:54.599215+00:00 [info] <0.254.0> Running boot step rabbit_mirror_queue_mode_nodes defined by app rabbit[0m
+rabbitmq-complaints  | 2026-02-20 16:25:54.599230+00:00 [info] <0.254.0> Running boot step rabbit_priority_queue defined by app rabbit[0m
+rabbitmq-complaints  | 2026-02-20 16:25:54.599240+00:00 [info] <0.254.0> Priority queues enabled, real BQ is rabbit_variable_queue[0m
+rabbitmq-complaints  | 2026-02-20 16:25:54.599259+00:00 [info] <0.254.0> Running boot step rabbit_queue_location_client_local defined by app rabbit[0m
+rabbitmq-complaints  | 2026-02-20 16:25:54.599274+00:00 [info] <0.254.0> Running boot step rabbit_queue_location_min_masters defined by app rabbit[0m
+rabbitmq-complaints  | 2026-02-20 16:25:54.599288+00:00 [info] <0.254.0> Running boot step rabbit_queue_location_random defined by app rabbit[0m
+rabbitmq-complaints  | 2026-02-20 16:25:54.599316+00:00 [info] <0.254.0> Running boot step kernel_ready defined by app rabbit[0m
+rabbitmq-complaints  | 2026-02-20 16:25:54.599329+00:00 [info] <0.254.0> Running boot step rabbit_sysmon_minder defined by app rabbit[0m
+rabbitmq-complaints  | 2026-02-20 16:25:54.599408+00:00 [info] <0.254.0> Running boot step rabbit_epmd_monitor defined by app rabbit[0m
+rabbitmq-complaints  | 2026-02-20 16:25:54.600333+00:00 [info] <0.570.0> epmd monitor knows us, inter-node communication (distribution) port: 25672[0m
+rabbitmq-complaints  | 2026-02-20 16:25:54.600404+00:00 [info] <0.254.0> Running boot step guid_generator defined by app rabbit[0m
+rabbitmq-complaints  | 2026-02-20 16:25:54.601644+00:00 [info] <0.254.0> Running boot step rabbit_node_monitor defined by app rabbit[0m
+rabbitmq-complaints  | 2026-02-20 16:25:54.601778+00:00 [info] <0.574.0> Starting rabbit_node_monitor (in ignore mode)[0m
+rabbitmq-complaints  | 2026-02-20 16:25:54.601866+00:00 [info] <0.254.0> Running boot step delegate_sup defined by app rabbit[0m
+rabbitmq-complaints  | 2026-02-20 16:25:54.602107+00:00 [info] <0.254.0> Running boot step rabbit_memory_monitor defined by app rabbit[0m
+rabbitmq-complaints  | 2026-02-20 16:25:54.602233+00:00 [info] <0.254.0> Running boot step rabbit_fifo_dlx_sup defined by app rabbit[0m
+rabbitmq-complaints  | 2026-02-20 16:25:54.602265+00:00 [info] <0.254.0> Running boot step core_initialized defined by app rabbit[0m
+rabbitmq-complaints  | 2026-02-20 16:25:54.602278+00:00 [info] <0.254.0> Running boot step rabbit_channel_tracking_handler defined by app rabbit[0m
+rabbitmq-complaints  | 2026-02-20 16:25:54.602321+00:00 [info] <0.254.0> Running boot step rabbit_connection_tracking_handler defined by app rabbit[0m
+rabbitmq-complaints  | 2026-02-20 16:25:54.602353+00:00 [info] <0.254.0> Running boot step rabbit_definitions_hashing defined by app rabbit[0m
+rabbitmq-complaints  | 2026-02-20 16:25:54.602399+00:00 [info] <0.254.0> Running boot step rabbit_exchange_parameters defined by app rabbit[0m
+rabbitmq-complaints  | 2026-02-20 16:25:54.618758+00:00 [info] <0.254.0> Running boot step rabbit_mirror_queue_misc defined by app rabbit[0m
+rabbitmq-complaints  | 2026-02-20 16:25:54.618996+00:00 [info] <0.254.0> Running boot step rabbit_policies defined by app rabbit[0m
+rabbitmq-complaints  | 2026-02-20 16:25:54.619133+00:00 [info] <0.254.0> Running boot step rabbit_policy defined by app rabbit[0m
+rabbitmq-complaints  | 2026-02-20 16:25:54.619159+00:00 [info] <0.254.0> Running boot step rabbit_queue_location_validator defined by app rabbit[0m
+rabbitmq-complaints  | 2026-02-20 16:25:54.619230+00:00 [info] <0.254.0> Running boot step rabbit_quorum_memory_manager defined by app rabbit[0m
+rabbitmq-complaints  | 2026-02-20 16:25:54.619256+00:00 [info] <0.254.0> Running boot step rabbit_quorum_queue defined by app rabbit[0m
+rabbitmq-complaints  | 2026-02-20 16:25:54.619289+00:00 [info] <0.254.0> Running boot step rabbit_stream_coordinator defined by app rabbit[0m
+rabbitmq-complaints  | 2026-02-20 16:25:54.619421+00:00 [info] <0.254.0> Running boot step rabbit_vhost_limit defined by app rabbit[0m
+rabbitmq-complaints  | 2026-02-20 16:25:54.619463+00:00 [info] <0.254.0> Running boot step rabbit_federation_parameters defined by app rabbitmq_federation[0m
+rabbitmq-complaints  | 2026-02-20 16:25:54.619517+00:00 [info] <0.254.0> Running boot step rabbit_federation_supervisor defined by app rabbitmq_federation[0m
+rabbitmq-complaints  | 2026-02-20 16:25:54.624980+00:00 [info] <0.254.0> Running boot step rabbit_federation_queue defined by app rabbitmq_federation[0m
+rabbitmq-complaints  | 2026-02-20 16:25:54.625062+00:00 [info] <0.254.0> Running boot step rabbit_federation_upstream_exchange defined by app rabbitmq_federation[0m
+rabbitmq-complaints  | 2026-02-20 16:25:54.625108+00:00 [info] <0.254.0> Running boot step rabbit_mgmt_reset_handler defined by app rabbitmq_management[0m
+rabbitmq-complaints  | 2026-02-20 16:25:54.625138+00:00 [info] <0.254.0> Running boot step rabbit_mgmt_db_handler defined by app rabbitmq_management_agent[0m
+rabbitmq-complaints  | 2026-02-20 16:25:54.625162+00:00 [info] <0.254.0> Management plugin: using rates mode 'basic'[0m
+rabbitmq-complaints  | 2026-02-20 16:25:54.625278+00:00 [info] <0.254.0> Running boot step recovery defined by app rabbit[0m
+rabbitmq-complaints  | 2026-02-20 16:25:54.637313+00:00 [info] <0.254.0> Running boot step empty_db_check defined by app rabbit[0m
+rabbitmq-complaints  | 2026-02-20 16:25:54.637352+00:00 [info] <0.254.0> Will seed default virtual host and user...[0m
+rabbitmq-complaints  | 2026-02-20 16:25:54.637424+00:00 [info] <0.254.0> Adding vhost '/' (description: 'Default virtual host', tags: [])[0m
+rabbitmq-complaints  | 2026-02-20 16:25:54.642542+00:00 [info] <0.634.0> Making sure data directory '/var/lib/rabbitmq/mnesia/rabbit@9dd07d76a841/msg_stores/vhosts/628WB79CIFDYO9LJI6DKMI09L' for vhost '/' exists[0m
+rabbitmq-complaints  | 2026-02-20 16:25:54.643314+00:00 [info] <0.634.0> Setting segment_entry_count for vhost '/' with 0 queues to '2048'[0m
+rabbitmq-complaints  | 2026-02-20 16:25:54.648465+00:00 [info] <0.634.0> Starting message stores for vhost '/'[0m
+rabbitmq-complaints  | 2026-02-20 16:25:54.648581+00:00 [info] <0.643.0> Message store "628WB79CIFDYO9LJI6DKMI09L/msg_store_transient": using rabbit_msg_store_ets_index to provide index[0m
+rabbitmq-complaints  | 2026-02-20 16:25:54.649535+00:00 [info] <0.634.0> Started message store of type transient for vhost '/'[0m
+rabbitmq-complaints  | 2026-02-20 16:25:54.649632+00:00 [info] <0.647.0> Message store "628WB79CIFDYO9LJI6DKMI09L/msg_store_persistent": using rabbit_msg_store_ets_index to provide index[0m
+rabbitmq-complaints  | [38;5;214m2026-02-20 16:25:54.650174+00:00 [warning] <0.647.0> Message store "628WB79CIFDYO9LJI6DKMI09L/msg_store_persistent": rebuilding indices from scratch[0m
+rabbitmq-complaints  | 2026-02-20 16:25:54.650680+00:00 [info] <0.634.0> Started message store of type persistent for vhost '/'[0m
+rabbitmq-complaints  | 2026-02-20 16:25:54.650752+00:00 [info] <0.634.0> Recovering 0 queues of type rabbit_classic_queue took 7ms[0m
+rabbitmq-complaints  | 2026-02-20 16:25:54.650770+00:00 [info] <0.634.0> Recovering 0 queues of type rabbit_quorum_queue took 0ms[0m
+rabbitmq-complaints  | 2026-02-20 16:25:54.650794+00:00 [info] <0.634.0> Recovering 0 queues of type rabbit_stream_queue took 0ms[0m
+rabbitmq-complaints  | 2026-02-20 16:25:54.652543+00:00 [info] <0.254.0> Created user 'guest'[0m
+rabbitmq-complaints  | 2026-02-20 16:25:54.653160+00:00 [info] <0.254.0> Successfully set user tags for user 'guest' to [administrator][0m
+rabbitmq-complaints  | 2026-02-20 16:25:54.653814+00:00 [info] <0.254.0> Successfully set permissions for user 'guest' in virtual host '/' to '.*', '.*', '.*'[0m
+rabbitmq-complaints  | 2026-02-20 16:25:54.653862+00:00 [info] <0.254.0> Running boot step rabbit_observer_cli defined by app rabbit[0m
+rabbitmq-complaints  | 2026-02-20 16:25:54.653905+00:00 [info] <0.254.0> Running boot step rabbit_looking_glass defined by app rabbit[0m
+rabbitmq-complaints  | 2026-02-20 16:25:54.653918+00:00 [info] <0.254.0> Running boot step rabbit_core_metrics_gc defined by app rabbit[0m
+rabbitmq-complaints  | 2026-02-20 16:25:54.653975+00:00 [info] <0.254.0> Running boot step background_gc defined by app rabbit[0m
+rabbitmq-complaints  | 2026-02-20 16:25:54.654023+00:00 [info] <0.254.0> Running boot step routing_ready defined by app rabbit[0m
+rabbitmq-complaints  | 2026-02-20 16:25:54.654032+00:00 [info] <0.254.0> Running boot step pre_flight defined by app rabbit[0m
+rabbitmq-complaints  | 2026-02-20 16:25:54.654052+00:00 [info] <0.254.0> Running boot step notify_cluster defined by app rabbit[0m
+rabbitmq-complaints  | 2026-02-20 16:25:54.654071+00:00 [info] <0.254.0> Running boot step networking defined by app rabbit[0m
+rabbitmq-complaints  | 2026-02-20 16:25:54.654084+00:00 [info] <0.254.0> Running boot step rabbit_quorum_queue_periodic_membership_reconciliation defined by app rabbit[0m
+rabbitmq-complaints  | 2026-02-20 16:25:54.654121+00:00 [info] <0.254.0> Running boot step definition_import_worker_pool defined by app rabbit[0m
+rabbitmq-complaints  | 2026-02-20 16:25:54.654140+00:00 [info] <0.315.0> Starting worker pool 'definition_import_pool' with 8 processes in it[0m
+rabbitmq-complaints  | 2026-02-20 16:25:54.654431+00:00 [info] <0.254.0> Running boot step cluster_name defined by app rabbit[0m
+rabbitmq-complaints  | 2026-02-20 16:25:54.654492+00:00 [info] <0.254.0> Initialising internal cluster ID to 'rabbitmq-cluster-id-71VJVW-DJWKMuTkclADrJg'[0m
+rabbitmq-complaints  | 2026-02-20 16:25:54.655580+00:00 [info] <0.254.0> Running boot step virtual_host_reconciliation defined by app rabbit[0m
+rabbitmq-complaints  | 2026-02-20 16:25:54.655695+00:00 [info] <0.254.0> Running boot step direct_client defined by app rabbit[0m
+rabbitmq-complaints  | 2026-02-20 16:25:54.655754+00:00 [info] <0.254.0> Running boot step rabbit_federation_exchange defined by app rabbitmq_federation[0m
+rabbitmq-complaints  | 2026-02-20 16:25:54.655841+00:00 [info] <0.254.0> Running boot step rabbit_management_load_definitions defined by app rabbitmq_management[0m
+rabbitmq-complaints  | 2026-02-20 16:25:54.655954+00:00 [info] <0.688.0> Resetting node maintenance status[0m
+rabbitmq-complaints  | [38;5;214m2026-02-20 16:25:54.825849+00:00 [warning] <0.717.0> Deprecated features: `management_metrics_collection`: Feature `management_metrics_collection` is deprecated.[0m
+rabbitmq-complaints  | [38;5;214m2026-02-20 16:25:54.825849+00:00 [warning] <0.717.0> By default, this feature can still be used for now.[0m
+rabbitmq-complaints  | [38;5;214m2026-02-20 16:25:54.825849+00:00 [warning] <0.717.0> Its use will not be permitted by default in a future minor RabbitMQ version and the feature will be removed from a future major RabbitMQ version; actual versions to be determined.[0m
+rabbitmq-complaints  | [38;5;214m2026-02-20 16:25:54.825849+00:00 [warning] <0.717.0> To continue using this feature when it is not permitted by default, set the following parameter in your configuration:[0m
+rabbitmq-complaints  | [38;5;214m2026-02-20 16:25:54.825849+00:00 [warning] <0.717.0>     "deprecated_features.permit.management_metrics_collection = true"[0m
+rabbitmq-complaints  | [38;5;214m2026-02-20 16:25:54.825849+00:00 [warning] <0.717.0> To test RabbitMQ as if the feature was removed, set this in your configuration:[0m
+rabbitmq-complaints  | [38;5;214m2026-02-20 16:25:54.825849+00:00 [warning] <0.717.0>     "deprecated_features.permit.management_metrics_collection = false"[0m
+ Container rabbitmq-complaints Healthy 
+ Container producer-service Starting 
+ Container rabbitmq-complaints Healthy 
+ Container producer-service Started 
+ Container frontend-service Starting 
+frontend-service     | /docker-entrypoint.sh: /docker-entrypoint.d/ is not empty, will attempt to perform configuration
+frontend-service     | /docker-entrypoint.sh: Looking for shell scripts in /docker-entrypoint.d/
+frontend-service     | /docker-entrypoint.sh: Launching /docker-entrypoint.d/10-listen-on-ipv6-by-default.sh
+ Container frontend-service Started 
+frontend-service     | 10-listen-on-ipv6-by-default.sh: info: Getting the checksum of /etc/nginx/conf.d/default.conf
+frontend-service     | 10-listen-on-ipv6-by-default.sh: info: Enabled listen on IPv6 in /etc/nginx/conf.d/default.conf
+frontend-service     | /docker-entrypoint.sh: Sourcing /docker-entrypoint.d/15-local-resolvers.envsh
+frontend-service     | /docker-entrypoint.sh: Launching /docker-entrypoint.d/20-envsubst-on-templates.sh
+frontend-service     | /docker-entrypoint.sh: Launching /docker-entrypoint.d/30-tune-worker-processes.sh
+frontend-service     | /docker-entrypoint.sh: Configuration complete; ready for start up
+frontend-service     | 2026/02/20 16:25:56 [notice] 1#1: using the "epoll" event method
+frontend-service     | 2026/02/20 16:25:56 [notice] 1#1: nginx/1.29.5
+frontend-service     | 2026/02/20 16:25:56 [notice] 1#1: built by gcc 15.2.0 (Alpine 15.2.0) 
+frontend-service     | 2026/02/20 16:25:56 [notice] 1#1: OS: Linux 6.12.68-linuxkit
+frontend-service     | 2026/02/20 16:25:56 [notice] 1#1: getrlimit(RLIMIT_NOFILE): 1048576:1048576
+frontend-service     | 2026/02/20 16:25:56 [notice] 1#1: start worker processes
+frontend-service     | 2026/02/20 16:25:56 [notice] 1#1: start worker process 30
+frontend-service     | 2026/02/20 16:25:56 [notice] 1#1: start worker process 31
+frontend-service     | 2026/02/20 16:25:56 [notice] 1#1: start worker process 32
+frontend-service     | 2026/02/20 16:25:56 [notice] 1#1: start worker process 33
+frontend-service     | 2026/02/20 16:25:56 [notice] 1#1: start worker process 34
+frontend-service     | 2026/02/20 16:25:56 [notice] 1#1: start worker process 35
+frontend-service     | 2026/02/20 16:25:56 [notice] 1#1: start worker process 36
+frontend-service     | 2026/02/20 16:25:56 [notice] 1#1: start worker process 37
+producer-service     | [2026-02-20T16:25:56.586Z] [INFO] Connecting to RabbitMQ... {"url":"amqp://rabbitmq:5672"}
+producer-service     | [2026-02-20T16:25:56.598Z] [ERROR] Failed to connect to RabbitMQ {"error":"connect ECONNREFUSED 172.18.0.3:5672"}
+producer-service     | [2026-02-20T16:25:56.598Z] [ERROR] Failed to start server {"error":"connect ECONNREFUSED 172.18.0.3:5672"}
+[Kproducer-service exited with code 1 (restarting)
+producer-service     | [2026-02-20T16:25:56.953Z] [INFO] Connecting to RabbitMQ... {"url":"amqp://rabbitmq:5672"}
+producer-service     | [2026-02-20T16:25:56.967Z] [ERROR] Failed to connect to RabbitMQ {"error":"connect ECONNREFUSED 172.18.0.3:5672"}
+producer-service     | [2026-02-20T16:25:56.967Z] [ERROR] Failed to start server {"error":"connect ECONNREFUSED 172.18.0.3:5672"}
+[Kproducer-service exited with code 1 (restarting)
+producer-service     | [2026-02-20T16:25:57.589Z] [INFO] Connecting to RabbitMQ... {"url":"amqp://rabbitmq:5672"}
+producer-service     | [2026-02-20T16:25:57.601Z] [ERROR] Failed to connect to RabbitMQ {"error":"connect ECONNREFUSED 172.18.0.3:5672"}
+producer-service     | [2026-02-20T16:25:57.601Z] [ERROR] Failed to start server {"error":"connect ECONNREFUSED 172.18.0.3:5672"}
+rabbitmq-complaints  | 2026-02-20 16:25:57.755070+00:00 [info] <0.754.0> Management plugin: HTTP (non-TLS) listener started on port 15672[0m
+rabbitmq-complaints  | 2026-02-20 16:25:57.755585+00:00 [info] <0.786.0> Statistics database started.[0m
+rabbitmq-complaints  | 2026-02-20 16:25:57.755684+00:00 [info] <0.785.0> Starting worker pool 'management_worker_pool' with 3 processes in it[0m
+rabbitmq-complaints  | 2026-02-20 16:25:57.764640+00:00 [info] <0.804.0> Prometheus metrics: HTTP (non-TLS) listener started on port 15692[0m
+rabbitmq-complaints  | 2026-02-20 16:25:57.764743+00:00 [info] <0.688.0> Ready to start client connection listeners[0m
+rabbitmq-complaints  | 2026-02-20 16:25:57.766282+00:00 [info] <0.848.0> started TCP listener on [::]:5672[0m
+[Kproducer-service exited with code 1 (restarting)
+rabbitmq-complaints  |  completed with 5 plugins.
+rabbitmq-complaints  | 2026-02-20 16:25:57.873172+00:00 [info] <0.688.0> Server startup complete; 5 plugins started.[0m
+rabbitmq-complaints  | 2026-02-20 16:25:57.873172+00:00 [info] <0.688.0>  * rabbitmq_prometheus[0m
+rabbitmq-complaints  | 2026-02-20 16:25:57.873172+00:00 [info] <0.688.0>  * rabbitmq_federation[0m
+rabbitmq-complaints  | 2026-02-20 16:25:57.873172+00:00 [info] <0.688.0>  * rabbitmq_management[0m
+rabbitmq-complaints  | 2026-02-20 16:25:57.873172+00:00 [info] <0.688.0>  * rabbitmq_management_agent[0m
+rabbitmq-complaints  | 2026-02-20 16:25:57.873172+00:00 [info] <0.688.0>  * rabbitmq_web_dispatch[0m
+rabbitmq-complaints  | 2026-02-20 16:25:57.877654+00:00 [info] <0.9.0> Time to start RabbitMQ: 6581 ms[0m
+producer-service     | [2026-02-20T16:25:58.277Z] [INFO] Connecting to RabbitMQ... {"url":"amqp://rabbitmq:5672"}
+rabbitmq-complaints  | 2026-02-20 16:25:58.286810+00:00 [info] <0.852.0> accepting AMQP connection <0.852.0> (172.18.0.4:58904 -> 172.18.0.3:5672)[0m
+rabbitmq-complaints  | 2026-02-20 16:25:58.333658+00:00 [info] <0.852.0> connection <0.852.0> (172.18.0.4:58904 -> 172.18.0.3:5672): user 'guest' authenticated and granted access to vhost '/'[0m
+producer-service     | [2026-02-20T16:25:58.342Z] [INFO] Connected to RabbitMQ successfully {"exchange":"complaints.exchange"}
+producer-service     | [2026-02-20T16:25:58.345Z] [INFO] Producer service started {"port":3000,"environment":"development"}
+ Container postgres-db Healthy 
+ Container consumer-service Starting 
+ Container consumer-service Started 
+ Container postgres-db Healthy 
+ Container reports-query-service Starting 
+consumer-service     | [2026-02-20T16:26:00.953Z] [INFO] Health-check server started {"port":3001}
+consumer-service     | [2026-02-20T16:26:00.978Z] [INFO] Database initialized - incidents table created if not existed
+consumer-service     | [2026-02-20T16:26:00.978Z] [INFO] Connecting to RabbitMQ at amqp://rabbitmq:5672...
+rabbitmq-complaints  | 2026-02-20 16:26:00.983114+00:00 [info] <0.868.0> accepting AMQP connection <0.868.0> (172.18.0.6:43518 -> 172.18.0.3:5672)[0m
+rabbitmq-complaints  | 2026-02-20 16:26:01.030848+00:00 [info] <0.868.0> connection <0.868.0> (172.18.0.6:43518 -> 172.18.0.3:5672): user 'guest' authenticated and granted access to vhost '/'[0m
+consumer-service     | [2026-02-20T16:26:01.035Z] [INFO] Asserting DLX exchange and DLQ...
+ Container reports-query-service Started 
+consumer-service     | [2026-02-20T16:26:01.067Z] [INFO] Asserting main exchange...
+consumer-service     | [2026-02-20T16:26:01.068Z] [INFO] Asserting main queue with DLQ binding...
+consumer-service     | [2026-02-20T16:26:01.077Z] [INFO] Waiting for messages on complaints.queue. Press CTRL+C to exit
+consumer-service     | [2026-02-20T16:26:01.077Z] [INFO] Consumer started and listening for messages
+reports-query-service  | 
+reports-query-service  | > reports-query@1.0.0 dev
+reports-query-service  | > ts-node src/index.ts
+reports-query-service  | 
+reports-query-service  | Reports Query service listening on port 4000

@@ -1,9 +1,6 @@
 import pool from '../config/database';
-import { Ticket, TicketFilters, PaginatedResponse, TicketStatus, TicketPriority, IncidentType } from '../types';
-
-export interface ITicketRepository {
-    findAll(filters: TicketFilters): Promise<PaginatedResponse<Ticket>>;
-}
+import { Ticket, TicketFilters, TicketStatus, TicketPriority, IncidentType, PaginatedResponse } from '../types';
+import { ITicketRepository } from './ITicketRepository';
 
 export class TicketRepository implements ITicketRepository {
     async findAll(filters: TicketFilters): Promise<PaginatedResponse<Ticket>> {
@@ -76,11 +73,11 @@ export class TicketRepository implements ITicketRepository {
 
             const tickets: Ticket[] = dataResult.rows.map((row: any) => ({
                 ...row,
-                createdAt: row.createdAt.toISOString(),
-                processedAt: row.processedAt ? row.processedAt.toISOString() : null
+                createdAt: typeof row.createdAt === 'string' ? row.createdAt : row.createdAt.toISOString(),
+                processedAt: row.processedAt ? (typeof row.processedAt === 'string' ? row.processedAt : row.processedAt.toISOString()) : null
             }));
 
-            const totalItems = parseInt(countResult.rows[0].count);
+            const totalItems = parseInt(countResult.rows[0].count, 10);
             const totalPages = Math.ceil(totalItems / limit);
 
             return {
@@ -89,12 +86,50 @@ export class TicketRepository implements ITicketRepository {
                     page,
                     pageSize: limit,
                     totalItems,
-                    totalPages
-                }
+                    totalPages,
+                },
             };
         } catch (error) {
             console.error('Error fetching tickets from database:', error);
             throw error;
         }
     }
+
+    async findById(ticketId: string): Promise<Ticket | null> {
+        const result = await pool.query(
+            `SELECT ticket_id as "ticketId", line_number as "lineNumber", email, type, description,
+                    status, priority, created_at as "createdAt", processed_at as "processedAt"
+             FROM tickets WHERE ticket_id = $1`,
+            [ticketId]
+        );
+        if (result.rows.length === 0) return null;
+        const row = result.rows[0];
+        return {
+            ...row,
+            createdAt: row.createdAt instanceof Date ? row.createdAt.toISOString() : row.createdAt,
+            processedAt: row.processedAt instanceof Date ? row.processedAt.toISOString() : row.processedAt,
+        };
+    }
+
+    async findByLineNumber(lineNumber: string): Promise<Ticket[]> {
+        const result = await pool.query(
+            `SELECT ticket_id as "ticketId", line_number as "lineNumber", email, type, description,
+                    status, priority, created_at as "createdAt", processed_at as "processedAt"
+             FROM tickets WHERE line_number = $1 ORDER BY created_at DESC`,
+            [lineNumber]
+        );
+        return result.rows.map((row: any) => ({
+            ...row,
+            createdAt: row.createdAt instanceof Date ? row.createdAt.toISOString() : row.createdAt,
+            processedAt: row.processedAt instanceof Date ? row.processedAt.toISOString() : row.processedAt,
+        }));
+    }
+
+    async getMetrics(): Promise<Record<string, unknown>> {
+        const result = await pool.query(
+            `SELECT status, priority, COUNT(*) as count FROM tickets GROUP BY status, priority`
+        );
+        return { metrics: result.rows };
+    }
 }
+

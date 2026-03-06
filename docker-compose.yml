@@ -33,7 +33,28 @@ services:
     depends_on:
       rabbitmq:
         condition: service_healthy
-    restart: unless-stopped
+    restart: no
+
+  # ============================================
+  # DATABASE (Postgres)
+  # ============================================
+  postgres:
+    image: postgres:15-alpine
+    container_name: postgres-db
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: tickets_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U user -d tickets_db"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: no
 
   # ============================================
   # WORKER SERVICE (Consumer)
@@ -60,7 +81,9 @@ services:
     depends_on:
       rabbitmq:
         condition: service_healthy
-    restart: unless-stopped
+      postgres:
+        condition: service_healthy
+    restart: no
 
   # ============================================
   # REPORTS QUERY SERVICE (EMPTY)
@@ -83,7 +106,7 @@ services:
     depends_on:
       postgres:
         condition: service_healthy
-    restart: unless-stopped
+    restart: no
 
   # ============================================
   # FRONTEND
@@ -98,4 +121,8 @@ services:
       - "80:80"
     depends_on:
       - producer
-    restart: unless-stopped
+      - reports-query
+    restart: no
+
+volumes:
+  postgres_data:
